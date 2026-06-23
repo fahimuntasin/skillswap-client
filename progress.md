@@ -11,10 +11,10 @@
 - [x] Create `skillswap-client` Next.js project (TS + Tailwind + React Compiler)
 - [x] Install base deps: better-auth, axios, react-hook-form, zod, react-hot-toast, date-fns, lucide-react, shadcn utils
 - [x] Install Hero UI / Radix UI deps
-- [ ] Init shadcn/ui + install components
-- [ ] Create `skillswap-server` Next.js project
-- [ ] Install server deps: better-auth, mongodb/mongoose, stripe, cors, dotenv
-- [x] Setup GitHub remotes + initial pushes (client)
+- [x] Init shadcn/ui + install components
+- [x] Create `skillswap-server` Next.js project
+- [x] Install server deps: better-auth, mongoose, stripe
+- [x] Setup GitHub remotes + initial pushes (both repos)
 
 ---
 
