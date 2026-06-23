@@ -12,7 +12,6 @@ const tasks = [
 ]
 
 export function FeaturedTasks() {
-
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
       <div className="mb-10 text-center">
@@ -24,18 +23,18 @@ export function FeaturedTasks() {
         {tasks.map((task) => (
           <Card
             key={task.id}
-            className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sakura/10"
+            className="group border-2 border-transparent transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
           >
             <CardContent className="p-5">
-              <Badge variant="secondary" className="mb-3 bg-sakura-petal text-sakura-deep">
+              <Badge variant="secondary" className="mb-3 bg-brand-light text-brand-deep border-0">
                 {task.category}
               </Badge>
-              <h3 className="mb-2 font-semibold text-foreground group-hover:text-sakura-deep transition-colors line-clamp-2">
+              <h3 className="mb-2 font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
                 {task.title}
               </h3>
               <p className="mb-4 text-sm text-muted-foreground">by {task.clientName}</p>
               <div className="flex items-center justify-between text-sm">
-                <span className="flex items-center gap-1 text-sakura-deep font-medium">
+                <span className="flex items-center gap-1 text-primary font-semibold">
                   <CurrencyDollarIcon className="size-4" />
                   ${task.budget}
                 </span>

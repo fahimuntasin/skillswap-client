@@ -22,12 +22,14 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 w-full border-b border-sakura-petal/50 bg-white/80 backdrop-blur-lg">
+      <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
         <Link href="/" className="flex items-center gap-2">
-          <span className="text-2xl">🌸</span>
-          <span className="text-xl font-bold bg-gradient-to-r from-sakura-deep to-sakura bg-clip-text text-transparent">
-            SkillSwap
+          <svg className="size-7 text-primary" viewBox="0 0 24 24" fill="currentColor">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
+          </svg>
+          <span className="text-xl font-bold text-foreground">
+            Skill<span className="text-primary">Swap</span>
           </span>
         </Link>
 
@@ -36,7 +38,7 @@ export function Navbar() {
             <Link
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-foreground/70 transition-colors hover:text-sakura-deep"
+              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
             >
               {link.label}
             </Link>
@@ -48,20 +50,18 @@ export function Navbar() {
                 <Link
                   key={link.href}
                   href={link.href}
-                  className="text-sm font-medium text-foreground/70 transition-colors hover:text-sakura-deep"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.label}
                 </Link>
               ))}
-              <Button variant="plastic" size="sm">
+              <Button variant="outline" size="sm">
                 Logout
               </Button>
             </div>
           ) : (
             <Link href="/login">
-              <Button variant="plastic" size="sm">
-                Login
-              </Button>
+              <Button size="sm">Login</Button>
             </Link>
           )}
         </div>
@@ -77,12 +77,12 @@ export function Navbar() {
                   key={link.href}
                   href={link.href}
                   onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-foreground/70 transition-colors hover:text-sakura-deep"
+                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                 >
                   {link.label}
                 </Link>
               ))}
-              <hr className="border-sakura-petal" />
+              <hr />
               {isLoggedIn ? (
                 <>
                   {privateLinks.map((link) => (
@@ -90,20 +90,18 @@ export function Navbar() {
                       key={link.href}
                       href={link.href}
                       onClick={() => setOpen(false)}
-                      className="text-sm font-medium text-foreground/70 transition-colors hover:text-sakura-deep"
+                      className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
                     >
                       {link.label}
                     </Link>
                   ))}
-                  <Button variant="plastic" onClick={() => setOpen(false)}>
+                  <Button variant="outline" onClick={() => setOpen(false)}>
                     Logout
                   </Button>
                 </>
               ) : (
                 <Link href="/login" onClick={() => setOpen(false)}>
-                  <Button variant="plastic" className="w-full">
-                    Login
-                  </Button>
+                  <Button className="w-full">Login</Button>
                 </Link>
               )}
             </div>
