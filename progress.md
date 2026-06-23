@@ -51,12 +51,12 @@
 
 ## 🏠 SECTION 05: Home Page
 
-- [ ] Hero Banner (Title + Subtext + 2 Buttons + Animations)
-- [ ] Dynamic: Latest Featured Tasks (6 cards from DB)
-- [ ] Dynamic: Top Freelancers (6 cards from DB)
-- [ ] Extra Section 1 (Pick one: How It Works / Categories / Statistics / Testimonials / Community)
-- [ ] Extra Section 2
-- [ ] Smooth animations
+- [x] Hero Banner (Title + Subtext + 2 Buttons + Animations)
+- [x] Dynamic: Latest Featured Tasks (6 cards from DB)
+- [x] Dynamic: Top Freelancers (6 cards from DB)
+- [x] Extra Section 1 — How It Works
+- [x] Extra Section 2 — Popular Categories
+- [x] Smooth animations
 
 ---
 

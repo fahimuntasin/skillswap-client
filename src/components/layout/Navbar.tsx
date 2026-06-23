@@ -67,10 +67,8 @@ export function Navbar() {
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="md:hidden">
-            <Button variant="ghost" size="icon">
-              <Bars3Icon className="size-5" />
-            </Button>
+          <SheetTrigger className="md:hidden inline-flex size-8 items-center justify-center rounded-lg transition-colors hover:bg-muted">
+            <Bars3Icon className="size-5" />
           </SheetTrigger>
           <SheetContent side="right" className="w-64 pt-12">
             <div className="flex flex-col gap-4">

@@ -2,28 +2,7 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ClockIcon, CurrencyDollarIcon } from "@heroicons/react/24/outline"
 
-type Task = {
-  id: string
-  title: string
-  clientName: string
-  category: string
-  budget: number
-  deadline: string
-}
-
-async function getLatestTasks(): Promise<Task[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/api/tasks?limit=6`, {
-      cache: "no-store",
-    })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
-
-const fallbackTasks: Task[] = [
+const tasks = [
   { id: "1", title: "Design a modern landing page", clientName: "TechCorp", category: "Design", budget: 150, deadline: "2026-07-15" },
   { id: "2", title: "Fix CSS responsive bugs", clientName: "WebAgency", category: "Development", budget: 80, deadline: "2026-07-10" },
   { id: "3", title: "Write SEO blog article", clientName: "ContentHub", category: "Writing", budget: 100, deadline: "2026-07-20" },
@@ -32,9 +11,7 @@ const fallbackTasks: Task[] = [
   { id: "6", title: "Debug Node.js API errors", clientName: "DevSquad", category: "Development", budget: 120, deadline: "2026-07-08" },
 ]
 
-export async function FeaturedTasks() {
-  const tasks = await getLatestTasks()
-  const displayTasks = tasks.length > 0 ? tasks : fallbackTasks
+export function FeaturedTasks() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16">
@@ -44,7 +21,7 @@ export async function FeaturedTasks() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {displayTasks.map((task) => (
+        {tasks.map((task) => (
           <Card
             key={task.id}
             className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sakura/10"

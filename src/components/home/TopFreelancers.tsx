@@ -3,28 +3,7 @@ import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { StarIcon } from "@heroicons/react/24/solid"
 
-type Freelancer = {
-  id: string
-  name: string
-  image: string
-  skills: string[]
-  rating: number
-  jobsCompleted: number
-}
-
-async function getTopFreelancers(): Promise<Freelancer[]> {
-  try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_API_URL || "http://localhost:3001"}/api/freelancers?limit=6`, {
-      cache: "no-store",
-    })
-    if (!res.ok) return []
-    return res.json()
-  } catch {
-    return []
-  }
-}
-
-const fallbackFreelancers: Freelancer[] = [
+const freelancers = [
   { id: "1", name: "Sarah Chen", image: "", skills: ["UI Design", "Figma", "Branding"], rating: 4.9, jobsCompleted: 87 },
   { id: "2", name: "Alex Rivera", image: "", skills: ["React", "Node.js", "TypeScript"], rating: 4.8, jobsCompleted: 64 },
   { id: "3", name: "Emily Park", image: "", skills: ["Copywriting", "SEO", "Blogging"], rating: 4.7, jobsCompleted: 52 },
@@ -33,9 +12,7 @@ const fallbackFreelancers: Freelancer[] = [
   { id: "6", name: "Ryan Patel", image: "", skills: ["Python", "Django", "AWS"], rating: 4.8, jobsCompleted: 78 },
 ]
 
-export async function TopFreelancers() {
-  const freelancers = await getTopFreelancers()
-  const displayFreelancers = freelancers.length > 0 ? freelancers : fallbackFreelancers
+export function TopFreelancers() {
 
   return (
     <section className="mx-auto max-w-7xl px-4 py-16 bg-sakura-petal/20 rounded-2xl my-8">
@@ -45,7 +22,7 @@ export async function TopFreelancers() {
       </div>
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {displayFreelancers.map((freelancer) => (
+        {freelancers.map((freelancer) => (
           <Card
             key={freelancer.id}
             className="group transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:shadow-sakura/10"
