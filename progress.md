@@ -21,16 +21,16 @@
 ## 📄 SECTION 04: Layout & Page Structure
 
 ### Navbar
-- [ ] Public Links: Home, Browse Tasks, Browse Freelancers, Login
-- [ ] Private Links: Dashboard, Profile, Logout
-- [ ] Responsive mobile menu
+- [x] Public Links: Home, Browse Tasks, Browse Freelancers, Login
+- [ ] Private Links: Dashboard, Profile, Logout (needs auth)
+- [x] Responsive mobile menu
 
 ### Footer
-- [ ] Website Logo with name
-- [ ] Navigation links
-- [ ] Social media links (X icon, not blue bird)
-- [ ] Copyright year text
-- [ ] Email/contact info
+- [x] Website Logo with name
+- [x] Navigation links
+- [x] Social media links (X icon, not blue bird)
+- [x] Copyright year text
+- [x] Email/contact info
 
 ### All Pages (Public)
 - [ ] Home Page

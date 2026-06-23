@@ -124,6 +124,21 @@
   --sakura-petal: oklch(0.25 0.03 0);
 }
 
+@keyframes fade-in-up {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@utility animate-fade-in-up {
+  animation: fade-in-up 0.6s ease-out forwards;
+}
+
 @layer base {
   * {
     @apply border-border outline-ring/50;
