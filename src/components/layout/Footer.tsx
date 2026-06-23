@@ -2,44 +2,42 @@ import Link from "next/link"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-secondary/30">
-      <div className="mx-auto max-w-7xl px-4 py-12">
-        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-4">
-          <div>
+    <footer className="border-t bg-muted/30">
+      <div className="mx-auto max-w-7xl px-4 py-14">
+        <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
+          <div className="lg:col-span-1">
             <Link href="/" className="flex items-center gap-2">
-              <svg className="size-6 text-primary" viewBox="0 0 24 24" fill="currentColor">
-                <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-              </svg>
-              <span className="text-lg font-bold text-foreground">
-                Skill<span className="text-primary">Swap</span>
-              </span>
+              <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
+                <svg className="size-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                  <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+                </svg>
+              </div>
+              <span className="text-lg font-bold tracking-tight">Skill<span className="text-primary">Swap</span></span>
             </Link>
-            <p className="mt-3 text-sm text-muted-foreground leading-relaxed">
-              Get your tasks done by skilled freelancers. The simple way to hire expert talent for micro-tasks.
+            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
+              The simple way to hire expert freelancers for micro-tasks. Fast, secure, and reliable.
             </p>
           </div>
-
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">Quick Links</h4>
-            <div className="flex flex-col gap-2">
-              <Link href="/" className="text-sm text-muted-foreground hover:text-primary transition-colors">Home</Link>
-              <Link href="/tasks" className="text-sm text-muted-foreground hover:text-primary transition-colors">Browse Tasks</Link>
-              <Link href="/freelancers" className="text-sm text-muted-foreground hover:text-primary transition-colors">Browse Freelancers</Link>
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Platform</h4>
+            <div className="flex flex-col gap-2.5">
+              <Link href="/tasks" className="text-sm text-foreground/80 hover:text-primary transition-colors">Browse Tasks</Link>
+              <Link href="/freelancers" className="text-sm text-foreground/80 hover:text-primary transition-colors">Browse Freelancers</Link>
+              <Link href="/register" className="text-sm text-foreground/80 hover:text-primary transition-colors">Become a Freelancer</Link>
             </div>
           </div>
-
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">Account</h4>
-            <div className="flex flex-col gap-2">
-              <Link href="/login" className="text-sm text-muted-foreground hover:text-primary transition-colors">Login</Link>
-              <Link href="/register" className="text-sm text-muted-foreground hover:text-primary transition-colors">Register</Link>
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Support</h4>
+            <div className="flex flex-col gap-2.5">
+              <Link href="/login" className="text-sm text-foreground/80 hover:text-primary transition-colors">Login</Link>
+              <Link href="/register" className="text-sm text-foreground/80 hover:text-primary transition-colors">Register</Link>
+              <span className="text-sm text-muted-foreground">contact@skillswap.com</span>
             </div>
           </div>
-
           <div>
-            <h4 className="mb-3 text-sm font-semibold text-foreground">Connect</h4>
-            <div className="flex gap-3 mb-3">
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="X (Twitter)">
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Connect</h4>
+            <div className="flex gap-4 mb-4">
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="X">
                 <svg viewBox="0 0 24 24" className="size-5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="GitHub">
@@ -52,8 +50,7 @@ export function Footer() {
             <p className="text-sm text-muted-foreground">contact@skillswap.com</p>
           </div>
         </div>
-
-        <div className="mt-10 border-t pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} SkillSwap. All rights reserved.
         </div>
       </div>

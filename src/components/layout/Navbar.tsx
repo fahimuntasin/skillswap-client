@@ -22,63 +22,57 @@ export function Navbar() {
   ]
 
   return (
-      <nav className="sticky top-0 z-50 w-full border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
+    <nav className="sticky top-0 z-50 border-b bg-white/95 backdrop-blur supports-[backdrop-filter]:bg-white/80">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4">
-        <Link href="/" className="flex items-center gap-2">
-          <svg className="size-7 text-primary" viewBox="0 0 24 24" fill="currentColor">
-            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" />
-          </svg>
-          <span className="text-xl font-bold text-foreground">
+        <Link href="/" className="flex items-center gap-2 shrink-0">
+          <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
+            <svg className="size-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+              <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
+            </svg>
+          </div>
+          <span className="text-xl font-bold tracking-tight">
             Skill<span className="text-primary">Swap</span>
           </span>
         </Link>
 
-        <div className="hidden items-center gap-6 md:flex">
+        <div className="hidden items-center gap-8 md:flex">
           {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-            >
+            <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
               {link.label}
             </Link>
           ))}
+        </div>
 
+        <div className="hidden items-center gap-3 md:flex">
           {isLoggedIn ? (
-            <div className="flex items-center gap-3">
+            <>
               {privateLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
+                <Link key={link.href} href={link.href} className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground">
                   {link.label}
                 </Link>
               ))}
-              <Button variant="outline" size="sm">
-                Logout
-              </Button>
-            </div>
+              <Button variant="outline" size="sm">Logout</Button>
+            </>
           ) : (
-            <Link href="/login">
-              <Button size="sm">Login</Button>
-            </Link>
+            <>
+              <Link href="/login">
+                <Button variant="ghost" size="sm" className="font-medium">Log in</Button>
+              </Link>
+              <Link href="/register">
+                <Button variant="plastic" size="sm">Join Now</Button>
+              </Link>
+            </>
           )}
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="md:hidden inline-flex size-8 items-center justify-center rounded-lg transition-colors hover:bg-muted">
-            <Bars3Icon className="size-5" />
+          <SheetTrigger className="md:hidden inline-flex size-9 items-center justify-center rounded-lg border bg-white">
+            <Bars3Icon className="size-4" />
           </SheetTrigger>
-          <SheetContent side="right" className="w-64 pt-12">
-            <div className="flex flex-col gap-4">
+          <SheetContent side="right" className="w-72 pt-12">
+            <div className="flex flex-col gap-5">
               {navLinks.map((link) => (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  onClick={() => setOpen(false)}
-                  className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                >
+                <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="text-base font-medium text-foreground">
                   {link.label}
                 </Link>
               ))}
@@ -86,23 +80,21 @@ export function Navbar() {
               {isLoggedIn ? (
                 <>
                   {privateLinks.map((link) => (
-                    <Link
-                      key={link.href}
-                      href={link.href}
-                      onClick={() => setOpen(false)}
-                      className="text-sm font-medium text-muted-foreground transition-colors hover:text-foreground"
-                    >
+                    <Link key={link.href} href={link.href} onClick={() => setOpen(false)} className="text-base font-medium text-foreground">
                       {link.label}
                     </Link>
                   ))}
-                  <Button variant="outline" onClick={() => setOpen(false)}>
-                    Logout
-                  </Button>
+                  <Button variant="outline" onClick={() => setOpen(false)}>Logout</Button>
                 </>
               ) : (
-                <Link href="/login" onClick={() => setOpen(false)}>
-                  <Button className="w-full">Login</Button>
-                </Link>
+                <div className="flex flex-col gap-3 pt-2">
+                  <Link href="/login" onClick={() => setOpen(false)}>
+                    <Button variant="outline" className="w-full">Log in</Button>
+                  </Link>
+                  <Link href="/register" onClick={() => setOpen(false)}>
+                    <Button variant="plastic" className="w-full">Join Now</Button>
+                  </Link>
+                </div>
               )}
             </div>
           </SheetContent>
