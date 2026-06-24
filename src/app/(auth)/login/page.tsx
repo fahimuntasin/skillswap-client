@@ -27,7 +27,7 @@ export default function LoginPage() {
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
-      <div className="hidden w-[480px] shrink-0 flex-col justify-between bg-gradient-to-br from-[#110f1f] via-[#15132b] to-[#0d0b1a] px-10 py-12 lg:flex border-r border-[#2a2a3e]">
+      <div className="hidden w-[480px] shrink-0 flex-col justify-between px-10 py-12 lg:flex border-r border-[#1e1e35] bg-[#0d0d18]">
         <div>
           <Link href="/" className="flex items-center gap-2">
             <div className="flex size-6 items-center justify-center rounded-lg bg-[#7C3AED]">
