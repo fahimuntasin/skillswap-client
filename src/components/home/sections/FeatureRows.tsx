@@ -44,8 +44,17 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
           <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
           <h2 className="text-[32px] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">{f.title}</h2>
           <p className="mt-4 text-base leading-relaxed text-[#64748B] max-w-[480px]">{f.desc}</p>
-          <Link href={f.href} className="btn-sweep mt-6">
-            {f.link} →
+          <Link href={f.href} className="btn-premium mt-6 rounded-xl">
+            {f.link}
+            <span className="btn-icon">
+              <svg viewBox="0 0 32 32" width="18" height="18">
+                <linearGradient id="fr-arrow" y2="100%" x2="100%" y1="0%" x1="0%">
+                  <stop stopColor="#FFFFFF" stopOpacity={1} offset="0%" />
+                  <stop stopColor="#AAAAAA" stopOpacity={1} offset="100%" />
+                </linearGradient>
+                <path fill="url(#fr-arrow)" d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"/>
+              </svg>
+            </span>
           </Link>
         </div>
         <div className={`rounded-xl border border-[#d1d9e0] bg-white p-8 ${f.reverse ? "lg:order-1" : ""}`}>
