@@ -2,6 +2,7 @@
 
 import { usePathname } from "next/navigation"
 import { ThemeProvider } from "next-themes"
+import { BookmarksProvider } from "@/lib/bookmarks"
 import { Navbar } from "@/components/layout/Navbar"
 import { Footer } from "@/components/layout/Footer"
 import { Toaster } from "@/components/ui/sonner"
@@ -12,10 +13,12 @@ export function LayoutContent({ children }: { children: React.ReactNode }) {
 
   return (
     <ThemeProvider attribute="class" defaultTheme="system" enableSystem>
+      <BookmarksProvider>
       {!hideLayout && <Navbar />}
       <main className="flex-1">{children}</main>
       {!hideLayout && <Footer />}
       <Toaster richColors />
+      </BookmarksProvider>
     </ThemeProvider>
   )
 }
