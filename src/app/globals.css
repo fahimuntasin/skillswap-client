@@ -156,7 +156,70 @@
   transform: scale(1);
 }
 
-/* ===== SWEEP ACTION BUTTON ===== */
+/* ===== PREMIUM PILL BUTTON ===== */
+.btn-premium {
+  position: relative;
+  padding: 12px 28px 12px 24px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background: linear-gradient(to bottom, #312e81, #1e1b4b);
+  border-radius: 9999px;
+  cursor: pointer;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.6), 0 8px 16px rgba(0,0,0,0.35);
+  transition: all 0.2s ease;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 14px;
+  border: 1px solid #4c1d95;
+  text-decoration: none;
+}
+.btn-premium::before {
+  content: "";
+  position: absolute;
+  top: -2px; right: -1px; bottom: -1px; left: -1px;
+  background: linear-gradient(to bottom, #4c1d95, #1e1b4b);
+  z-index: -1;
+  border-radius: 9999px;
+  opacity: 1;
+}
+.btn-premium:active {
+  transform: translateY(2px);
+  box-shadow: 0 1px 2px rgba(0,0,0,0.6), 0 4px 8px rgba(0,0,0,0.35);
+}
+
+.btn-premium .btn-icon {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(to bottom, #312e81, #1e1b4b);
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  box-shadow: 0 0 1px rgba(0,0,0,0.8);
+  border: 1px solid #3730a3;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+.btn-premium .btn-icon::before {
+  content: "";
+  position: absolute;
+  top: -2px; right: -1px; bottom: -1px; left: -1px;
+  background: linear-gradient(to bottom, #4c1d95, #1e1b4b);
+  z-index: -1;
+  border-radius: 50%;
+  opacity: 1;
+}
+.btn-premium .btn-icon svg {
+  filter: drop-shadow(0 8px 16px rgba(0,0,0,0.8)) drop-shadow(0 0 4px rgba(0,0,0,0.8));
+  transition: all 0.4s ease-in-out;
+}
+.btn-premium:hover .btn-icon svg {
+  filter: drop-shadow(0 8px 16px rgba(200,180,255,0.6)) drop-shadow(0 0 16px rgba(124,58,237,0.8));
+  transform: rotate(-35deg);
+}
 .btn-sweep {
   display: inline-flex;
   align-items: center;

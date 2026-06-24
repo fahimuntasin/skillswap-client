@@ -25,7 +25,18 @@ export function FeatureCards() {
               </div>
               <h3 className="text-lg font-semibold text-[#0F172A]">{card.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">{card.desc}</p>
-              <Link href={card.href} className="btn-sweep mt-6">{card.link} →</Link>
+              <Link href={card.href} className="btn-premium mt-6">
+                {card.link}
+                <span className="btn-icon">
+                  <svg viewBox="0 0 32 32" width="18" height="18">
+                    <linearGradient id="prem-arrow" y2="100%" x2="100%" y1="0%" x1="0%">
+                      <stop stopColor="#FFFFFF" stopOpacity={1} offset="0%" />
+                      <stop stopColor="#AAAAAA" stopOpacity={1} offset="100%" />
+                    </linearGradient>
+                    <path fill="url(#prem-arrow)" d="M4 15a1 1 0 0 0 1 1h19.586l-4.292 4.292a1 1 0 0 0 1.414 1.414l6-6a.99.99 0 0 0 .292-.702V15c0-.13-.026-.26-.078-.382a.99.99 0 0 0-.216-.324l-6-6a1 1 0 0 0-1.414 1.414L24.586 14H5a1 1 0 0 0-1 1z"/>
+                  </svg>
+                </span>
+              </Link>
             </div>
           ))}
         </div>
