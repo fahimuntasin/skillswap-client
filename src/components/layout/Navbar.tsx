@@ -11,6 +11,7 @@ import { NotificationBell } from "@/components/ui/NotificationBell"
 import { MenuIcon, MoonIcon, SunIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
+import { getSession } from "@/lib/auth-client"
 
 export function Navbar() {
   const { theme, setTheme } = useTheme()
@@ -19,7 +20,8 @@ export function Navbar() {
   useEffect(() => { setMounted(true) }, [])
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const isLoggedIn = false
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  useEffect(() => { getSession().then(s => setIsLoggedIn(!!s?.user)) }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -99,7 +101,7 @@ export function Navbar() {
             </div>
           )}
 
-          {mounted && (<NotificationBell />)}
+          {mounted && isLoggedIn && (<NotificationBell />)}
           {mounted && (
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
