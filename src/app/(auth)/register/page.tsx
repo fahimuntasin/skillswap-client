@@ -148,7 +148,7 @@ export default function RegisterPage() {
             <div className="h-px flex-1 bg-[#F1F5F9]" />
           </div>
 
-          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] dark:bg-[#2a2a3e] gap-2.5" onClick={() => signInWithGoogle()}>
+          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:bg-[#F8FAFC] dark:bg-[#0f0f1a] dark:bg-[#2a2a3e] gap-2.5" onClick={() => signInWithGoogle()}>
             <svg viewBox="0 0 24 24" className="size-[18px]">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>

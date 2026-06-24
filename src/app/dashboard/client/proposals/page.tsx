@@ -27,7 +27,7 @@ export default function ProposalsPage() {
       </div>
       <div className="space-y-3">
         {proposals.map((p) => (
-          <div key={p.id} className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-5">
+          <div key={p.id} className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-5">
             <div className="flex items-start justify-between mb-3">
               <div>
                 <p className="text-sm text-[#94A3B8] dark:text-[#64748b] mb-0.5">Task: <span className="text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] font-medium">{p.task}</span></p>

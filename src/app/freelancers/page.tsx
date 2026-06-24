@@ -29,7 +29,7 @@ export default function FreelancersPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {freelancers.map((f) => (
-            <Link key={f.id} href={`/freelancers/${f.id}`} className="group rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] hover:-translate-y-1">
+            <Link key={f.id} href={`/freelancers/${f.id}`} className="group rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] hover:-translate-y-1">
               <div className="flex items-start gap-3 mb-4">
                 <Avatar className="size-12 ring-2 ring-[#F5F3FF] ring-offset-2 ring-offset-white">
                   <AvatarFallback className="bg-[#7C3AED] text-white font-semibold">{f.name.split(" ").map(n => n[0]).join("")}</AvatarFallback>

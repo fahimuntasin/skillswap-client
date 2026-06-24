@@ -79,7 +79,6 @@
 @layer base {
   * { @apply border-border; }
   body {
-    @apply bg-white text-[#475569] text-base leading-relaxed antialiased dark:bg-[#0a0a0b] dark:text-[#94a3b8];
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
   h1 {
@@ -391,4 +390,19 @@
 .dark .btn-sweep { background-color: #f1f5f9; color: #0f172a; box-shadow: 3px 3px 8px rgba(0,0,0,0.3); }
 .dark .btn-sweep::before { background-color: #0f172a; }
 .dark .btn-glow { background: #334155; color: #f1f5f9; }
+
+/* ===== STARS ANIMATION ===== */
+#stars, #stars2, #stars3 {
+  width: 1px; height: 1px; background: transparent;
+  box-shadow: 501px 811px #fff, 1450px 1324px #fff, 1093px 1780px #fff, 1469px 678px #fff, 904px 741px #fff, 1160px 781px #fff, 1841px 1962px #fff, 1630px 1667px #fff, 1788px 676px #fff, 367px 1734px #fff, 1343px 156px #fff, 1283px 1142px #fff, 1062px 378px #fff, 1395px 467px #fff, 1017px 1891px #fff, 137px 1114px #fff, 1767px 1403px #fff, 1543px 11px #fff, 1078px 181px #fff, 1189px 1574px #fff, 1697px 1551px #fff, 439px 472px #fff, 1491px 677px #fff, 1364px 599px #fff, 34px 382px #fff, 1221px 1584px #fff, 1266px 1499px #fff, 169px 1907px #fff, 1219px 1125px #fff, 659px 18px #fff, 1731px 1959px #fff, 332px 1216px #fff, 1913px 788px #fff, 80px 712px #fff, 326px 1605px #fff, 574px 1502px #fff, 473px 1653px #fff, 404px 975px #fff, 322px 1797px #fff, 425px 1321px #fff, 1121px 1797px #fff, 731px 647px #fff, 891px 1584px #fff, 1523px 109px #fff, 1379px 244px #fff, 865px 1064px #fff, 493px 956px #fff, 624px 1380px #fff, 440px 619px #fff;
+  animation: animStar 50s linear infinite;
+}
+#stars { width: 1px; height: 1px; }
+#stars2 { width: 2px; height: 2px; animation-duration: 100s; }
+#stars3 { width: 3px; height: 3px; animation-duration: 150s; }
+
+@keyframes animStar {
+  from { transform: translateY(0px); }
+  to { transform: translateY(-2000px); }
+}
 

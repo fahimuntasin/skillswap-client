@@ -3,9 +3,9 @@ import { Logo } from "@/components/layout/Logo"
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#0a0a0b] dark:border-[#2a2a3e]">
+    <footer className="relative border-t border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#0e0e16] dark:border-[#2a2a3e]">
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] opacity-15">
-        <img src="/images/footer.png" alt="" className="w-full max-w-[800px] h-auto" />
+        <img src="/images/footer.png" alt="" className="w-full max-w-[1000px] h-auto dark:opacity-10 dark:invert" />
       </div>
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
@@ -13,30 +13,30 @@ export function Footer() {
             <Link href="/">
               <Logo className="h-[22px] w-auto" />
             </Link>
-            <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
+            <p className="mt-4 text-sm text-muted-foreground dark:text-[#94a3b8] leading-relaxed max-w-xs">
               The simple way to hire expert freelancers for micro-tasks. Fast, secure, and reliable.
             </p>
           </div>
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Platform</h4>
+              <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground dark:text-[#94a3b8]">Platform</h4>
             <div className="flex flex-col gap-2.5">
-              <Link href="/tasks" className="text-sm text-foreground/70 hover:text-primary transition-colors">Browse Tasks</Link>
-              <Link href="/freelancers" className="text-sm text-foreground/70 hover:text-primary transition-colors">Browse Freelancers</Link>
-              <Link href="/register" className="text-sm text-foreground/70 hover:text-primary transition-colors">Become a Freelancer</Link>
+              <Link href="/tasks" className="text-sm text-foreground/70 dark:text-[#94a3b8] hover:text-primary dark:hover:text-[#c4b5fd] transition-colors">Browse Tasks</Link>
+              <Link href="/freelancers" className="text-sm text-foreground/70 dark:text-[#94a3b8] hover:text-primary dark:hover:text-[#c4b5fd] transition-colors">Browse Freelancers</Link>
+              <Link href="/register" className="text-sm text-foreground/70 dark:text-[#94a3b8] hover:text-primary dark:hover:text-[#c4b5fd] transition-colors">Become a Freelancer</Link>
             </div>
           </div>
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Support</h4>
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground dark:text-[#94a3b8]">Support</h4>
             <div className="flex flex-col gap-2.5">
-              <Link href="/login" className="text-sm text-foreground/70 hover:text-primary transition-colors">Login</Link>
-              <Link href="/register" className="text-sm text-foreground/70 hover:text-primary transition-colors">Register</Link>
-              <span className="text-sm text-muted-foreground">contact@skillswap.com</span>
+              <Link href="/login" className="text-sm text-foreground/70 dark:text-[#94a3b8] hover:text-primary dark:hover:text-[#c4b5fd] transition-colors">Login</Link>
+              <Link href="/register" className="text-sm text-foreground/70 dark:text-[#94a3b8] hover:text-primary dark:hover:text-[#c4b5fd] transition-colors">Register</Link>
+              <span className="text-sm text-muted-foreground dark:text-[#64748b]">contact@skillswap.com</span>
             </div>
           </div>
           <div>
-            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Connect</h4>
+            <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground dark:text-[#94a3b8]">Connect</h4>
             <div className="flex gap-4 mb-4">
-              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="X">
+              <a href="https://x.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground dark:text-[#94a3b8] hover:text-foreground dark:hover:text-[#f8fafc] transition-colors" aria-label="X">
                 <svg viewBox="0 0 24 24" className="size-5 fill-current"><path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/></svg>
               </a>
               <a href="https://github.com" target="_blank" rel="noopener noreferrer" className="text-muted-foreground hover:text-foreground transition-colors" aria-label="GitHub">
@@ -46,10 +46,10 @@ export function Footer() {
                 <svg viewBox="0 0 24 24" className="size-5 fill-current"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433c-1.144 0-2.063-.926-2.063-2.065 0-1.138.92-2.063 2.063-2.063 1.14 0 2.064.925 2.064 2.063 0 1.139-.925 2.065-2.064 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></svg>
               </a>
             </div>
-            <p className="text-sm text-muted-foreground">contact@skillswap.com</p>
+            <p className="text-sm text-muted-foreground dark:text-[#64748b]">contact@skillswap.com</p>
           </div>
         </div>
-        <div className="mt-12 border-t border-border/50 pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border/50 dark:border-[#2a2a3e] pt-6 text-center text-sm text-muted-foreground dark:text-[#64748b]">
           &copy; {new Date().getFullYear()} SkillSwap. All rights reserved.
         </div>
       </div>

@@ -19,7 +19,7 @@ export function FeatureCards() {
         <div className="mb-6"><p className="text-sm font-semibold text-[#7C3AED]">Platform features</p></div>
         <div className="grid gap-px border border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-[#d1d9e0] sm:grid-cols-3">
           {cards.map((card) => (
-            <div key={card.title} className="special-card bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-8 sm:p-10 flex flex-col">
+            <div key={card.title} className="special-card bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-8 sm:p-10 flex flex-col">
               <div className="mb-5 flex size-9 items-center justify-center rounded-full bg-[#EDE9FE] group-hover:scale-110 transition-transform">
                 <card.icon className="size-[18px] text-[#7C3AED]" />
               </div>

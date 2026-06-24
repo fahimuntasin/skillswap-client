@@ -52,7 +52,7 @@ export default function BrowseTasksPage() {
           <select
             value={category}
             onChange={(e) => { setCategory(e.target.value); setPage(1) }}
-            className="h-11 rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] px-3 text-sm text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] w-full sm:w-[180px] outline-none focus:border-[#7C3AED]"
+            className="h-11 rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] px-3 text-sm text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] w-full sm:w-[180px] outline-none focus:border-[#7C3AED]"
           >
             {categories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
@@ -60,7 +60,7 @@ export default function BrowseTasksPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {paged.map((t) => (
-            <Link key={t.id} href={`/tasks/${t.id}`} className="group rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] hover:-translate-y-1">
+            <Link key={t.id} href={`/tasks/${t.id}`} className="group rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] hover:-translate-y-1">
               <Badge variant="secondary" className="mb-3 bg-[#F5F3FF] text-[#7C3AED] border-0 font-medium text-xs">{t.category}</Badge>
               <h3 className="text-[15px] font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] group-hover:text-[#7C3AED] transition-colors line-clamp-2 mb-2">{t.title}</h3>
               <p className="text-[13px] text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] mb-4">by {t.client}</p>

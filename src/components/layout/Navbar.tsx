@@ -38,7 +38,7 @@ export function Navbar() {
         "sticky top-0 z-50 h-16 border-b transition-all duration-300",
         scrolled
           ? "border-[#E2E8F0] dark:border-[#2a2a3e] bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(10,10,11,0.85)] backdrop-blur-[12px] dark:border-[#2a2a3e] dark:bg-[rgba(10,10,11,0.85)]"
-          : "border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] dark:border-[#2a2a3e] dark:bg-[#0a0a0b]"
+          : "border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] dark:border-[#2a2a3e] dark:bg-[#0f0f1a]"
       )}
     >
       <div className="mx-auto flex h-full max-w-[1280px] items-center px-6">
@@ -101,7 +101,7 @@ export function Navbar() {
           {mounted && (
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] transition-colors dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:hover:bg-[#2a2a3e]"
+            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] hover:bg-[#F8FAFC] dark:bg-[#0f0f1a] transition-colors dark:border-[#2a2a3e] dark:bg-[#1c1a3a] dark:hover:bg-[#2a2a3e]"
             aria-label="Toggle theme"
           >
             <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc] hidden dark:block" />
@@ -111,7 +111,7 @@ export function Navbar() {
 
           {/* Mobile menu toggle */}
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] transition-colors">
+            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] hover:bg-[#F8FAFC] dark:bg-[#0f0f1a] transition-colors">
               <MenuIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72 pt-14">

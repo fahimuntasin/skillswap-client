@@ -41,7 +41,7 @@ export function AccordionSection() {
           </div>
         </div>
 
-        <div className="sticky top-20 rounded-xl border border-[#E2E8F0] dark:border-[#2a2a3e] bg-[#F8FAFC] dark:bg-[#0a0a0b] p-6">
+        <div className="sticky top-20 rounded-xl border border-[#E2E8F0] dark:border-[#2a2a3e] bg-[#F8FAFC] dark:bg-[#0f0f1a] p-6">
           <div className="space-y-3">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-2">
