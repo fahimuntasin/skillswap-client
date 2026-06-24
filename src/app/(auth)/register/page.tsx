@@ -69,6 +69,7 @@ export default function RegisterPage() {
           <form className="space-y-4" onSubmit={async (e) => {
             e.preventDefault(); setLoading(true)
             const form = new FormData(e.currentTarget)
+            const pass = form.get("password") as string; if (pass.length < 6) { toast.error("Password must be at least 6 characters"); setLoading(false); return }; if (!/[A-Z]/.test(pass)) { toast.error("Password must contain 1 uppercase letter"); setLoading(false); return }; if (!/[a-z]/.test(pass)) { toast.error("Password must contain 1 lowercase letter"); setLoading(false); return }
             const isFreelancer = (e.currentTarget.querySelector("#freelancer") as HTMLInputElement)?.checked
             try {
               await registerWithEmail({ name: form.get("name") as string, email: form.get("email") as string, password: form.get("password") as string, image: (form.get("image") as string) || "", role: isFreelancer ? "freelancer" : "client" })
