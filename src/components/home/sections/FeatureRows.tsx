@@ -1,4 +1,5 @@
 import Link from "next/link"
+import { ShieldCheckIcon } from "lucide-react"
 
 const features = [
   {
@@ -35,10 +36,11 @@ export function FeatureRows() {
     <section className="border-b border-[#d1d9e0]">
       <div className="mx-auto max-w-[1280px]">
         {features.map((f, i) => (
-          <div
-            key={i}
-            className={`grid items-center gap-16 px-6 py-24 ${f.bg} ${f.reverse ? "lg:grid-cols-[55%_45%]" : "lg:grid-cols-[45%_55%]"}`}
-          >
+          <div key={i}>
+            {i > 0 && <div className="border-t border-[#d1d9e0]" />}
+            <div
+              className={`grid items-center gap-16 px-6 py-24 ${f.bg} ${f.reverse ? "lg:grid-cols-[55%_45%]" : "lg:grid-cols-[45%_55%]"}`}
+            >
             <div className={f.reverse ? "lg:order-2" : ""}>
               <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
               <h2 className="text-[32px] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">{f.title}</h2>
@@ -77,13 +79,15 @@ export function FeatureRows() {
                 )}
                 {f.tag.includes("securely") && (
                   <div className="rounded-lg border border-[#d1d9e0] p-4 text-center">
-                    <p className="text-sm font-semibold text-[#0F172A]">🔒 Secure Payment</p>
+                    <ShieldCheckIcon className="size-6 text-[#7C3AED] mx-auto mb-2" />
+                    <p className="text-sm font-semibold text-[#0F172A]">Secure Payment</p>
                     <p className="text-xs text-[#64748B] mt-1">Pay via Stripe · Funds held until approval</p>
                     <p className="text-lg font-bold text-[#0F172A] mt-2">$150.00</p>
                   </div>
                 )}
               </div>
             </div>
+          </div>
           </div>
         ))}
       </div>
