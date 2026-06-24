@@ -21,7 +21,9 @@ export function Navbar() {
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const [isLoggedIn, setIsLoggedIn] = useState(false)
-  useEffect(() => { getSession().then(s => setIsLoggedIn(!!s?.user)) }, [])
+  useEffect(() => {
+    getSession().then(s => setIsLoggedIn(!!s && s.user !== null))
+  }, [])
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)

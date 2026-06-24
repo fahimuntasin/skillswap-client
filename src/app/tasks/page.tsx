@@ -60,9 +60,9 @@ export default function BrowseTasksPage() {
           <p className="text-center text-[#64748B] py-20">No tasks found. Try different filters.</p>
         ) : (
           <>
-            <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
+            <div className="gsap-cards grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
               {tasks.map((t: any) => (
-                <Link key={t._id} href={`/tasks/${t._id}`} className="group relative rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:hover:border-[#3a3a5e] hover:-translate-y-1">
+                <Link key={t._id} href={`/tasks/${t._id}`} className="gsap-card group relative rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:hover:border-[#3a3a5e] hover:-translate-y-1">
                   <BookmarkButton taskId={t._id} />
                   <Badge variant="secondary" className="mb-3 bg-[#F5F3FF] dark:bg-[#2d1f5e] text-[#7C3AED] dark:text-[#c4b5fd] border-0 font-medium text-xs">{t.category}</Badge>
                   <h3 className="text-[15px] font-semibold text-[#0F172A] dark:text-[#f8fafc] group-hover:text-[#7C3AED] transition-colors line-clamp-2 mb-2">{t.title}</h3>
