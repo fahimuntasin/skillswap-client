@@ -1,14 +1,20 @@
 "use client"
 
 import Link from "next/link"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
 import { Logo } from "@/components/layout/Logo"
 import { AuthIllustration } from "@/components/layout/AuthIllustration"
+import { signUp, signIn } from "@/lib/auth-client"
+import { toast } from "sonner"
 
 export default function RegisterPage() {
+  const router = useRouter()
+  const [loading, setLoading] = useState(false)
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex relative overflow-hidden">
@@ -46,7 +52,30 @@ export default function RegisterPage() {
             <p className="text-[#64748B] text-[15px]">Enter your details to get started on SkillSwap</p>
           </div>
 
-          <form className="space-y-4">
+          <form
+            className="space-y-4"
+            onSubmit={async (e) => {
+              e.preventDefault()
+              setLoading(true)
+              const form = new FormData(e.currentTarget)
+              const isFreelancer = (e.currentTarget.querySelector("#freelancer") as HTMLInputElement)?.checked
+              try {
+                await signUp.email({
+                  name: form.get("name") as string,
+                  email: form.get("email") as string,
+                  password: form.get("password") as string,
+                  image: (form.get("image") as string) || "",
+                  role: isFreelancer ? "freelancer" : "client",
+                })
+                toast.success("Account created! Please log in.")
+                router.push("/login")
+              } catch {
+                toast.error("Registration failed. Please try again.")
+              } finally {
+                setLoading(false)
+              }
+            }}
+          >
             <div className="space-y-2">
               <Label htmlFor="name" className="text-[13px] font-medium text-[#0F172A]">Full name</Label>
               <Input id="name" placeholder="John Doe" autoComplete="name" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
@@ -74,8 +103,8 @@ export default function RegisterPage() {
               </Label>
             </div>
 
-            <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium">
-              Create account
+            <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>
+              {loading ? "Creating..." : "Create account"}
             </Button>
           </form>
 
@@ -85,7 +114,13 @@ export default function RegisterPage() {
             <div className="h-px flex-1 bg-[#F1F5F9]" />
           </div>
 
-          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5">
+          <Button
+            variant="outline"
+            className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5"
+            onClick={async () => {
+              await signIn.social({ provider: "google", callbackURL: "/" })
+            }}
+          >
             <svg viewBox="0 0 24 24" className="size-[18px]">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
