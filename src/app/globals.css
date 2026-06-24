@@ -156,7 +156,56 @@
   transform: scale(1);
 }
 
-/* ===== PREMIUM PILL BUTTON ===== */
+/* ===== RECTANGULAR DARK ACTION BUTTON ===== */
+.btn-action {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  background: linear-gradient(180deg, #1e1b4b 0%, #0f0d2e 100%);
+  color: #e0d9ff;
+  font-weight: 600;
+  font-size: 14px;
+  padding: 11px 24px;
+  border-radius: 6px;
+  cursor: pointer;
+  border: 1px solid rgba(124,58,237,0.25);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
+  transition: all 0.25s ease;
+  text-decoration: none;
+  position: relative;
+  overflow: hidden;
+}
+.btn-action::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  pointer-events: none;
+}
+.btn-action:hover {
+  background: linear-gradient(180deg, #312e81 0%, #1e1b4b 100%);
+  border-color: rgba(124,58,237,0.5);
+  box-shadow: 0 4px 16px rgba(124,58,237,0.25), 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  transform: translateY(-1px);
+}
+.btn-action:active {
+  transform: translateY(1px);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+}
+.btn-action .btn-arrow {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 22px;
+  height: 22px;
+  background: rgba(124,58,237,0.2);
+  border-radius: 4px;
+  transition: all 0.25s ease;
+}
+.btn-action:hover .btn-arrow {
+  background: rgba(124,58,237,0.4);
+  transform: translateX(2px);
+}
 .btn-premium {
   position: relative;
   padding: 12px 28px 12px 24px;
