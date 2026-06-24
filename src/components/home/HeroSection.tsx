@@ -10,7 +10,7 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden border-b border-[#F1F5F9]">
       {/* Floating task cards — subtle background */}
-      <div className="pointer-events-none absolute right-0 top-12 hidden opacity-[0.07] lg:block">
+      <div className="pointer-events-none absolute right-0 top-12 hidden opacity-[0.07] lg:block animate-float-subtle">
         <Image src={cardsImg} alt="" width={400} height={400} priority />
       </div>
 
