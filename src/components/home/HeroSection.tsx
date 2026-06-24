@@ -10,8 +10,10 @@ export function HeroSection() {
   return (
     <section className="relative overflow-hidden border-b border-[#F1F5F9]">
       {/* Floating task cards — subtle background */}
-      <div className="pointer-events-none absolute right-0 top-12 hidden opacity-[0.07] lg:block animate-float-subtle">
-        <Image src={cardsImg} alt="" width={400} height={400} priority />
+      <div className="pointer-events-none absolute right-[-60px] top-0 hidden h-full w-[550px] lg:block animate-float-subtle opacity-[0.06]">
+        <div className="relative h-full w-full">
+          <Image src={cardsImg} alt="" fill className="object-contain object-right-top" unoptimized />
+        </div>
       </div>
 
       <div className="mx-auto max-w-[1280px] px-6 py-[120px]">
