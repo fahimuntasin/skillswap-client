@@ -6,46 +6,83 @@ import { useRouter } from "next/navigation"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
-import { Logo } from "@/components/layout/Logo"
-import { AuthIllustration } from "@/components/layout/AuthIllustration"
+import { FileTextIcon, UsersIcon, ShieldCheckIcon, LayersIcon } from "lucide-react"
 import { loginWithEmail, signInWithGoogle } from "@/lib/auth-client"
 import { toast } from "sonner"
+
+const features = [
+  { icon: FileTextIcon, title: "Post in minutes", sub: "Describe your task and set your budget instantly." },
+  { icon: UsersIcon, title: "Get proposals fast", sub: "Skilled freelancers apply within hours." },
+  { icon: ShieldCheckIcon, title: "Pay securely", sub: "Stripe-protected. Money releases on completion." },
+]
+
+const stats = [
+  { n: "1,200+", l: "Tasks posted" },
+  { n: "850+", l: "Freelancers" },
+  { n: "$48k", l: "Paid out" },
+]
 
 export default function LoginPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
-      {/* Left — brand panel */}
-      <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex relative overflow-hidden">
-        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(124,58,237,0.04),transparent_70%)]" />
-        <div className="relative z-10 flex flex-col justify-between h-full">
-          <div>
-            <Link href="/">
-              <Logo className="h-[22px] w-auto" />
-            </Link>
-          </div>
+      {/* Left panel */}
+      <div className="hidden w-[480px] shrink-0 flex-col justify-between bg-[#EDE9FE] px-10 py-12 lg:flex">
+        <div>
+          <Link href="/" className="flex items-center gap-2">
+            <div className="flex size-6 items-center justify-center rounded-lg bg-[#7C3AED]">
+              <LayersIcon className="size-3.5 text-white" strokeWidth={2.5} />
+            </div>
+            <span className="text-base font-bold text-[#3C3489]">
+              Skill<span className="text-[#7C3AED]">Swap</span>
+            </span>
+          </Link>
+        </div>
 
-          <div className="flex-1 flex items-center justify-end">
-            <AuthIllustration />
-          </div>
-
-          <blockquote className="max-w-[320px]">
-            <p className="text-[15px] leading-relaxed text-[#475569]">
-              &ldquo;SkillSwap helped me find amazing freelancers for my startup tasks. Fast, reliable, and incredibly easy to use.&rdquo;
-            </p>
-            <footer className="mt-4 flex items-center gap-3">
-              <div className="flex size-8 items-center justify-center rounded-full bg-[#EDE9FE] text-[13px] font-semibold text-[#7C3AED]">SD</div>
-              <div>
-                <p className="text-sm font-medium text-[#0F172A]">Sophia Davis</p>
-                <p className="text-xs text-[#94A3B8]">Startup Founder</p>
+        <div className="flex flex-col gap-8">
+          {features.map((f) => (
+            <div key={f.title} className="flex gap-4">
+              <div className="flex size-10 shrink-0 items-center justify-center rounded-[10px] bg-[#7C3AED]">
+                <f.icon className="size-5 text-white" strokeWidth={2} />
               </div>
-            </footer>
-          </blockquote>
+              <div>
+                <p className="text-sm font-semibold text-[#3C3489]">{f.title}</p>
+                <p className="mt-0.5 text-[13px] leading-[1.6] text-[#534AB7]">{f.sub}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <div>
+          <div className="flex gap-6">
+            {stats.map((s) => (
+              <div key={s.l}>
+                <p className="text-lg font-bold text-[#7C3AED]">{s.n}</p>
+                <p className="text-[11px] text-[#534AB7]">{s.l}</p>
+              </div>
+            ))}
+          </div>
+
+          <div className="mt-5 border-t border-[#AFA9EC] pt-5">
+            <p className="text-[13px] italic leading-[1.6] text-[#534AB7]">
+              &ldquo;SkillSwap helped me find amazing freelancers. Fast and reliable.&rdquo;
+            </p>
+            <div className="mt-3 flex items-center gap-2.5">
+              <div className="flex size-8 items-center justify-center rounded-full bg-[#7C3AED] text-xs font-semibold text-white">
+                SD
+              </div>
+              <div>
+                <p className="text-[13px] font-semibold text-[#3C3489]">Sophia Davis</p>
+                <p className="text-[11px] text-[#534AB7]">Startup Founder</p>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
 
-      {/* Right — form */}
+      {/* Right form */}
       <div className="flex flex-1 items-center justify-center px-6 py-12">
         <div className="w-full max-w-[380px]">
           <div className="mb-10">
@@ -60,10 +97,7 @@ export default function LoginPage() {
               setLoading(true)
               const form = new FormData(e.currentTarget)
               try {
-                await loginWithEmail(
-                  form.get("email") as string,
-                  form.get("password") as string,
-                )
+                await loginWithEmail(form.get("email") as string, form.get("password") as string)
                 toast.success("Logged in successfully")
                 router.push("/")
               } catch {
@@ -75,33 +109,15 @@ export default function LoginPage() {
           >
             <div className="space-y-2">
               <Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A]">Email</Label>
-              <Input
-                id="email"
-                type="email"
-                placeholder="name@example.com"
-                autoCapitalize="none"
-                autoComplete="email"
-                autoCorrect="off"
-                className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0"
-              />
+              <Input id="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
-
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A]">Password</Label>
-                <Link href="/forgot-password" className="text-[13px] text-[#64748B] hover:text-[#7C3AED] transition-colors">
-                  Forgot?
-                </Link>
+                <Link href="/forgot-password" className="text-[13px] text-[#64748B] hover:text-[#7C3AED]">Forgot?</Link>
               </div>
-              <Input
-                id="password"
-                type="password"
-                placeholder="••••••••"
-                autoComplete="current-password"
-                className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0"
-              />
+              <Input id="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
-
             <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>
               {loading ? "Signing in..." : "Sign in"}
             </Button>
@@ -113,11 +129,7 @@ export default function LoginPage() {
             <div className="h-px flex-1 bg-[#F1F5F9]" />
           </div>
 
-          <Button
-            variant="outline"
-            className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5"
-            onClick={() => signInWithGoogle()}
-          >
+          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5" onClick={() => signInWithGoogle()}>
             <svg viewBox="0 0 24 24" className="size-[18px]">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -129,7 +141,7 @@ export default function LoginPage() {
 
           <p className="mt-8 text-center text-[14px] text-[#64748B]">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="font-medium text-[#0F172A] hover:text-[#7C3AED] transition-colors underline underline-offset-4">
+            <Link href="/register" className="font-medium text-[#0F172A] hover:text-[#7C3AED] underline underline-offset-4">
               Sign up
             </Link>
           </p>

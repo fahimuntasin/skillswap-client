@@ -1,46 +1,38 @@
+"use client"
+
 import Link from "next/link"
 import Image from "next/image"
+import { useEffect, useState } from "react"
 import workspaceImg from "@/Picture/Freelance Workspace Scene (Hero right side).png"
 
 export function HeroSection() {
+  const [mounted, setMounted] = useState(false)
+  useEffect(() => setMounted(true), [])
+
   return (
-    <section className="min-h-[calc(100vh-4rem)] flex flex-col justify-center border-b border-[#d1d9e0] overflow-hidden">
-      <div className="mx-auto grid w-full max-w-[1280px] flex-1 items-center gap-12 px-8 py-24 lg:grid-cols-2 lg:py-0">
-        <div className="max-w-[560px]">
-          <div className="mb-2">
-            <Link href="/" className="inline-flex items-center gap-1 text-sm font-semibold text-[#7C3AED] hover:underline">
-              SkillSwap
-              <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
-            </Link>
-          </div>
-
-          <h1 className="text-[clamp(48px,6vw,72px)] font-bold leading-[1.05] tracking-[-0.03em] text-[#0F172A]">
-            From task to done,
-            <br />
-            <span className="text-[#7C3AED]">in one platform</span>
-          </h1>
-
-          <p className="mt-6 max-w-[460px] text-lg leading-relaxed text-[#64748B]">
-            SkillSwap is the only freelance platform built for micro-tasks. Post any job and get it done by vetted professionals.
+    <section className="border-b border-[#d1d9e0]">
+      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-8 py-28 lg:grid-cols-2">
+        <div>
+          <p className={`mb-4 text-sm font-medium text-[#7C3AED] transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+            SkillSwap
           </p>
-
-          <div className="mt-10 flex flex-wrap items-center gap-6">
-            <Link
-              href="/register"
-              className="inline-flex items-center gap-2 rounded-md bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white transition-colors hover:bg-[#6D28D9]"
-            >
-              Get Started
-              <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
+          <h1 className={`text-[56px] font-bold leading-[1.05] tracking-[-0.03em] text-[#0F172A] sm:text-[72px] transition-all duration-700 delay-100 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+            From task to done, <span className="text-[#7C3AED]">in one platform</span>
+          </h1>
+          <p className={`mt-6 max-w-[460px] text-lg text-[#64748B] transition-all duration-700 delay-200 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+            Post any job and get it done by vetted professionals.
+          </p>
+          <div className={`mt-10 flex items-center gap-6 transition-all duration-700 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
+            <Link href="/register" className="inline-flex items-center gap-2 rounded-md bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white hover:bg-[#6D28D9] transition-colors">
+              Get Started <span aria-hidden="true">→</span>
             </Link>
-            <Link href="/tasks" className="inline-flex items-center gap-1 text-sm font-semibold text-[#0F172A] transition-colors hover:text-[#7C3AED]">
-              Browse Tasks
-              <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
+            <Link href="/tasks" className="text-sm font-semibold text-[#0F172A] hover:text-[#7C3AED] transition-colors">
+              Browse Tasks <span aria-hidden="true">→</span>
             </Link>
           </div>
         </div>
-
-        <div className="hidden lg:flex items-center justify-center">
-          <Image src={workspaceImg} alt="" width={640} height={480} className="w-full max-w-[640px] h-auto" priority />
+        <div className={`hidden lg:block transition-all duration-1000 delay-200 ${mounted ? "opacity-100 translate-x-0" : "opacity-0 translate-x-8"}`}>
+          <Image src={workspaceImg} alt="" width={640} height={480} className="w-full h-auto" priority />
         </div>
       </div>
     </section>
