@@ -4,10 +4,15 @@ import workspaceImg from "@/Picture/Freelance Workspace Scene (Hero right side).
 
 export function HeroSection() {
   return (
-    <section className="flex min-h-[calc(100vh-4rem)] items-center border-b border-[#d1d9e0]">
-      <div className="mx-auto grid w-full max-w-[1280px] items-center gap-16 px-6 lg:grid-cols-2">
+    <section className="min-h-[calc(100vh-4rem)] flex flex-col justify-center border-b border-[#d1d9e0] overflow-hidden">
+      <div className="mx-auto grid w-full max-w-[1280px] flex-1 items-center gap-12 px-8 py-24 lg:grid-cols-2 lg:py-0">
         <div className="max-w-[560px]">
-          <p className="mb-4 text-sm font-medium text-[#7C3AED]">SkillSwap</p>
+          <div className="mb-2">
+            <Link href="/" className="inline-flex items-center gap-1 text-sm font-semibold text-[#7C3AED] hover:underline">
+              SkillSwap
+              <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
+            </Link>
+          </div>
 
           <h1 className="text-[clamp(48px,6vw,72px)] font-bold leading-[1.05] tracking-[-0.03em] text-[#0F172A]">
             From task to done,
@@ -27,7 +32,7 @@ export function HeroSection() {
               Get Started
               <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
             </Link>
-            <Link href="/tasks" className="text-sm font-semibold text-[#0F172A] hover:text-[#7C3AED] transition-colors inline-flex items-center gap-1">
+            <Link href="/tasks" className="inline-flex items-center gap-1 text-sm font-semibold text-[#0F172A] transition-colors hover:text-[#7C3AED]">
               Browse Tasks
               <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
             </Link>
@@ -35,7 +40,7 @@ export function HeroSection() {
         </div>
 
         <div className="hidden lg:flex items-center justify-center">
-          <Image src={workspaceImg} alt="" width={600} height={500} className="w-full max-w-[600px] h-auto" priority />
+          <Image src={workspaceImg} alt="" width={640} height={480} className="w-full max-w-[640px] h-auto" priority />
         </div>
       </div>
     </section>
