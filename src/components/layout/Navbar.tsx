@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Logo } from "@/components/layout/Logo"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
+import { NotificationBell } from "@/components/ui/NotificationBell"
 import { MenuIcon, MoonIcon, SunIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 import { useTheme } from "next-themes"
@@ -98,6 +99,7 @@ export function Navbar() {
             </div>
           )}
 
+          {mounted && (<NotificationBell />)}
           {mounted && (
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
