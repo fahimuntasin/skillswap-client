@@ -36,7 +36,7 @@ const clientLinks: SidebarLink[] = [
 
 const freelancerLinks: SidebarLink[] = [
   { href: "/dashboard/freelancer", label: "Overview", icon: LayoutDashboardIcon },
-  { href: "/dashboard/freelancer/browse", label: "Browse Tasks", icon: BriefcaseIcon },
+  { href: "/tasks", label: "Browse Tasks", icon: BriefcaseIcon },
   { href: "/dashboard/freelancer/proposals", label: "My Proposals", icon: FileTextIcon },
   { href: "/dashboard/freelancer/projects", label: "Active Projects", icon: TrendingUpIcon },
   { href: "/dashboard/freelancer/earnings", label: "Earnings", icon: DollarSignIcon },
