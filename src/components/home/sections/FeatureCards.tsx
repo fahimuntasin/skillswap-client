@@ -25,9 +25,8 @@ export function FeatureCards() {
               </div>
               <h3 className="text-lg font-semibold text-[#0F172A]">{card.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">{card.desc}</p>
-              <Link href={card.href} className="group mt-6 inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-semibold text-[#0F172A] transition-all duration-200 hover:border-[#0F172A] hover:bg-[#F8FAFC]">
-                {card.link}
-                <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+              <Link href={card.href} className="btn-glow mt-6">
+                <span>{card.link} →</span>
               </Link>
             </div>
           ))}

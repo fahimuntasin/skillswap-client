@@ -44,9 +44,8 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
           <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
           <h2 className="text-[32px] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">{f.title}</h2>
           <p className="mt-4 text-base leading-relaxed text-[#64748B] max-w-[480px]">{f.desc}</p>
-          <Link href={f.href} className="group mt-6 inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-semibold text-[#0F172A] transition-all duration-200 hover:border-[#0F172A] hover:bg-[#F8FAFC]">
-            {f.link}
-            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
+          <Link href={f.href} className="btn-glow mt-6">
+            <span>{f.link} →</span>
           </Link>
         </div>
         <div className={`rounded-xl border border-[#d1d9e0] bg-white p-8 ${f.reverse ? "lg:order-1" : ""}`}>

@@ -156,6 +156,60 @@
   transform: scale(1);
 }
 
-/* Section divider */
-.vl { border-left: 1px solid #E2E8F0; }
+/* ===== GLOW LINK BUTTON ===== */
+.btn-glow {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  background: #1e293b;
+  color: #f8fafc;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 10px 20px;
+  border-radius: 8px;
+  border: 0;
+  overflow: hidden;
+  text-decoration: none;
+  transition: all 0.5s;
+}
+.btn-glow::before {
+  content: "";
+  position: absolute;
+  width: 48px;
+  height: 48px;
+  right: 4px;
+  top: 4px;
+  z-index: 0;
+  background: #8b5cf6;
+  border-radius: 50%;
+  filter: blur(16px);
+  transition: all 0.5s;
+}
+.btn-glow::after {
+  content: "";
+  position: absolute;
+  width: 80px;
+  height: 80px;
+  right: 32px;
+  top: 12px;
+  z-index: 0;
+  background: #f43f5e;
+  border-radius: 50%;
+  filter: blur(20px);
+  transition: all 0.5s;
+}
+.btn-glow:hover {
+  color: #fda4af;
+  border-color: #fda4af;
+}
+.btn-glow:hover::before {
+  right: 48px;
+  bottom: -32px;
+  box-shadow: 20px 20px 20px 30px #a21caf;
+}
+.btn-glow:hover::after {
+  right: -32px;
+}
+.btn-glow span { position: relative; z-index: 1; }
 
