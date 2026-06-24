@@ -1,7 +1,5 @@
-const API_URL = "http://localhost:3001"
-
 async function request(path: string, options?: RequestInit) {
-  const res = await fetch(`${API_URL}${path}`, {
+  const res = await fetch(path, {
     headers: { "Content-Type": "application/json", ...options?.headers },
     ...options,
   })

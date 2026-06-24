@@ -97,9 +97,12 @@ export default function LoginPage() {
               setLoading(true)
               const form = new FormData(e.currentTarget)
               try {
-                await loginWithEmail(form.get("email") as string, form.get("password") as string)
+                const res = await loginWithEmail(form.get("email") as string, form.get("password") as string)
                 toast.success("Logged in successfully")
-                router.push("/")
+                const role = res.user?.role
+                if (role === "admin") router.push("/dashboard/admin")
+                else if (role === "freelancer") router.push("/dashboard/freelancer")
+                else router.push("/")
               } catch {
                 toast.error("Invalid email or password")
               } finally {
@@ -109,14 +112,14 @@ export default function LoginPage() {
           >
             <div className="space-y-2">
               <Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A]">Email</Label>
-              <Input id="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="email" name="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
                 <Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A]">Password</Label>
                 <Link href="/forgot-password" className="text-[13px] text-[#64748B] hover:text-[#7C3AED]">Forgot?</Link>
               </div>
-              <Input id="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="password" name="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>
               {loading ? "Signing in..." : "Sign in"}

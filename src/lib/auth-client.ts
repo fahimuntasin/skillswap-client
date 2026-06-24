@@ -1,48 +1,33 @@
-const API_URL = "http://localhost:3001"
-
-export async function loginWithEmail(email: string, password: string) {
-  const res = await fetch(`${API_URL}/api/auth/sign-in/email`, {
+async function post(path: string, body: unknown) {
+  const res = await fetch(path, {
     method: "POST",
     headers: { "Content-Type": "application/json" },
-    body: JSON.stringify({ email, password }),
+    body: JSON.stringify(body),
     credentials: "include",
   })
-  if (!res.ok) throw new Error("Login failed")
-  return res.json()
+  const data = await res.json()
+  if (!res.ok) throw new Error(data.message || "Request failed")
+  return data
 }
 
-export async function registerWithEmail(data: {
-  name: string
-  email: string
-  password: string
-  image?: string
-  role?: string
-}) {
-  const res = await fetch(`${API_URL}/api/auth/sign-up/email`, {
-    method: "POST",
-    headers: { "Content-Type": "application/json" },
-    body: JSON.stringify(data),
-    credentials: "include",
-  })
-  if (!res.ok) throw new Error("Registration failed")
-  return res.json()
-}
+export const loginWithEmail = (email: string, password: string) =>
+  post("/api/auth/sign-in/email", { email, password })
 
-export async function signInWithGoogle() {
-  window.location.href = `${API_URL}/api/auth/sign-in/google`
+export const registerWithEmail = (data: { name: string; email: string; password: string; image?: string; role?: string }) =>
+  post("/api/auth/sign-up/email", data)
+
+export function signInWithGoogle() {
+  window.location.href = "/api/auth/sign-in/google"
 }
 
 export async function getSession() {
-  const res = await fetch(`${API_URL}/api/auth/session`, {
-    credentials: "include",
-  })
-  if (!res.ok) return null
-  return res.json()
+  try {
+    const res = await fetch("/api/auth/session", { credentials: "include" })
+    if (!res.ok) return null
+    return res.json()
+  } catch { return null }
 }
 
 export async function signOut() {
-  await fetch(`${API_URL}/api/auth/sign-out`, {
-    method: "POST",
-    credentials: "include",
-  })
+  await fetch("/api/auth/sign-out", { method: "POST", credentials: "include" })
 }

@@ -115,19 +115,19 @@ export default function RegisterPage() {
           >
             <div className="space-y-2">
               <Label htmlFor="name" className="text-[13px] font-medium text-[#0F172A]">Full name</Label>
-              <Input id="name" placeholder="John Doe" autoComplete="name" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="name" name="name" placeholder="John Doe" autoComplete="name" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A]">Email</Label>
-              <Input id="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="email" name="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="image" className="text-[13px] font-medium text-[#0F172A]">Profile image URL</Label>
-              <Input id="image" placeholder="https://example.com/photo.jpg" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="image" name="image" placeholder="https://example.com/photo.jpg" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <div className="space-y-2">
               <Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A]">Password</Label>
-              <Input id="password" type="password" placeholder="Min. 6 characters, 1 uppercase, 1 lowercase" autoComplete="new-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="password" name="password" type="password" placeholder="Min. 6 characters, 1 uppercase, 1 lowercase" autoComplete="new-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
 
             <div className="flex items-center gap-2.5 pt-1">
