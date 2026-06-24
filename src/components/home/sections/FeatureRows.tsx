@@ -2,6 +2,7 @@
 
 import Link from "next/link"
 import { useReveal } from "@/lib/use-reveal"
+import { AnimatedLines } from "@/components/home/decor/Decorations"
 
 const features = [
   {
@@ -63,8 +64,9 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
 
 export function FeatureRows() {
   return (
-    <section className="border-b border-[#d1d9e0]">
-      <div className="mx-auto max-w-[1280px]">
+    <section className="relative border-b border-[#d1d9e0] overflow-hidden">
+      <AnimatedLines />
+      <div className="mx-auto max-w-[1280px] relative">
         {features.map((f, i) => <FeatureRow key={i} f={f} i={i} />)}
       </div>
     </section>

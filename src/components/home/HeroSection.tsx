@@ -4,14 +4,18 @@ import Link from "next/link"
 import Image from "next/image"
 import { useEffect, useState } from "react"
 import workspaceImg from "@/Picture/Freelance Workspace Scene (Hero right side).png"
+import { DottedGrid, GlowOrb } from "@/components/home/decor/Decorations"
 
 export function HeroSection() {
   const [mounted, setMounted] = useState(false)
   useEffect(() => setMounted(true), [])
 
   return (
-    <section className="border-b border-[#d1d9e0]">
-      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-8 py-28 lg:grid-cols-2">
+    <section className="relative border-b border-[#d1d9e0] overflow-hidden">
+      <DottedGrid />
+      <GlowOrb className="top-[-100px] right-[-100px] w-[400px] h-[400px] bg-[#7C3AED]/[0.06]" />
+      <GlowOrb className="bottom-[-80px] left-[-80px] w-[300px] h-[300px] bg-[#A78BFA]/[0.04]" />
+      <div className="mx-auto grid max-w-[1280px] items-center gap-12 px-8 py-28 lg:grid-cols-2 relative">
         <div>
           <p className={`mb-4 text-sm font-medium text-[#7C3AED] transition-all duration-700 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
             SkillSwap
