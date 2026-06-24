@@ -25,8 +25,8 @@ export function FeatureCards() {
               </div>
               <h3 className="text-lg font-semibold text-[#0F172A]">{card.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">{card.desc}</p>
-              <Link href={card.href} className="btn-glow mt-6">
-                <span>{card.link} →</span>
+              <Link href={card.href} className="btn-sweep mt-6">
+                {card.link} →
               </Link>
             </div>
           ))}

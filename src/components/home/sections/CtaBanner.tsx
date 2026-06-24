@@ -14,7 +14,7 @@ export function CtaBanner() {
         <p className="mt-3 text-base text-[#64748B] max-w-[480px] mx-auto">Join thousands of clients and freelancers already using SkillSwap.</p>
         <div className="mt-8 flex flex-wrap items-center justify-center gap-4">
           <Link href="/register" className="btn-glossy">Get Started <span>→</span></Link>
-          <Link href="/tasks" className="btn-glow"><span>Browse Tasks →</span></Link>
+          <Link href="/tasks" className="btn-sweep">Browse Tasks →</Link>
         </div>
       </div>
     </section>

@@ -44,8 +44,8 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
           <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
           <h2 className="text-[32px] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">{f.title}</h2>
           <p className="mt-4 text-base leading-relaxed text-[#64748B] max-w-[480px]">{f.desc}</p>
-          <Link href={f.href} className="btn-glow mt-6">
-            <span>{f.link} →</span>
+          <Link href={f.href} className="btn-sweep mt-6">
+            {f.link} →
           </Link>
         </div>
         <div className={`rounded-xl border border-[#d1d9e0] bg-white p-8 ${f.reverse ? "lg:order-1" : ""}`}>
