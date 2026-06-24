@@ -385,3 +385,8 @@
 }
 .btn-glow span { position: relative; z-index: 1; }
 
+/* ===== DARK MODE ===== */
+.dark .btn-sweep { background-color: #f1f5f9; color: #0f172a; box-shadow: 3px 3px 8px rgba(0,0,0,0.3); }
+.dark .btn-sweep::before { background-color: #0f172a; }
+.dark .btn-glow { background: #334155; color: #f1f5f9; }
+

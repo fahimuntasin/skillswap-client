@@ -7,10 +7,12 @@ import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
 import { Logo } from "@/components/layout/Logo"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { MenuIcon } from "lucide-react"
+import { MenuIcon, MoonIcon, SunIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
+import { useDarkMode } from "@/lib/theme"
 
 export function Navbar() {
+  const { dark, toggle } = useDarkMode()
   const pathname = usePathname()
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
@@ -93,6 +95,14 @@ export function Navbar() {
               </Link>
             </div>
           )}
+
+          <button
+            onClick={toggle}
+            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors"
+            aria-label="Toggle theme"
+          >
+            {dark ? <SunIcon className="size-4 text-[#0F172A]" /> : <MoonIcon className="size-4 text-[#0F172A]" />}
+          </button>
 
           {/* Mobile menu toggle */}
           <Sheet open={open} onOpenChange={setOpen}>
