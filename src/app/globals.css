@@ -161,16 +161,20 @@
   display: inline-flex;
   align-items: center;
   gap: 10px;
-  background: linear-gradient(180deg, #1e1b4b 0%, #0f0d2e 100%);
-  color: #e0d9ff;
+  background: linear-gradient(180deg, #2e2866 0%, #1a1640 30%, #0f0d2e 100%);
+  color: #ede9fe;
   font-weight: 600;
   font-size: 14px;
   padding: 11px 24px;
   border-radius: 6px;
   cursor: pointer;
-  border: 1px solid rgba(124,58,237,0.25);
-  box-shadow: 0 2px 8px rgba(0,0,0,0.3), inset 0 1px 0 rgba(255,255,255,0.06);
-  transition: all 0.25s ease;
+  border: 1px solid rgba(196,181,253,0.15);
+  box-shadow:
+    0 2px 0 rgba(0,0,0,0.5),
+    0 4px 12px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.1),
+    inset 0 0 1px rgba(255,255,255,0.05);
+  transition: all 0.2s ease;
   text-decoration: none;
   position: relative;
   overflow: hidden;
@@ -178,19 +182,29 @@
 .btn-action::after {
   content: "";
   position: absolute;
-  inset: 0;
-  background: linear-gradient(180deg, rgba(255,255,255,0.06) 0%, transparent 50%);
+  top: 0; left: 0; right: 0;
+  height: 45%;
+  background: linear-gradient(180deg, rgba(255,255,255,0.08) 0%, transparent 100%);
+  border-radius: 5px 5px 0 0;
   pointer-events: none;
 }
 .btn-action:hover {
-  background: linear-gradient(180deg, #312e81 0%, #1e1b4b 100%);
-  border-color: rgba(124,58,237,0.5);
-  box-shadow: 0 4px 16px rgba(124,58,237,0.25), 0 2px 4px rgba(0,0,0,0.4), inset 0 1px 0 rgba(255,255,255,0.1);
+  background: linear-gradient(180deg, #3730a3 0%, #1e1b4b 30%, #171444 100%);
+  border-color: rgba(196,181,253,0.3);
+  box-shadow:
+    0 3px 0 rgba(0,0,0,0.5),
+    0 6px 20px rgba(124,58,237,0.3),
+    0 2px 4px rgba(0,0,0,0.4),
+    inset 0 1px 0 rgba(255,255,255,0.15),
+    inset 0 0 2px rgba(255,255,255,0.08);
   transform: translateY(-1px);
 }
 .btn-action:active {
   transform: translateY(1px);
-  box-shadow: 0 1px 3px rgba(0,0,0,0.3);
+  box-shadow:
+    0 1px 0 rgba(0,0,0,0.5),
+    0 2px 6px rgba(0,0,0,0.3),
+    inset 0 2px 4px rgba(0,0,0,0.3);
 }
 .btn-action .btn-arrow {
   display: inline-flex;
@@ -198,12 +212,14 @@
   justify-content: center;
   width: 22px;
   height: 22px;
-  background: rgba(124,58,237,0.2);
+  background: rgba(124,58,237,0.3);
   border-radius: 4px;
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.1);
   transition: all 0.25s ease;
 }
 .btn-action:hover .btn-arrow {
-  background: rgba(124,58,237,0.4);
+  background: rgba(124,58,237,0.5);
+  box-shadow: inset 0 1px 0 rgba(255,255,255,0.2);
   transform: translateX(2px);
 }
 .btn-premium {
