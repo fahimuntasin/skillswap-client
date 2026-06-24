@@ -13,8 +13,8 @@ export default function RegisterPage() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.06]">
-          <Image src={authImg} alt="" fill className="object-cover" unoptimized />
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15">
+          <Image src={authImg} alt="" fill className="object-cover" unoptimized priority />
         </div>
         <div className="relative z-10 flex flex-col justify-between h-full">
           <Link href="/">
