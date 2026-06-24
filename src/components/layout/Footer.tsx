@@ -1,13 +1,11 @@
 import Link from "next/link"
-import Image from "next/image"
 import { Logo } from "@/components/layout/Logo"
-import footerImg from "@/Picture/Footer Illustration (Bottom of every page).png"
 
 export function Footer() {
   return (
     <footer className="relative border-t border-[#F1F5F9] bg-white">
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] opacity-15">
-        <Image src={footerImg} alt="" width={800} height={160} className="w-full h-auto" unoptimized priority />
+        <img src="/images/footer.png" alt="" className="w-full max-w-[800px] h-auto" />
       </div>
       <div className="relative z-10 mx-auto max-w-[1280px] px-6 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">

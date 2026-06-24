@@ -1,25 +1,28 @@
 "use client"
 
 import Link from "next/link"
-import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Logo } from "@/components/layout/Logo"
-import authImg from "@/Picture/Auth Left Panel Illustration.png"
+import { AuthIllustration } from "@/components/layout/AuthIllustration"
 
 export default function LoginPage() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Left — brand panel */}
       <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex relative overflow-hidden">
-        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-15">
-          <Image src={authImg} alt="" fill className="object-cover" unoptimized priority />
-        </div>
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_top_right,rgba(124,58,237,0.04),transparent_70%)]" />
         <div className="relative z-10 flex flex-col justify-between h-full">
-          <Link href="/">
-            <Logo className="h-[22px] w-auto" />
-          </Link>
+          <div>
+            <Link href="/">
+              <Logo className="h-[22px] w-auto" />
+            </Link>
+          </div>
+
+          <div className="flex-1 flex items-center justify-end">
+            <AuthIllustration />
+          </div>
 
           <blockquote className="max-w-[320px]">
             <p className="text-[15px] leading-relaxed text-[#475569]">
