@@ -6,10 +6,10 @@ export function HowItWorks() {
   ]
 
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9]">
+    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
       <div className="mb-12 text-center">
         <h2>How It Works</h2>
-        <p className="mt-3 text-[#64748B] text-base">Three simple steps to get your tasks done</p>
+        <p className="mt-3 text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] text-base">Three simple steps to get your tasks done</p>
       </div>
 
       <div className="grid gap-6 sm:grid-cols-3">
@@ -17,7 +17,7 @@ export function HowItWorks() {
           <div key={s.n} className="card-global relative">
             <span className="mb-4 inline-block text-[42px] font-semibold text-[#F1F5F9]">{s.n}</span>
             <h3 className="mb-2">{s.title}</h3>
-            <p className="text-[#64748B] text-sm leading-relaxed">{s.desc}</p>
+            <p className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] text-sm leading-relaxed">{s.desc}</p>
             {i < 2 && (
               <div className="absolute -right-3 top-1/2 hidden -translate-y-1/2 sm:block">
                 <svg className="size-5 text-[#E2E8F0]" fill="none" viewBox="0 0 24 24" stroke="currentColor">

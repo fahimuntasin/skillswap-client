@@ -55,6 +55,8 @@
   --animate-dash-reverse: dash 20s linear infinite reverse;
 }
 
+.dark h1, .dark h2, .dark h3 { color: #f8fafc; }
+
 @keyframes fade-in-up {
   from { opacity: 0; transform: translateY(24px); }
   to { opacity: 1; transform: translateY(0); }
@@ -77,7 +79,7 @@
 @layer base {
   * { @apply border-border; }
   body {
-    @apply bg-background text-[#475569] text-base leading-relaxed antialiased;
+    @apply bg-white text-[#475569] text-base leading-relaxed antialiased dark:bg-[#0a0a0b] dark:text-[#94a3b8];
     font-family: var(--font-inter), ui-sans-serif, system-ui, sans-serif;
   }
   h1 {

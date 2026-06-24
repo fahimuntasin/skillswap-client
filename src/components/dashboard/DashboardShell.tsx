@@ -64,7 +64,7 @@ export function DashboardShell({ children, role, userName = "User" }: DashboardS
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r bg-white/50 backdrop-blur-sm lg:block">
+      <aside className="hidden w-64 shrink-0 border-r bg-white/50 backdrop-blur-sm lg:block dark:bg-[#0a0a0b]/80 dark:border-[#2a2a3e]">
         <div className="flex h-full flex-col">
           <div className="flex items-center gap-3 border-b px-6 py-5">
             <Avatar className="size-9 ring-2 ring-primary/20">

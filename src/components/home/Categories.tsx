@@ -11,10 +11,10 @@ const categories = [
 
 export function Categories() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9]">
+    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
       <div className="mb-12 text-center">
         <h2>Popular Categories</h2>
-        <p className="mt-3 text-[#64748B] text-base">Choose from a wide range of task categories</p>
+        <p className="mt-3 text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] text-base">Choose from a wide range of task categories</p>
       </div>
 
       <div className="grid grid-cols-2 gap-4 sm:grid-cols-3 md:grid-cols-5">
@@ -23,7 +23,7 @@ export function Categories() {
             <div className={`rounded-xl p-3 ${cat.color}`}>
               <cat.icon className="size-6" />
             </div>
-            <span className="text-sm font-medium text-[#0F172A]">{cat.name}</span>
+            <span className="text-sm font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{cat.name}</span>
           </Link>
         ))}
       </div>

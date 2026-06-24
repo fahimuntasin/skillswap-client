@@ -36,23 +36,23 @@ export default function BrowseTasksPage() {
   const paged = filtered.slice((page - 1) * perPage, page * perPage)
 
   return (
-    <div className="min-h-[calc(100vh-4rem)] border-b border-[#d1d9e0]">
+    <div className="min-h-[calc(100vh-4rem)] border-b border-[#d1d9e0] dark:border-[#2a2a3e]">
       <div className="mx-auto max-w-[1280px] px-8 py-16">
         <div className="mb-10">
           <p className="text-sm font-semibold text-[#7C3AED] mb-2">Explore</p>
-          <h1 className="text-[40px] font-bold text-[#0F172A] tracking-[-0.02em]">Browse Tasks</h1>
-          <p className="mt-2 text-[#64748B] text-base">Find the perfect task and start earning</p>
+          <h1 className="text-[40px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] tracking-[-0.02em]">Browse Tasks</h1>
+          <p className="mt-2 text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] text-base">Find the perfect task and start earning</p>
         </div>
 
         <div className="mb-10 flex flex-col gap-3 sm:flex-row">
           <div className="relative flex-1">
-            <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#94A3B8]" />
-            <Input placeholder="Search tasks..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} className="pl-9 h-11 rounded-lg border-[#E2E8F0]" />
+            <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#94A3B8] dark:text-[#64748b]" />
+            <Input placeholder="Search tasks..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} className="pl-9 h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e]" />
           </div>
           <select
             value={category}
             onChange={(e) => { setCategory(e.target.value); setPage(1) }}
-            className="h-11 rounded-lg border border-[#E2E8F0] bg-white px-3 text-sm text-[#0F172A] w-full sm:w-[180px] outline-none focus:border-[#7C3AED]"
+            className="h-11 rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] px-3 text-sm text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] w-full sm:w-[180px] outline-none focus:border-[#7C3AED]"
           >
             {categories.map((c) => <option key={c} value={c}>{c}</option>)}
           </select>
@@ -60,13 +60,13 @@ export default function BrowseTasksPage() {
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
           {paged.map((t) => (
-            <Link key={t.id} href={`/tasks/${t.id}`} className="group rounded-xl border border-[#F1F5F9] bg-white p-5 transition-all duration-200 hover:border-[#E2E8F0] hover:-translate-y-1">
+            <Link key={t.id} href={`/tasks/${t.id}`} className="group rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-5 transition-all duration-200 hover:border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] hover:-translate-y-1">
               <Badge variant="secondary" className="mb-3 bg-[#F5F3FF] text-[#7C3AED] border-0 font-medium text-xs">{t.category}</Badge>
-              <h3 className="text-[15px] font-semibold text-[#0F172A] group-hover:text-[#7C3AED] transition-colors line-clamp-2 mb-2">{t.title}</h3>
-              <p className="text-[13px] text-[#64748B] mb-4">by {t.client}</p>
+              <h3 className="text-[15px] font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] group-hover:text-[#7C3AED] transition-colors line-clamp-2 mb-2">{t.title}</h3>
+              <p className="text-[13px] text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] mb-4">by {t.client}</p>
               <div className="flex items-center justify-between text-[13px]">
-                <span className="flex items-center gap-1 font-semibold text-[#0F172A]"><DollarSignIcon className="size-3.5" />${t.budget}</span>
-                <span className="flex items-center gap-1 text-[#64748B]"><ClockIcon className="size-3.5" />{new Date(t.deadline).toLocaleDateString()}</span>
+                <span className="flex items-center gap-1 font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"><DollarSignIcon className="size-3.5" />${t.budget}</span>
+                <span className="flex items-center gap-1 text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]"><ClockIcon className="size-3.5" />{new Date(t.deadline).toLocaleDateString()}</span>
               </div>
             </Link>
           ))}
@@ -74,13 +74,13 @@ export default function BrowseTasksPage() {
 
         {totalPages > 1 && (
           <div className="mt-10 flex items-center justify-center gap-2">
-            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-medium text-[#64748B] hover:border-[#0F172A] hover:text-[#0F172A] disabled:opacity-40 transition-all">Previous</button>
+            <button onClick={() => setPage(p => Math.max(1, p - 1))} disabled={page === 1} className="rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] px-4 py-2 text-sm font-medium text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:border-[#0F172A] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] disabled:opacity-40 transition-all">Previous</button>
             {Array.from({ length: totalPages }, (_, i) => (
-              <button key={i} onClick={() => setPage(i + 1)} className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${page === i + 1 ? "bg-[#0F172A] text-white" : "border border-[#E2E8F0] text-[#64748B] hover:border-[#0F172A]"}`}>
+              <button key={i} onClick={() => setPage(i + 1)} className={`rounded-lg px-4 py-2 text-sm font-medium transition-all ${page === i + 1 ? "bg-[#0F172A] text-white" : "border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:border-[#0F172A]"}`}>
                 {i + 1}
               </button>
             ))}
-            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-medium text-[#64748B] hover:border-[#0F172A] hover:text-[#0F172A] disabled:opacity-40 transition-all">Next</button>
+            <button onClick={() => setPage(p => Math.min(totalPages, p + 1))} disabled={page === totalPages} className="rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] px-4 py-2 text-sm font-medium text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:border-[#0F172A] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] disabled:opacity-40 transition-all">Next</button>
           </div>
         )}
       </div>

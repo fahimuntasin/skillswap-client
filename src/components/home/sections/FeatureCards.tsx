@@ -14,17 +14,17 @@ export function FeatureCards() {
   const { ref, visible } = useReveal()
 
   return (
-    <section ref={ref} className="border-b border-[#d1d9e0] py-24">
+    <section ref={ref} className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] py-24">
       <div className={`mx-auto max-w-[1280px] px-6 transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className="mb-6"><p className="text-sm font-semibold text-[#7C3AED]">Platform features</p></div>
-        <div className="grid gap-px border border-[#d1d9e0] bg-[#d1d9e0] sm:grid-cols-3">
+        <div className="grid gap-px border border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-[#d1d9e0] sm:grid-cols-3">
           {cards.map((card) => (
-            <div key={card.title} className="special-card bg-white p-8 sm:p-10 flex flex-col">
+            <div key={card.title} className="special-card bg-white dark:bg-[#1a1a2e] dark:bg-[#1a1a2e] p-8 sm:p-10 flex flex-col">
               <div className="mb-5 flex size-9 items-center justify-center rounded-full bg-[#EDE9FE] group-hover:scale-110 transition-transform">
                 <card.icon className="size-[18px] text-[#7C3AED]" />
               </div>
-              <h3 className="text-lg font-semibold text-[#0F172A]">{card.title}</h3>
-              <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">{card.desc}</p>
+              <h3 className="text-lg font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{card.title}</h3>
+              <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">{card.desc}</p>
               <Link href={card.href} className="btn-premium mt-6">
                 {card.link}
                 <span className="btn-icon">

@@ -37,8 +37,8 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 h-16 border-b transition-all duration-300",
         scrolled
-          ? "border-[#E2E8F0] bg-[rgba(255,255,255,0.85)] backdrop-blur-[12px]"
-          : "border-[#E2E8F0] bg-white"
+          ? "border-[#E2E8F0] dark:border-[#2a2a3e] bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(10,10,11,0.85)] backdrop-blur-[12px] dark:border-[#2a2a3e] dark:bg-[rgba(10,10,11,0.85)]"
+          : "border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] dark:border-[#2a2a3e] dark:bg-[#0a0a0b]"
       )}
     >
       <div className="mx-auto flex h-full max-w-[1280px] items-center px-6">
@@ -62,7 +62,7 @@ export function Navbar() {
                   "relative px-3 py-5 text-[14px] font-normal transition-colors",
                   isActive
                     ? "text-[#7C3AED]"
-                    : "text-[#64748B] hover:text-[#0F172A]"
+                    : "text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
                 )}
               >
                 {link.label}
@@ -78,18 +78,18 @@ export function Navbar() {
         <div className="ml-auto flex items-center gap-3">
           {isLoggedIn ? (
             <>
-              <Link href="/dashboard" className="hidden sm:flex items-center gap-2 text-[14px] font-medium text-[#0F172A] hover:text-[#7C3AED] transition-colors">
+              <Link href="/dashboard" className="hidden sm:flex items-center gap-2 text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
                 Dashboard
               </Link>
               <Avatar className="size-8 ring-2 ring-[#7C3AED] ring-offset-1">
                 <AvatarImage src="" alt="User" />
                 <AvatarFallback className="bg-[#7C3AED] text-white text-xs font-semibold">JD</AvatarFallback>
               </Avatar>
-              <span className="hidden sm:inline text-[14px] font-medium text-[#0F172A]">John</span>
+              <span className="hidden sm:inline text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">John</span>
             </>
           ) : (
             <div className="hidden sm:flex items-center gap-3">
-              <Link href="/login" className="text-[14px] font-medium text-[#0F172A] hover:text-[#7C3AED] transition-colors">
+              <Link href="/login" className="text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
                 Log in
               </Link>
               <Link href="/register">
@@ -101,18 +101,18 @@ export function Navbar() {
           {mounted && (
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:hover:bg-[#2a2a3e]"
+            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] transition-colors dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:hover:bg-[#2a2a3e]"
             aria-label="Toggle theme"
           >
-            <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] hidden dark:block" />
-            <MoonIcon className="size-4 text-[#0F172A] dark:hidden" />
+            <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc] hidden dark:block" />
+            <MoonIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:hidden" />
           </button>
           )}
 
           {/* Mobile menu toggle */}
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors">
-              <MenuIcon className="size-4 text-[#0F172A]" />
+            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0a0a0b] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] transition-colors">
+              <MenuIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72 pt-14">
               <div className="flex flex-col gap-1">
@@ -127,19 +127,19 @@ export function Navbar() {
                         "rounded-lg px-3 py-2.5 text-[15px] font-medium transition-colors",
                         isActive
                           ? "bg-[#F5F3FF] text-[#7C3AED]"
-                          : "text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                          : "text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:bg-[#F1F5F9] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
                       )}
                     >
                       {link.label}
                     </Link>
                   )
                 })}
-                <hr className="my-3 border-[#E2E8F0]" />
+                <hr className="my-3 border-[#E2E8F0] dark:border-[#2a2a3e]" />
                 {isLoggedIn ? (
                   <Link
                     href="/dashboard"
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#64748B] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
+                    className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:bg-[#F1F5F9] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
                   >
                     Dashboard
                   </Link>
@@ -148,7 +148,7 @@ export function Navbar() {
                     <Link
                       href="/login"
                       onClick={() => setOpen(false)}
-                      className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#0F172A] hover:bg-[#F1F5F9]"
+                      className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:bg-[#F1F5F9]"
                     >
                       Log in
                     </Link>

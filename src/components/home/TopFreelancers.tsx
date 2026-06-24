@@ -13,10 +13,10 @@ const freelancers = [
 
 export function TopFreelancers() {
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9]">
+    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
       <div className="mb-12 text-center">
         <h2>Top Freelancers</h2>
-        <p className="mt-3 text-[#64748B] text-base">Meet our highest-rated talent ready to work on your tasks</p>
+        <p className="mt-3 text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] text-base">Meet our highest-rated talent ready to work on your tasks</p>
       </div>
 
       <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
@@ -30,13 +30,13 @@ export function TopFreelancers() {
                 </AvatarFallback>
               </Avatar>
               <div>
-                <h3 className="text-[17px] font-medium text-[#0F172A] group-hover:text-[#7C3AED] transition-colors">
+                <h3 className="text-[17px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] group-hover:text-[#7C3AED] transition-colors">
                   {f.name}
                 </h3>
                 <div className="flex items-center gap-1 text-sm">
                   <StarIcon className="size-3.5 text-amber-400" />
-                  <span className="font-medium text-[#0F172A]">{f.rating}</span>
-                  <span className="text-[#64748B]">· {f.jobsCompleted} jobs</span>
+                  <span className="font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{f.rating}</span>
+                  <span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">· {f.jobsCompleted} jobs</span>
                 </div>
               </div>
             </div>

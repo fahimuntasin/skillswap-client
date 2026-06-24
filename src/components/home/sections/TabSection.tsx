@@ -13,15 +13,15 @@ export function TabSection() {
   const [active, setActive] = useState(0)
 
   return (
-    <section className="border-b border-[#d1d9e0] py-16">
+    <section className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] py-16">
       <div className="mx-auto max-w-[1280px] px-6 text-center">
-        <div className="inline-flex rounded-full border border-[#d1d9e0] p-1">
+        <div className="inline-flex rounded-full border border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] p-1">
           {tabs.map((tab, i) => (
             <button
               key={tab.id}
               onClick={() => setActive(i)}
               className={`rounded-full px-5 py-2 text-sm font-medium transition-colors ${
-                active === i ? "bg-[#0F172A] text-white" : "text-[#64748B] hover:text-[#0F172A]"
+                active === i ? "bg-[#0F172A] text-white" : "text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
               }`}
             >
               {tab.label}
@@ -29,7 +29,7 @@ export function TabSection() {
           ))}
         </div>
 
-        <p className="mx-auto mt-6 max-w-[520px] text-base leading-relaxed text-[#64748B]">
+        <p className="mx-auto mt-6 max-w-[520px] text-base leading-relaxed text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">
           {tabs[active].desc}
         </p>
       </div>

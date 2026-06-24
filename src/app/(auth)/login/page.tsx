@@ -86,8 +86,8 @@ export default function LoginPage() {
       <div className="flex flex-1 items-center justify-center px-6 py-12">
         <div className="w-full max-w-[380px]">
           <div className="mb-10">
-            <h1 className="text-[28px] font-semibold text-[#0F172A] tracking-[-0.02em] mb-2">Welcome back</h1>
-            <p className="text-[#64748B] text-[15px]">Enter your email to sign in to your account</p>
+            <h1 className="text-[28px] font-semibold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em] mb-2">Welcome back</h1>
+            <p className="text-[#64748B] dark:text-[#94a3b8] text-[15px]">Enter your email to sign in to your account</p>
           </div>
 
           <form
@@ -111,15 +111,15 @@ export default function LoginPage() {
             }}
           >
             <div className="space-y-2">
-              <Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A]">Email</Label>
-              <Input id="email" name="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A] dark:text-[#f8fafc]">Email</Label>
+              <Input id="email" name="email" type="email" placeholder="name@example.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A]">Password</Label>
-                <Link href="/forgot-password" className="text-[13px] text-[#64748B] hover:text-[#7C3AED]">Forgot?</Link>
+                <Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A] dark:text-[#f8fafc]">Password</Label>
+                <Link href="/forgot-password" className="text-[13px] text-[#64748B] dark:text-[#94a3b8] hover:text-[#7C3AED]">Forgot?</Link>
               </div>
-              <Input id="password" name="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
+              <Input id="password" name="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
             <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>
               {loading ? "Signing in..." : "Sign in"}
@@ -132,7 +132,7 @@ export default function LoginPage() {
             <div className="h-px flex-1 bg-[#F1F5F9]" />
           </div>
 
-          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5" onClick={() => signInWithGoogle()}>
+          <Button variant="outline" className="w-full h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:bg-[#F8FAFC] dark:bg-[#0a0a0b] dark:bg-[#2a2a3e] gap-2.5" onClick={() => signInWithGoogle()}>
             <svg viewBox="0 0 24 24" className="size-[18px]">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
               <path d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z" fill="#34A853"/>
@@ -142,9 +142,9 @@ export default function LoginPage() {
             Continue with Google
           </Button>
 
-          <p className="mt-8 text-center text-[14px] text-[#64748B]">
+          <p className="mt-8 text-center text-[14px] text-[#64748B] dark:text-[#94a3b8]">
             Don&apos;t have an account?{" "}
-            <Link href="/register" className="font-medium text-[#0F172A] hover:text-[#7C3AED] underline underline-offset-4">
+            <Link href="/register" className="font-medium text-[#0F172A] dark:text-[#f8fafc] hover:text-[#7C3AED] underline underline-offset-4">
               Sign up
             </Link>
           </p>
