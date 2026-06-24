@@ -5,21 +5,15 @@ import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Checkbox } from "@/components/ui/checkbox"
+import { Logo } from "@/components/layout/Logo"
 
 export default function RegisterPage() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex">
         <div>
-          <Link href="/" className="flex items-center">
-            <div className="flex size-[26px] items-center justify-center rounded-[6px] bg-[#7C3AED]">
-              <svg className="size-[14px] text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                <path d="M12 2L2 7l10 5 10-5-10-5z" /><path d="M2 17l10 5 10-5" /><path d="M2 12l10 5 10-5" />
-              </svg>
-            </div>
-            <span className="ml-2 text-[18px] font-semibold text-[#0F172A]">
-              Skill<span className="text-[#7C3AED]">Swap</span>
-            </span>
+          <Link href="/">
+            <Logo className="h-[22px] w-auto" />
           </Link>
         </div>
 

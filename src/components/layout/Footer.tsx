@@ -1,18 +1,14 @@
 import Link from "next/link"
+import { Logo } from "@/components/layout/Logo"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-white/50 backdrop-blur-sm">
-      <div className="mx-auto max-w-7xl px-4 py-14">
+    <footer className="border-t border-[#F1F5F9] bg-white">
+      <div className="mx-auto max-w-[1280px] px-6 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
           <div>
-            <Link href="/" className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-xl bg-primary shadow-sm">
-                <svg className="size-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
-                  <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
-                </svg>
-              </div>
-              <span className="text-lg font-bold tracking-tight">Skill<span className="text-primary">Swap</span></span>
+            <Link href="/">
+              <Logo className="h-[22px] w-auto" />
             </Link>
             <p className="mt-4 text-sm text-muted-foreground leading-relaxed max-w-xs">
               The simple way to hire expert freelancers for micro-tasks. Fast, secure, and reliable.

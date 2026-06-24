@@ -5,8 +5,9 @@ import { usePathname } from "next/navigation"
 import { useState, useEffect } from "react"
 import { Button } from "@/components/ui/button"
 import { Sheet, SheetContent, SheetTrigger } from "@/components/ui/sheet"
+import { Logo } from "@/components/layout/Logo"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { MenuIcon, LayersIcon } from "lucide-react"
+import { MenuIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
 
 export function Navbar() {
@@ -39,12 +40,7 @@ export function Navbar() {
       <div className="mx-auto flex h-full max-w-[1280px] items-center px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
-          <div className="flex size-[26px] items-center justify-center rounded-[6px] bg-[#7C3AED]">
-            <LayersIcon className="size-[14px] text-white" strokeWidth={2.5} />
-          </div>
-          <span className="ml-2 text-[18px] font-semibold text-[#0F172A] leading-none">
-            Skill<span className="text-[#7C3AED]">Swap</span>
-          </span>
+          <Logo className="h-[26px] w-auto" />
         </Link>
 
         {/* Divider */}
