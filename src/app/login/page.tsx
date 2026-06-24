@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Logo } from "@/components/layout/Logo"
 import { AuthIllustration } from "@/components/layout/AuthIllustration"
-import { getAuth } from "@/lib/auth-client"
+import { loginWithEmail, signInWithGoogle } from "@/lib/auth-client"
 import { toast } from "sonner"
 
 export default function LoginPage() {
@@ -60,11 +60,10 @@ export default function LoginPage() {
               setLoading(true)
               const form = new FormData(e.currentTarget)
               try {
-                const client = await getAuth()
-                await client.signIn.email({
-                  email: form.get("email") as string,
-                  password: form.get("password") as string,
-                })
+                await loginWithEmail(
+                  form.get("email") as string,
+                  form.get("password") as string,
+                )
                 toast.success("Logged in successfully")
                 router.push("/")
               } catch {
@@ -117,10 +116,7 @@ export default function LoginPage() {
           <Button
             variant="outline"
             className="w-full h-11 rounded-lg border-[#E2E8F0] text-[15px] font-medium text-[#0F172A] hover:bg-[#F8FAFC] gap-2.5"
-            onClick={async () => {
-              const client = await getAuth()
-              await client.signIn.social({ provider: "google", callbackURL: "/" })
-            }}
+            onClick={() => signInWithGoogle()}
           >
             <svg viewBox="0 0 24 24" className="size-[18px]">
               <path d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92a5.06 5.06 0 01-2.2 3.32v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.1z" fill="#4285F4"/>
