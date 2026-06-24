@@ -19,15 +19,15 @@ export function FeatureCards() {
         <div className="mb-6"><p className="text-sm font-semibold text-[#7C3AED]">Platform features</p></div>
         <div className="grid gap-px border border-[#d1d9e0] bg-[#d1d9e0] sm:grid-cols-3">
           {cards.map((card) => (
-            <div key={card.title} className="bg-white p-8 sm:p-10 flex flex-col group hover:bg-[#FAFAFA] transition-colors">
+            <div key={card.title} className="special-card bg-white p-8 sm:p-10 flex flex-col">
               <div className="mb-5 flex size-9 items-center justify-center rounded-full bg-[#EDE9FE] group-hover:scale-110 transition-transform">
                 <card.icon className="size-[18px] text-[#7C3AED]" />
               </div>
               <h3 className="text-lg font-semibold text-[#0F172A]">{card.title}</h3>
               <p className="mt-2 flex-1 text-sm leading-relaxed text-[#64748B]">{card.desc}</p>
-              <Link href={card.href} className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#0F172A] hover:text-[#7C3AED] transition-colors">
+              <Link href={card.href} className="group mt-6 inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-semibold text-[#0F172A] transition-all duration-200 hover:border-[#0F172A] hover:bg-[#F8FAFC]">
                 {card.link}
-                <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
+                <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
               </Link>
             </div>
           ))}

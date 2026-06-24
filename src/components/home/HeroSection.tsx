@@ -23,11 +23,11 @@ export function HeroSection() {
             Post any job and get it done by vetted professionals.
           </p>
           <div className={`mt-10 flex items-center gap-6 transition-all duration-700 delay-300 ${mounted ? "opacity-100 translate-y-0" : "opacity-0 translate-y-3"}`}>
-            <Link href="/register" className="inline-flex items-center gap-2 rounded-md bg-[#7C3AED] px-6 py-3 text-sm font-semibold text-white hover:bg-[#6D28D9] transition-colors">
-              Get Started <span aria-hidden="true">→</span>
+            <Link href="/register" className="btn-glossy">
+              Get Started <span>→</span>
             </Link>
-            <Link href="/tasks" className="text-sm font-semibold text-[#0F172A] hover:text-[#7C3AED] transition-colors">
-              Browse Tasks <span aria-hidden="true">→</span>
+            <Link href="/tasks" className="group inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] px-6 py-3 text-sm font-semibold text-[#0F172A] transition-all duration-200 hover:border-[#CBD5E1] hover:bg-[#F8FAFC]">
+              Browse Tasks <span className="transition-transform group-hover:translate-x-0.5">→</span>
             </Link>
           </div>
         </div>

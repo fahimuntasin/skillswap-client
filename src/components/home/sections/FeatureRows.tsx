@@ -40,13 +40,13 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
     <div ref={ref}>
       {i > 0 && <div className="border-t border-[#d1d9e0]" />}
       <div className={`grid items-center gap-16 px-6 py-24 ${f.bg} ${f.reverse ? "lg:grid-cols-[55%_45%]" : "lg:grid-cols-[45%_55%]"} transition-all duration-700 ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
-        <div className={f.reverse ? "lg:order-2" : ""}>
+        <div className={`relative ${f.reverse ? "lg:order-2" : ""} ${f.reverse ? "lg:pl-0 lg:border-l-0" : "lg:border-r border-[#d1d9e0]"}`}>
           <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
           <h2 className="text-[32px] font-bold text-[#0F172A] tracking-[-0.02em] leading-[1.2]">{f.title}</h2>
           <p className="mt-4 text-base leading-relaxed text-[#64748B] max-w-[480px]">{f.desc}</p>
-          <Link href={f.href} className="mt-6 inline-flex items-center gap-1 text-sm font-semibold text-[#0F172A] hover:text-[#7C3AED] transition-colors">
+          <Link href={f.href} className="group mt-6 inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] px-4 py-2 text-sm font-semibold text-[#0F172A] transition-all duration-200 hover:border-[#0F172A] hover:bg-[#F8FAFC]">
             {f.link}
-            <svg className="size-4" viewBox="0 0 20 20" fill="currentColor"><path fillRule="evenodd" d="M3 10a.75.75 0 01.75-.75h10.638L10.23 5.29a.75.75 0 111.04-1.08l5.5 5.25a.75.75 0 010 1.08l-5.5 5.25a.75.75 0 11-1.04-1.08l4.158-3.96H3.75A.75.75 0 013 10z" clipRule="evenodd"/></svg>
+            <span className="transition-transform duration-200 group-hover:translate-x-0.5">→</span>
           </Link>
         </div>
         <div className={`rounded-xl border border-[#d1d9e0] bg-white p-8 ${f.reverse ? "lg:order-1" : ""}`}>

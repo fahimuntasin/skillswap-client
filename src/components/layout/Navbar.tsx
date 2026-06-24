@@ -89,9 +89,7 @@ export function Navbar() {
                 Log in
               </Link>
               <Link href="/register">
-                <Button variant="plastic" className="h-9 rounded-[6px] px-[18px] text-[14px] font-medium">
-                  Join Now
-                </Button>
+                <button className="btn-glossy text-[13px] !py-2 !px-4">Join Now</button>
               </Link>
             </div>
           )}
