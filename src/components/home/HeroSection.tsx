@@ -5,6 +5,7 @@ import { ArrowRightIcon } from "@heroicons/react/24/outline"
 import workspaceImg from "@/Picture/Freelance Workspace Scene (Hero right side).png"
 import networkImg from "@/Picture/Collaboration Network (Bottom of hero).png"
 import cardsImg from "@/Picture/Floating Task Cards.png"
+import accentImg from "@/Picture/Subtle Animated Accent (For adding motion to existing PNGs).png"
 
 export function HeroSection() {
   return (
@@ -14,6 +15,11 @@ export function HeroSection() {
         <div className="relative h-full w-full">
           <Image src={cardsImg} alt="" fill className="object-contain object-right-top" unoptimized />
         </div>
+      </div>
+
+      {/* Subtle animated accent dots */}
+      <div className="pointer-events-none absolute left-10 top-1/3 hidden lg:block animate-pulse-subtle opacity-30">
+        <Image src={accentImg} alt="" width={100} height={100} className="w-[80px] h-auto" unoptimized />
       </div>
 
       <div className="mx-auto max-w-[1280px] px-6 py-[120px]">

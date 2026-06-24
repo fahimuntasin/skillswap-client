@@ -1,34 +1,39 @@
 "use client"
 
 import Link from "next/link"
+import Image from "next/image"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Logo } from "@/components/layout/Logo"
+import authImg from "@/Picture/Auth Left Panel Illustration.png"
 
 export default function LoginPage() {
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Left — brand panel */}
-      <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex">
-        <div>
+      <div className="hidden w-[480px] shrink-0 flex-col justify-between border-r border-[#F1F5F9] bg-[#FAFAFA] p-16 lg:flex relative overflow-hidden">
+        <div className="pointer-events-none absolute inset-0 flex items-center justify-center opacity-[0.06]">
+          <Image src={authImg} alt="" fill className="object-cover" unoptimized />
+        </div>
+        <div className="relative z-10 flex flex-col justify-between h-full">
           <Link href="/">
             <Logo className="h-[22px] w-auto" />
           </Link>
-        </div>
 
-        <blockquote className="max-w-[320px]">
-          <p className="text-[15px] leading-relaxed text-[#475569]">
-            &ldquo;SkillSwap helped me find amazing freelancers for my startup tasks. Fast, reliable, and incredibly easy to use.&rdquo;
-          </p>
-          <footer className="mt-4 flex items-center gap-3">
-            <div className="flex size-8 items-center justify-center rounded-full bg-[#EDE9FE] text-[13px] font-semibold text-[#7C3AED]">SD</div>
-            <div>
-              <p className="text-sm font-medium text-[#0F172A]">Sophia Davis</p>
-              <p className="text-xs text-[#94A3B8]">Startup Founder</p>
-            </div>
-          </footer>
-        </blockquote>
+          <blockquote className="max-w-[320px]">
+            <p className="text-[15px] leading-relaxed text-[#475569]">
+              &ldquo;SkillSwap helped me find amazing freelancers for my startup tasks. Fast, reliable, and incredibly easy to use.&rdquo;
+            </p>
+            <footer className="mt-4 flex items-center gap-3">
+              <div className="flex size-8 items-center justify-center rounded-full bg-[#EDE9FE] text-[13px] font-semibold text-[#7C3AED]">SD</div>
+              <div>
+                <p className="text-sm font-medium text-[#0F172A]">Sophia Davis</p>
+                <p className="text-xs text-[#94A3B8]">Startup Founder</p>
+              </div>
+            </footer>
+          </blockquote>
+        </div>
       </div>
 
       {/* Right — form */}
