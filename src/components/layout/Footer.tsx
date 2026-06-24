@@ -2,12 +2,12 @@ import Link from "next/link"
 
 export function Footer() {
   return (
-    <footer className="border-t bg-muted/30">
+    <footer className="border-t bg-white/50 backdrop-blur-sm">
       <div className="mx-auto max-w-7xl px-4 py-14">
         <div className="grid gap-10 sm:grid-cols-2 lg:grid-cols-4">
-          <div className="lg:col-span-1">
+          <div>
             <Link href="/" className="flex items-center gap-2">
-              <div className="flex size-8 items-center justify-center rounded-lg bg-primary">
+              <div className="flex size-8 items-center justify-center rounded-xl bg-primary shadow-sm">
                 <svg className="size-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
                   <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
                 </svg>
@@ -21,16 +21,16 @@ export function Footer() {
           <div>
             <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Platform</h4>
             <div className="flex flex-col gap-2.5">
-              <Link href="/tasks" className="text-sm text-foreground/80 hover:text-primary transition-colors">Browse Tasks</Link>
-              <Link href="/freelancers" className="text-sm text-foreground/80 hover:text-primary transition-colors">Browse Freelancers</Link>
-              <Link href="/register" className="text-sm text-foreground/80 hover:text-primary transition-colors">Become a Freelancer</Link>
+              <Link href="/tasks" className="text-sm text-foreground/70 hover:text-primary transition-colors">Browse Tasks</Link>
+              <Link href="/freelancers" className="text-sm text-foreground/70 hover:text-primary transition-colors">Browse Freelancers</Link>
+              <Link href="/register" className="text-sm text-foreground/70 hover:text-primary transition-colors">Become a Freelancer</Link>
             </div>
           </div>
           <div>
             <h4 className="mb-4 text-xs font-semibold uppercase tracking-wider text-muted-foreground">Support</h4>
             <div className="flex flex-col gap-2.5">
-              <Link href="/login" className="text-sm text-foreground/80 hover:text-primary transition-colors">Login</Link>
-              <Link href="/register" className="text-sm text-foreground/80 hover:text-primary transition-colors">Register</Link>
+              <Link href="/login" className="text-sm text-foreground/70 hover:text-primary transition-colors">Login</Link>
+              <Link href="/register" className="text-sm text-foreground/70 hover:text-primary transition-colors">Register</Link>
               <span className="text-sm text-muted-foreground">contact@skillswap.com</span>
             </div>
           </div>
@@ -50,7 +50,7 @@ export function Footer() {
             <p className="text-sm text-muted-foreground">contact@skillswap.com</p>
           </div>
         </div>
-        <div className="mt-12 border-t pt-6 text-center text-sm text-muted-foreground">
+        <div className="mt-12 border-t border-border/50 pt-6 text-center text-sm text-muted-foreground">
           &copy; {new Date().getFullYear()} SkillSwap. All rights reserved.
         </div>
       </div>

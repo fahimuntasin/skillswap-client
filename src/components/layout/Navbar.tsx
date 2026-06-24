@@ -17,10 +17,10 @@ export function Navbar() {
   ]
 
   return (
-    <nav className="sticky top-0 z-50 border-b border-border/60 bg-white/80 backdrop-blur-xl">
+    <nav className="sticky top-0 z-50 border-b border-border/40 bg-white/70 backdrop-blur-xl supports-[backdrop-filter]:bg-white/60">
       <div className="mx-auto flex h-16 max-w-7xl items-center justify-between px-4 sm:px-6">
-        <Link href="/" className="flex items-center gap-2.5 shrink-0">
-          <div className="flex size-8 items-center justify-center rounded-lg bg-primary shadow-sm">
+        <Link href="/" className="flex items-center gap-2.5 shrink-0 group">
+          <div className="flex size-8 items-center justify-center rounded-xl bg-primary shadow-sm shadow-primary/20 transition-transform group-hover:scale-105">
             <svg className="size-4 text-white" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
               <path d="M12 2L2 7l10 5 10-5-10-5z"/><path d="M2 17l10 5 10-5"/><path d="M2 12l10 5 10-5"/>
             </svg>
@@ -30,9 +30,9 @@ export function Navbar() {
           </span>
         </Link>
 
-        <div className="hidden sm:flex items-center gap-1">
+        <div className="hidden sm:flex items-center gap-1 bg-muted/50 rounded-xl p-1">
           {publicLinks.map((link) => (
-            <Link key={link.href} href={link.href} className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground transition-colors hover:bg-muted hover:text-foreground">
+            <Link key={link.href} href={link.href} className="rounded-lg px-3.5 py-2 text-sm font-medium text-muted-foreground transition-all hover:bg-white hover:text-foreground hover:shadow-sm">
               {link.label}
             </Link>
           ))}
@@ -41,23 +41,23 @@ export function Navbar() {
         <div className="hidden sm:flex items-center gap-2">
           {isLoggedIn ? (
             <>
-              <Link href="/dashboard" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:bg-muted hover:text-foreground">Dashboard</Link>
-              <Button variant="outline" size="sm" className="font-medium">Logout</Button>
+              <Link href="/dashboard" className="rounded-lg px-3 py-2 text-sm font-medium text-muted-foreground hover:text-foreground">Dashboard</Link>
+              <Button variant="outline" size="sm" className="font-medium rounded-xl">Logout</Button>
             </>
           ) : (
             <>
               <Link href="/login">
-                <Button variant="ghost" size="sm" className="font-medium text-muted-foreground hover:text-foreground">Log in</Button>
+                <Button variant="ghost" size="sm" className="font-medium text-muted-foreground rounded-xl">Log in</Button>
               </Link>
               <Link href="/register">
-                <Button variant="plastic" size="sm">Join Now</Button>
+                <Button variant="plastic" size="sm" className="rounded-xl">Join Now</Button>
               </Link>
             </>
           )}
         </div>
 
         <Sheet open={open} onOpenChange={setOpen}>
-          <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-lg border bg-white hover:bg-muted">
+          <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-xl border bg-white hover:bg-muted transition-colors">
             <Bars3Icon className="size-4" />
           </SheetTrigger>
           <SheetContent side="right" className="w-72 pt-14">
@@ -76,10 +76,10 @@ export function Navbar() {
               ) : (
                 <div className="flex flex-col gap-3 pt-2">
                   <Link href="/login" onClick={() => setOpen(false)}>
-                    <Button variant="ghost" className="w-full justify-start text-base font-normal">Log in</Button>
+                    <Button variant="ghost" className="w-full justify-start text-base font-normal rounded-xl">Log in</Button>
                   </Link>
                   <Link href="/register" onClick={() => setOpen(false)}>
-                    <Button variant="plastic" className="w-full">Join Now</Button>
+                    <Button variant="plastic" className="w-full rounded-xl">Join Now</Button>
                   </Link>
                 </div>
               )}

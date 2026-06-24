@@ -1,20 +1,8 @@
 export function HowItWorks() {
   const steps = [
-    {
-      step: "01",
-      title: "Post a Task",
-      description: "Describe what you need done. Set your budget and deadline. It takes less than 2 minutes.",
-    },
-    {
-      step: "02",
-      title: "Get Proposals",
-      description: "Freelancers review your task and submit competitive proposals with their price and timeline.",
-    },
-    {
-      step: "03",
-      title: "Hire & Pay",
-      description: "Accept the best proposal, pay securely via Stripe, and the freelancer starts working right away.",
-    },
+    { step: "01", title: "Post a Task", desc: "Describe your need, set budget and deadline. Takes under 2 minutes." },
+    { step: "02", title: "Get Proposals", desc: "Freelancers review and submit competitive bids with their price and timeline." },
+    { step: "03", title: "Hire & Pay", desc: "Accept the best proposal, pay securely via Stripe, and work begins immediately." },
   ]
 
   return (
@@ -25,20 +13,16 @@ export function HowItWorks() {
       </div>
 
       <div className="grid gap-6 sm:grid-cols-3">
-        {steps.map((step, index) => (
-          <div
-            key={step.step}
-            className="relative rounded-2xl border bg-white p-6 transition-all duration-300 hover:-translate-y-1 hover:shadow-lg hover:border-primary/30"
-          >
-            <span className="mb-4 inline-block text-5xl font-bold text-primary/10">
+        {steps.map((step, i) => (
+          <div key={step.step} className="uiverse-card group relative rounded-2xl p-6">
+            <span className="mb-4 inline-block text-5xl font-bold text-primary/8 group-hover:text-primary/15 transition-colors">
               {step.step}
             </span>
-            <h3 className="mb-2 text-lg font-semibold text-foreground">{step.title}</h3>
-            <p className="text-sm text-muted-foreground leading-relaxed">{step.description}</p>
-
-            {index < steps.length - 1 && (
+            <h3 className="mb-2 text-lg font-semibold">{step.title}</h3>
+            <p className="text-sm text-muted-foreground leading-relaxed">{step.desc}</p>
+            {i < 2 && (
               <div className="absolute -right-3 top-1/2 hidden -translate-y-1/2 sm:block">
-                <svg className="size-6 text-primary/30" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <svg className="size-6 text-primary/20" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
                 </svg>
               </div>

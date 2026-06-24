@@ -21,12 +21,9 @@ export function FeaturedTasks() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {tasks.map((task) => (
-          <Card
-            key={task.id}
-            className="group border-2 border-transparent transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
-          >
+          <Card key={task.id} className="uiverse-card border-0 rounded-2xl">
             <CardContent className="p-5">
-              <Badge variant="secondary" className="mb-3 bg-brand-light text-brand-deep border-0">
+              <Badge variant="secondary" className="mb-3 bg-accent text-accent-foreground border-0 font-medium">
                 {task.category}
               </Badge>
               <h3 className="mb-2 font-semibold text-foreground group-hover:text-primary transition-colors line-clamp-2">
@@ -34,11 +31,11 @@ export function FeaturedTasks() {
               </h3>
               <p className="mb-4 text-sm text-muted-foreground">by {task.clientName}</p>
               <div className="flex items-center justify-between text-sm">
-                <span className="flex items-center gap-1 text-primary font-semibold">
+                <span className="flex items-center gap-1.5 text-primary font-semibold">
                   <CurrencyDollarIcon className="size-4" />
                   ${task.budget}
                 </span>
-                <span className="flex items-center gap-1 text-muted-foreground">
+                <span className="flex items-center gap-1.5 text-muted-foreground">
                   <ClockIcon className="size-4" />
                   {new Date(task.deadline).toLocaleDateString()}
                 </span>

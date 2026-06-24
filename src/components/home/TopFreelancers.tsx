@@ -14,7 +14,7 @@ const freelancers = [
 
 export function TopFreelancers() {
   return (
-    <section className="mx-auto max-w-7xl px-4 py-16 bg-brand-surface rounded-2xl my-8">
+    <section className="mx-auto max-w-7xl px-4 py-16 bg-accent/30 rounded-3xl my-8">
       <div className="mb-10 text-center">
         <h2 className="text-3xl font-bold text-foreground">Top Freelancers</h2>
         <p className="mt-2 text-muted-foreground">Meet our highest-rated talent ready to work on your tasks</p>
@@ -22,13 +22,10 @@ export function TopFreelancers() {
 
       <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {freelancers.map((freelancer) => (
-          <Card
-            key={freelancer.id}
-            className="group border-2 border-transparent transition-all duration-300 hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg"
-          >
+          <Card key={freelancer.id} className="uiverse-card border-0 rounded-2xl">
             <CardContent className="p-5">
               <div className="flex items-center gap-3 mb-3">
-                <Avatar className="size-12 ring-2 ring-primary/20">
+                <Avatar className="size-12 ring-2 ring-primary/20 ring-offset-2 ring-offset-white">
                   <AvatarImage src={freelancer.image} alt={freelancer.name} />
                   <AvatarFallback className="bg-primary text-white font-semibold">
                     {freelancer.name.split(" ").map(n => n[0]).join("")}
@@ -39,7 +36,7 @@ export function TopFreelancers() {
                     {freelancer.name}
                   </h3>
                   <div className="flex items-center gap-1 text-sm">
-                    <StarIcon className="size-3.5 text-yellow-500" />
+                    <StarIcon className="size-3.5 text-amber-400" />
                     <span className="font-medium">{freelancer.rating}</span>
                     <span className="text-muted-foreground">· {freelancer.jobsCompleted} jobs</span>
                   </div>
@@ -48,7 +45,7 @@ export function TopFreelancers() {
 
               <div className="flex flex-wrap gap-1.5">
                 {freelancer.skills.map((skill) => (
-                  <Badge key={skill} variant="outline" className="text-xs border-primary/20 text-primary bg-primary/5">
+                  <Badge key={skill} variant="outline" className="text-xs border-primary/15 text-primary bg-primary/5 font-medium">
                     {skill}
                   </Badge>
                 ))}
