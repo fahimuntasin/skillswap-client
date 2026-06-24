@@ -1,96 +1,56 @@
 import Link from "next/link"
 import Image from "next/image"
-import { Button } from "@/components/ui/button"
-import { ArrowRightIcon } from "@heroicons/react/24/outline"
 import workspaceImg from "@/Picture/Freelance Workspace Scene (Hero right side).png"
-import networkImg from "@/Picture/Collaboration Network (Bottom of hero).png"
-import cardsImg from "@/Picture/Floating Task Cards.png"
-import accentImg from "@/Picture/Subtle Animated Accent (For adding motion to existing PNGs).png"
 
 export function HeroSection() {
   return (
-    <section className="relative overflow-hidden border-b border-[#F1F5F9]">
-      {/* Floating task cards — subtle background */}
-      <div className="pointer-events-none absolute right-[-60px] top-0 hidden h-full w-[550px] lg:block animate-float-subtle opacity-[0.06]">
-        <div className="relative h-full w-full">
-          <Image src={cardsImg} alt="" fill className="object-contain object-right-top" unoptimized />
-        </div>
-      </div>
+    <section className="flex min-h-[calc(100vh-4rem)] items-center border-b border-[#F1F5F9]">
+      <div className="mx-auto grid w-full max-w-[1280px] items-center gap-16 px-6 lg:grid-cols-2">
+        <div className="max-w-[580px]">
+          <div className="inline-flex items-center gap-2 text-[11px] font-semibold tracking-[0.1em] text-[#7C3AED] uppercase mb-6">
+            <span className="block size-2 bg-[#7C3AED]" />
+            Freelance Platform
+          </div>
 
-      {/* Subtle animated accent dots */}
-      <div className="pointer-events-none absolute left-10 top-1/3 hidden lg:block animate-pulse-subtle opacity-30">
-        <Image src={accentImg} alt="" width={100} height={100} className="w-[80px] h-auto" unoptimized />
-      </div>
+          <h1 className="text-[clamp(48px,6vw,72px)] font-bold leading-[1.05] tracking-[-0.03em] text-[#0F172A]">
+            Hire expert{" "}
+            <span className="text-[#7C3AED]">freelancers</span>
+            {" "}for any task
+          </h1>
 
-      <div className="mx-auto max-w-[1280px] px-6 py-[120px]">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          {/* Left text */}
-          <div className="max-w-[580px]">
-            <div className="animate-fade-in-up space-y-6">
-              <h1 className="text-[48px] sm:text-[56px]">
-                Hire expert{" "}
-                <span className="text-[#7C3AED]">freelancers</span>
-                {" "}for any task
-              </h1>
-              <p className="text-[18px] text-[#475569] leading-relaxed max-w-[480px]">
-                Post your task, receive proposals from top talent, and get quality work done — fast, secure, and hassle-free.
-              </p>
-            </div>
+          <p className="mt-6 max-w-[440px] text-[18px] leading-[1.7] text-[#64748B]">
+            Post your task, receive proposals from top talent, and get quality work done &mdash; fast, secure, and hassle-free.
+          </p>
 
-            <div className="animate-fade-in-up mt-10 flex flex-wrap items-center gap-3 [animation-delay:150ms] opacity-0">
-              <Link href="/register">
-                <Button variant="plastic" size="xl" className="gap-2 rounded-xl h-12 px-7 text-[15px]">
-                  Get Started
-                  <ArrowRightIcon className="size-4" />
-                </Button>
-              </Link>
-              <Link href="/tasks">
-                <Button variant="outline" size="xl" className="gap-2 rounded-xl h-12 px-7 text-[15px] border-[#E2E8F0]">
-                  Browse Tasks
-                </Button>
-              </Link>
-            </div>
+          <div className="mt-10 flex flex-wrap items-center gap-3">
+            <Link href="/register" className="inline-flex items-center gap-2 rounded-[6px] bg-[#7C3AED] px-7 py-3 text-[15px] font-semibold text-white transition-colors hover:bg-[#6D28D9]">
+              Get Started
+            </Link>
+            <Link href="/tasks" className="inline-flex items-center gap-2 rounded-[6px] border border-[#E2E8F0] px-7 py-3 text-[15px] font-semibold text-[#0F172A] transition-colors hover:border-[#7C3AED]">
+              Browse Tasks
+            </Link>
+          </div>
 
-            <div className="animate-fade-in-up mt-14 flex items-center gap-10 [animation-delay:300ms] opacity-0">
-              {[
-                { value: "500+", label: "Tasks Done" },
-                { value: "200+", label: "Freelancers" },
-                { value: "98%", label: "Satisfaction" },
-              ].map((stat, i) => (
-                <div key={stat.label} className="flex items-center gap-2">
-                  {i > 0 && <div className="h-8 w-px bg-[#E2E8F0]" />}
-                  <div>
-                    <div className="text-[28px] font-semibold text-[#0F172A]">{stat.value}</div>
-                    <div className="text-sm text-[#64748B]">{stat.label}</div>
-                  </div>
+          <div className="mt-16 flex items-center">
+            {[
+              { n: "500+", l: "Tasks Done" },
+              { n: "200+", l: "Freelancers" },
+              { n: "98%", l: "Satisfaction" },
+            ].map((s, i) => (
+              <div key={s.l} className="flex items-center" style={{ paddingLeft: i === 0 ? 0 : 32, paddingRight: i < 2 ? 32 : 0 }}>
+                {i > 0 && <div className="absolute -ml-px h-10 w-px bg-[#E2E8F0]" />}
+                <div className="relative">
+                  {i > 0 && <div className="absolute -left-[33px] top-0 h-10 w-px bg-[#E2E8F0]" />}
+                  <div className="text-[32px] font-bold text-[#0F172A] leading-none">{s.n}</div>
+                  <div className="mt-0.5 text-[13px] text-[#94A3B8]">{s.l}</div>
                 </div>
-              ))}
-            </div>
-          </div>
-
-          {/* Right — workspace illustration */}
-          <div className="hidden lg:flex items-center justify-center">
-            <Image
-              src={workspaceImg}
-              alt="Freelance workspace illustration"
-              width={550}
-              height={450}
-              className="w-full max-w-[550px] h-auto"
-              priority
-            />
+              </div>
+            ))}
           </div>
         </div>
 
-        {/* Bottom — collaboration network */}
-        <div className="mt-20 flex justify-center">
-          <Image
-            src={networkImg}
-            alt="Collaboration network"
-            width={700}
-            height={140}
-            className="w-full max-w-[700px] h-auto opacity-60"
-            priority
-          />
+        <div className="hidden lg:flex items-center justify-center">
+          <Image src={workspaceImg} alt="" width={550} height={450} className="w-full max-w-[550px] h-auto" priority />
         </div>
       </div>
     </section>
