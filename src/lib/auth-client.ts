@@ -1,7 +1,13 @@
-import { getAuthClient } from "@better-auth/client"
+import type { BetterAuthOptions } from "better-auth"
 
-export const authClient = getAuthClient({
-  baseURL: "http://localhost:3001/api/auth",
-})
+let clientPromise: ReturnType<typeof import("@better-auth/client").getAuthClient> | null = null
 
-export const { signIn, signUp, signOut, getSession, useSession } = authClient
+export async function getAuth() {
+  if (!clientPromise) {
+    const { getAuthClient } = await import("@better-auth/client")
+    clientPromise = getAuthClient({
+      baseURL: "http://localhost:3001/api/auth",
+    })
+  }
+  return clientPromise
+}
