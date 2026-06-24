@@ -4,7 +4,6 @@ import { useState } from "react"
 import Link from "next/link"
 import { Badge } from "@/components/ui/badge"
 import { Input } from "@/components/ui/input"
-import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { ClockIcon, DollarSignIcon, SearchIcon } from "lucide-react"
 
 const tasks = [
@@ -50,10 +49,13 @@ export default function BrowseTasksPage() {
             <SearchIcon className="absolute left-3 top-1/2 size-4 -translate-y-1/2 text-[#94A3B8]" />
             <Input placeholder="Search tasks..." value={search} onChange={(e) => { setSearch(e.target.value); setPage(1) }} className="pl-9 h-11 rounded-lg border-[#E2E8F0]" />
           </div>
-          <Select value={category} onValueChange={(v) => { setCategory(v); setPage(1) }}>
-            <SelectTrigger className="w-full sm:w-[180px] h-11 rounded-lg border-[#E2E8F0]"><SelectValue /></SelectTrigger>
-            <SelectContent>{categories.map((c) => <SelectItem key={c} value={c}>{c}</SelectItem>)}</SelectContent>
-          </Select>
+          <select
+            value={category}
+            onChange={(e) => { setCategory(e.target.value); setPage(1) }}
+            className="h-11 rounded-lg border border-[#E2E8F0] bg-white px-3 text-sm text-[#0F172A] w-full sm:w-[180px] outline-none focus:border-[#7C3AED]"
+          >
+            {categories.map((c) => <option key={c} value={c}>{c}</option>)}
+          </select>
         </div>
 
         <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
