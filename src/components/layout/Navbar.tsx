@@ -9,11 +9,13 @@ import { Logo } from "@/components/layout/Logo"
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
 import { MenuIcon, MoonIcon, SunIcon } from "lucide-react"
 import { cn } from "@/lib/utils"
-import { useDarkMode } from "@/lib/theme"
+import { useTheme } from "next-themes"
 
 export function Navbar() {
-  const { dark, toggle } = useDarkMode()
+  const { theme, setTheme } = useTheme()
+  const [mounted, setMounted] = useState(false)
   const pathname = usePathname()
+  useEffect(() => { setMounted(true) }, [])
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
   const isLoggedIn = false
@@ -96,13 +98,16 @@ export function Navbar() {
             </div>
           )}
 
+          {mounted && (
           <button
-            onClick={toggle}
-            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors"
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] bg-white hover:bg-[#F8FAFC] transition-colors dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:hover:bg-[#2a2a3e]"
             aria-label="Toggle theme"
           >
-            {dark ? <SunIcon className="size-4 text-[#0F172A]" /> : <MoonIcon className="size-4 text-[#0F172A]" />}
+            <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] hidden dark:block" />
+            <MoonIcon className="size-4 text-[#0F172A] dark:hidden" />
           </button>
+          )}
 
           {/* Mobile menu toggle */}
           <Sheet open={open} onOpenChange={setOpen}>
