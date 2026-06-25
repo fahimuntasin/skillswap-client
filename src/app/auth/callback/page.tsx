@@ -13,7 +13,10 @@ export default function AuthCallbackPage() {
     }
 
     fetch("/api/auth/session", { credentials: "include" }).then(r => r.json()).then(async (s: any) => {
-      if (!s?.user) { router.push("/login"); return }
+      if (!s?.user) {
+        setTimeout(() => { window.location.href = "/login" }, 500)
+        return
+      }
       const pendingRole = typeof window !== "undefined" ? sessionStorage.getItem("pending_role") : null
       if (pendingRole && pendingRole !== s.user.role) {
         await updateRole(s.user.id, pendingRole)
@@ -21,10 +24,10 @@ export default function AuthCallbackPage() {
         sessionStorage.removeItem("pending_role")
       }
       const role = s.user.role
-      if (role === "admin") router.push("/dashboard/admin")
-      else if (role === "freelancer") router.push("/dashboard/freelancer")
-      else router.push("/dashboard/client")
-    }).catch(() => router.push("/login"))
+      if (role === "admin") window.location.href = "/dashboard/admin"
+      else if (role === "freelancer") window.location.href = "/dashboard/freelancer"
+      else window.location.href = "/dashboard/client"
+    }).catch(() => { setTimeout(() => { window.location.href = "/login" }, 500) })
   }, [router])
 
   return (

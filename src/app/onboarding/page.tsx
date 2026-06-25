@@ -52,7 +52,7 @@ export default function OnboardingPage() {
       }
       await api.updateUser(user.id, data)
       toast.success("Profile setup complete!")
-      router.push(role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client")
+      window.location.href = role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client"
     } catch {
       toast.error("Something went wrong")
     } finally { setSaving(false) }
