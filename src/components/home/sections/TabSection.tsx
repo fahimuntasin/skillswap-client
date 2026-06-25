@@ -13,9 +13,9 @@ export function TabSection() {
   const [active, setActive] = useState(0)
 
   return (
-    <section className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] py-16">
-      <div className="mx-auto max-w-[1280px] px-6 text-center">
-        <div className="inline-flex rounded-full border border-[#d1d9e0] dark:border-[#2a2a3e] dark:border-[#2a2a3e] p-1">
+    <section className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] py-16">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6 text-center">
+          <div className="inline-flex flex-wrap justify-center rounded-full border border-[#d1d9e0] dark:border-[#2a2a3e] p-1">
           {tabs.map((tab, i) => (
             <button
               key={tab.id}

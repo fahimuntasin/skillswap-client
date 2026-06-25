@@ -42,14 +42,14 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
   return (
     <div ref={ref}>
       {i > 0 && <div className="border-t border-[#d1d9e0] dark:border-[#2a2a3e]" />}
-      <div className={`grid items-center gap-16 px-6 py-24 ${f.bg} ${f.reverse ? "lg:grid-cols-[55%_45%]" : "lg:grid-cols-[45%_55%]"} transition-all duration-700 overflow-hidden ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
+      <div className={`grid items-center gap-8 sm:gap-16 px-4 sm:px-6 py-12 sm:py-24 ${f.bg} ${f.reverse ? "lg:grid-cols-[55%_45%]" : "lg:grid-cols-[45%_55%]"} transition-all duration-700 overflow-hidden ${visible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-6"}`}>
         <div className={f.reverse ? "lg:order-2" : ""}>
           <p className="mb-3 text-sm font-semibold text-[#7C3AED]">{f.tag}</p>
           <h2 className="text-[28px] leading-tight sm:text-[32px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">{f.title}</h2>
           <p className="mt-4 text-base leading-relaxed text-[#64748B] dark:text-[#94a3b8] max-w-[480px]">{f.desc}</p>
           <Link href={f.href} className="btn-action mt-6">{f.link}<span className="btn-arrow">→</span></Link>
         </div>
-        <div className={`rounded-xl border ${cardBorder} ${cardBg} p-6 ${f.reverse ? "lg:order-1" : ""} overflow-hidden max-w-[90%]`}>
+          <div className={`rounded-xl border ${cardBorder} ${cardBg} p-4 sm:p-6 ${f.reverse ? "lg:order-1" : ""} overflow-hidden max-w-full sm:max-w-[90%]`}>
           <div className="space-y-3">
             {f.tag.includes("Post") && (
               <div className={`rounded-lg border ${cardBorder} p-4 dark:bg-[#16163a]`}>

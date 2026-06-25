@@ -3,7 +3,7 @@ import { Logo } from "@/components/layout/Logo"
 
 export function Footer() {
   return (
-    <footer className="relative border-t border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#0e0e16] dark:border-[#2a2a3e]">
+    <footer className="relative border-t border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#0e0e16]">
       <div className="pointer-events-none absolute bottom-0 left-1/2 -translate-x-1/2 w-full max-w-[800px] opacity-15">
         <img src="/images/footer.png" alt="" className="w-full max-w-[1000px] h-auto dark:opacity-10 dark:invert" />
       </div>

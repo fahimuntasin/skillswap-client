@@ -15,14 +15,22 @@ export default function FreelancerProfilePage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    api.updateUser(id, {}).catch(() => {}).finally(() => {
-      api.getUsers(`role=freelancer&limit=50`).then((users: any[]) => {
-        const u = users.find((u: any) => u._id === id)
-        if (u) setUser(u)
-      })
-      api.getReviews(`reviewee_email=${user?.email}`).then(setReviews).catch(() => {})
-      setLoading(false)
-    })
+    let cancelled = false
+    async function load() {
+      try {
+        const u = await api.getUser(id)
+        if (cancelled) return
+        setUser(u)
+        const r = await api.getReviews(`reviewee_email=${u.email}`)
+        if (!cancelled) setReviews(r)
+      } catch {
+        // user not found
+      } finally {
+        if (!cancelled) setLoading(false)
+      }
+    }
+    load()
+    return () => { cancelled = true }
   }, [id])
 
   if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><Loader /></div>
@@ -32,20 +40,20 @@ export default function FreelancerProfilePage() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] border-b border-[#d1d9e0] dark:border-[#2a2a3e]">
-      <div className="mx-auto max-w-[1280px] px-8 py-16">
-        <div className="flex flex-col sm:flex-row gap-8 mb-10">
-          <Avatar className="size-24 ring-4 ring-[#F5F3FF] dark:ring-[#2d1f5e] ring-offset-4 ring-offset-white dark:ring-offset-[#0a0a0b] shrink-0">
-            <AvatarFallback className="bg-[#7C3AED] text-white text-2xl font-semibold">{user.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase()}</AvatarFallback>
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-12 sm:py-16">
+        <div className="flex flex-col sm:flex-row items-center sm:items-start gap-6 sm:gap-8 mb-10 text-center sm:text-left">
+          <Avatar className="size-20 sm:size-24 ring-4 ring-[#F5F3FF] dark:ring-[#2d1f5e] ring-offset-4 ring-offset-white dark:ring-offset-[#0a0a0b] shrink-0">
+            <AvatarFallback className="bg-[#7C3AED] text-white text-xl sm:text-2xl font-semibold">{user.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase()}</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc]">{user.name}</h1>
-            <div className="flex items-center gap-3 mt-2">
-              <div className="flex items-center gap-1"><StarIcon className="size-5 fill-amber-400 text-amber-400" /><span className="font-semibold text-[#0F172A] dark:text-[#f8fafc]">{avgRating}</span><span className="text-[#64748B] dark:text-[#94a3b8]">({reviews.length} reviews)</span></div>
+            <h1 className="text-[24px] sm:text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc]">{user.name}</h1>
+            <div className="flex flex-wrap items-center gap-3 mt-2 justify-center sm:justify-start">
+              <div className="flex items-center gap-1"><StarIcon className="size-5 fill-amber-400 text-amber-400" /><span className="font-semibold text-[#0F172A] dark:text-[#f8fafc]">{avgRating}</span><span className="text-[#64748B] dark:text-[#94a3b8]">({reviews.length})</span></div>
               {user.hourlyRate > 0 && <span className="flex items-center gap-1 text-[#7C3AED] font-semibold"><DollarSignIcon className="size-4" />{user.hourlyRate}/hr</span>}
             </div>
             {user.bio && <p className="mt-4 text-[15px] leading-relaxed text-[#475569] dark:text-[#cbd5e1] max-w-[600px]">{user.bio}</p>}
             {user.skills?.length > 0 && (
-              <div className="flex flex-wrap gap-2 mt-4">
+              <div className="flex flex-wrap gap-2 mt-4 justify-center sm:justify-start">
                 {user.skills.map((s: string) => <Badge key={s} className="bg-[#F5F3FF] dark:bg-[#2d1f5e] text-[#7C3AED] dark:text-[#c4b5fd] border-0 font-medium">{s}</Badge>)}
               </div>
             )}
@@ -53,7 +61,7 @@ export default function FreelancerProfilePage() {
         </div>
         {reviews.length > 0 && (
           <div>
-            <h2 className="text-[24px] font-bold text-[#0F172A] dark:text-[#f8fafc] mb-6">Reviews ({reviews.length})</h2>
+            <h2 className="text-[20px] sm:text-[24px] font-bold text-[#0F172A] dark:text-[#f8fafc] mb-6">Reviews ({reviews.length})</h2>
             <div className="space-y-4">
               {reviews.map((r: any) => (
                 <div key={r._id} className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] p-5">

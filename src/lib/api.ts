@@ -1,10 +1,17 @@
 async function request(path: string, options?: RequestInit) {
-  const res = await fetch(path, {
-    headers: { "Content-Type": "application/json", ...options?.headers },
-    ...options,
-  })
-  if (!res.ok) throw new Error(`API error: ${res.status}`)
-  return res.json()
+  const controller = new AbortController()
+  const timeout = setTimeout(() => controller.abort(), 8000)
+  try {
+    const res = await fetch(path, {
+      headers: { "Content-Type": "application/json", ...options?.headers },
+      signal: controller.signal,
+      ...options,
+    })
+    if (!res.ok) throw new Error(`API error: ${res.status}`)
+    return res.json()
+  } finally {
+    clearTimeout(timeout)
+  }
 }
 
 export const api = {
@@ -24,6 +31,7 @@ export const api = {
   getFreelancers: (limit?: number) => request(`/api/freelancers${limit ? `?limit=${limit}` : ""}`),
 
   // Users
+  getUser: (id: string) => request(`/api/users/${id}`),
   getUsers: (params?: string) => request(`/api/users${params ? `?${params}` : ""}`),
   updateUser: (id: string, data: unknown) => request(`/api/users/${id}`, { method: "PATCH", body: JSON.stringify(data) }),
 
@@ -38,6 +46,7 @@ export const api = {
 
   // Stats & Earnings
   getStats: () => request("/api/stats"),
+  getRevenue: () => request("/api/admin/revenue"),
   getEarnings: (email: string) => request(`/api/earnings?email=${email}`),
   getClientTasks: (email: string) => request(`/api/client-tasks?client_email=${email}`),
 }

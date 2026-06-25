@@ -73,8 +73,8 @@ export function DashboardShell({ children, role, userName = "User" }: DashboardS
               </AvatarFallback>
             </Avatar>
             <div className="min-w-0">
-              <p className="truncate text-sm font-semibold">{userName}</p>
-              <p className="truncate text-xs text-muted-foreground capitalize">{role}</p>
+              <p className="truncate text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">{userName}</p>
+              <p className="truncate text-xs text-muted-foreground dark:text-[#94a3b8] capitalize">{role}</p>
             </div>
           </div>
 
@@ -110,10 +110,37 @@ export function DashboardShell({ children, role, userName = "User" }: DashboardS
         </div>
       </aside>
 
-      {/* Main content */}
-      <main className="flex-1 overflow-auto">
-        <div className="mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">{children}</div>
-      </main>
+      {/* Main area (content + mobile bottom nav) */}
+      <div className="flex flex-1 flex-col min-w-0">
+        {/* Main content */}
+        <main className="flex-1 overflow-auto pb-16 lg:pb-0">
+          <div className="mx-auto max-w-5xl p-4 sm:p-6 lg:p-8">{children}</div>
+        </main>
+
+        {/* Mobile bottom tab nav */}
+        <nav className="lg:hidden fixed bottom-0 left-0 right-0 z-50 border-t bg-white dark:bg-[#0f0f1a] dark:border-[#2a2a3e]">
+          <div className="flex overflow-x-auto">
+            {links.map((link) => {
+              const isActive = pathname === link.href
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className={cn(
+                    "flex flex-col items-center gap-0.5 flex-1 min-w-0 py-2 px-1 text-[10px] font-medium transition-all",
+                    isActive
+                      ? "text-primary"
+                      : "text-muted-foreground"
+                  )}
+                >
+                  <link.icon className="size-5" />
+                  <span className="truncate w-full text-center leading-tight">{link.label}</span>
+                </Link>
+              )
+            })}
+          </div>
+        </nav>
+      </div>
     </div>
   )
 }

@@ -27,8 +27,8 @@ export function FeatureCards() {
   }, [])
 
   return (
-    <section ref={sectionRef} className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] py-24">
-      <div className="mx-auto max-w-[1280px] px-6">
+    <section ref={sectionRef} className="border-b border-[#d1d9e0] dark:border-[#2a2a3e] py-16 sm:py-24">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-6">
         <div ref={headingRef} className="mb-6"><p className="text-sm font-semibold text-[#7C3AED]">Platform features</p></div>
         <div className="grid gap-px border border-[#d1d9e0] dark:border-[#2a2a3e] bg-[#d1d9e0] dark:bg-[#2a2a3e] sm:grid-cols-3">
           {cards.map((card) => (

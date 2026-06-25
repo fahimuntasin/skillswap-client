@@ -16,8 +16,18 @@ export const loginWithEmail = (email: string, password: string) =>
 export const registerWithEmail = (data: { name: string; email: string; password: string; image?: string; role?: string }) =>
   post("/api/auth/sign-up/email", data)
 
-export function signInWithGoogle() {
-  window.location.href = "/api/auth/sign-in/google"
+export async function signInWithGoogle() {
+  try {
+    const res = await fetch("/api/auth/sign-in/social", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({ provider: "google", callbackURL: "/auth/callback" }),
+    })
+    const data = await res.json()
+    if (data.url) window.location.href = data.url
+  } catch {
+    window.location.href = "/api/auth/sign-in/social?provider=google"
+  }
 }
 
 export async function getSession() {

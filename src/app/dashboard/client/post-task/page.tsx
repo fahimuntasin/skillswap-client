@@ -1,6 +1,6 @@
 "use client"
 
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import { useRouter } from "next/navigation"
 import { DashboardShell } from "@/components/dashboard/DashboardShell"
 import { Button } from "@/components/ui/button"
@@ -9,31 +9,33 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select"
 import { toast } from "sonner"
+import { getSession } from "@/lib/auth-client"
+import { api } from "@/lib/api"
 
 const categories = ["Design", "Writing", "Development", "Marketing", "Other"]
 
 export default function PostTaskPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [session, setSession] = useState<any>(null)
+
+  useEffect(() => {
+    getSession().then((s) => setSession(s))
+  }, [])
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault()
     setLoading(true)
     const form = new FormData(e.currentTarget)
     try {
-      const res = await fetch("http://localhost:3001/api/tasks", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({
-          title: form.get("title"),
-          category: form.get("category"),
-          description: form.get("description"),
-          budget: Number(form.get("budget")),
-          deadline: form.get("deadline"),
-          client_email: "client@example.com",
-        }),
+      await api.createTask({
+        title: form.get("title"),
+        category: form.get("category"),
+        description: form.get("description"),
+        budget: Number(form.get("budget")),
+        deadline: form.get("deadline"),
+        client_email: session?.user?.email || "client@example.com",
       })
-      if (!res.ok) throw new Error("Failed")
       toast.success("Task posted successfully!")
       router.push("/dashboard/client")
     } catch {
@@ -44,11 +46,11 @@ export default function PostTaskPage() {
   }
 
   return (
-    <DashboardShell role="client" userName="John">
+    <DashboardShell role="client" userName={session?.user?.name || "Client"}>
       <div className="max-w-[640px]">
         <div className="mb-8">
           <p className="text-sm font-semibold text-[#7C3AED] mb-1">Create</p>
-          <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc] tracking-[-0.02em]">Post a New Task</h1>
+          <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">Post a New Task</h1>
         </div>
         <form onSubmit={handleSubmit} className="space-y-5">
           <div className="grid gap-2"><Label>Task Title</Label><Input name="title" placeholder="e.g. Design a landing page" required className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e]" /></div>

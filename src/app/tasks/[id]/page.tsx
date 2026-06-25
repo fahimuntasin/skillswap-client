@@ -42,11 +42,11 @@ export default function TaskDetailPage() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] border-b border-[#d1d9e0] dark:border-[#2a2a3e]">
-      <div className="mx-auto max-w-[1280px] px-8 py-16">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-12 sm:py-16">
         <div className="grid gap-10 lg:grid-cols-[1fr_400px]">
           <div>
             <p className="text-sm font-semibold text-[#7C3AED] mb-2">Task Detail</p>
-            <h1 className="text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">{task.title}</h1>
+            <h1 className="text-[24px] sm:text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">{task.title}</h1>
             <div className="mt-4 flex flex-wrap gap-3">
               <Badge className="bg-[#F5F3FF] dark:bg-[#2d1f5e] text-[#7C3AED] dark:text-[#c4b5fd] border-0">{task.category}</Badge>
               <span className="flex items-center gap-1 text-sm text-[#64748B] dark:text-[#94a3b8]"><DollarSignIcon className="size-3.5" />${task.budget}</span>

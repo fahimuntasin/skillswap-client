@@ -39,11 +39,11 @@ export default function BrowseTasksPage() {
 
   return (
     <div className="min-h-[calc(100vh-4rem)] border-b border-[#d1d9e0] dark:border-[#2a2a3e]">
-      <div className="mx-auto max-w-[1280px] px-8 py-16">
-        <div className="mb-10">
+      <div className="mx-auto max-w-[1280px] px-4 sm:px-8 py-12 sm:py-16">
+        <div className="mb-6 sm:mb-10">
           <p className="text-sm font-semibold text-[#7C3AED] mb-2">Explore</p>
-          <h1 className="text-[40px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">Browse Tasks</h1>
-          <p className="mt-2 text-[#64748B] dark:text-[#94a3b8] text-base">Find the perfect task and start earning</p>
+          <h1 className="text-[28px] sm:text-[40px] font-bold text-[#0F172A] dark:text-[#f8fafc] tracking-[-0.02em]">Browse Tasks</h1>
+          <p className="mt-2 text-[#64748B] dark:text-[#94a3b8] text-sm sm:text-base">Find the perfect task and start earning</p>
         </div>
 
         <div className="mb-10 flex flex-col gap-3 sm:flex-row">

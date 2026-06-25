@@ -16,7 +16,7 @@ export async function FeaturedTasks() {
   if (!tasks.length) return null
 
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-[96px] border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
+    <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-[96px] border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
       <div className="mb-12 text-center">
         <h2>Latest Featured Tasks</h2>
         <p className="mt-3 text-[#64748B] dark:text-[#94a3b8] text-base">Browse recently posted tasks from clients worldwide</p>

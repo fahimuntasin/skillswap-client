@@ -20,10 +20,13 @@ export function Navbar() {
   useEffect(() => { setMounted(true) }, [])
   const [scrolled, setScrolled] = useState(false)
   const [open, setOpen] = useState(false)
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [session, setSession] = useState<any>(null)
+  const [sessionFull, setSessionFull] = useState<any>(null)
   useEffect(() => {
-    getSession().then(s => setIsLoggedIn(!!s && s.user !== null))
+    getSession().then(s => { setSession(s?.user || null); setSessionFull(s) })
   }, [])
+
+  const dashboardHref = sessionFull?.user?.role === "admin" ? "/dashboard/admin" : sessionFull?.user?.role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client"
 
   useEffect(() => {
     const onScroll = () => setScrolled(window.scrollY > 10)
@@ -42,11 +45,11 @@ export function Navbar() {
       className={cn(
         "sticky top-0 z-50 h-16 border-b transition-all duration-300",
         scrolled
-          ? "border-[#E2E8F0] dark:border-[#2a2a3e] bg-[rgba(255,255,255,0.85)] dark:bg-[rgba(10,10,11,0.85)] backdrop-blur-[12px] dark:border-[#2a2a3e] dark:bg-[rgba(10,10,11,0.85)]"
+          ?         "border-[#E2E8F0] dark:border-[#2a2a3e] bg-white/85 dark:bg-[#0f0f1a]/85 backdrop-blur-[12px]"
           : "border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] dark:border-[#2a2a3e] dark:bg-[#0f0f1a]"
       )}
     >
-      <div className="mx-auto flex h-full max-w-[1280px] items-center px-6">
+      <div className="mx-auto flex h-full max-w-[1280px] items-center px-4 sm:px-6">
         {/* Logo */}
         <Link href="/" className="flex items-center shrink-0">
           <Logo className="h-[26px] w-auto" />
@@ -67,7 +70,7 @@ export function Navbar() {
                   "relative px-3 py-5 text-[14px] font-normal transition-colors",
                   isActive
                     ? "text-[#7C3AED]"
-                    : "text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
+                    : "text-[#64748B] dark:text-[#94a3b8] hover:text-[#0F172A] dark:hover:text-[#f8fafc]"
                 )}
               >
                 {link.label}
@@ -81,20 +84,22 @@ export function Navbar() {
 
         {/* Right side */}
         <div className="ml-auto flex items-center gap-3">
-          {isLoggedIn ? (
+          {session ? (
             <>
-              <Link href="/dashboard" className="hidden sm:flex items-center gap-2 text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
+              <Link href={dashboardHref} className="hidden sm:flex items-center gap-2 text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
                 Dashboard
               </Link>
               <Avatar className="size-8 ring-2 ring-[#7C3AED] ring-offset-1">
-                <AvatarImage src="" alt="User" />
-                <AvatarFallback className="bg-[#7C3AED] text-white text-xs font-semibold">JD</AvatarFallback>
+                <AvatarImage src={session.image || ""} alt="User" />
+                <AvatarFallback className="bg-[#7C3AED] text-white text-xs font-semibold">
+                  {session.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase().slice(0, 2) || "U"}
+                </AvatarFallback>
               </Avatar>
-              <span className="hidden sm:inline text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">John</span>
+              <span className="hidden sm:inline text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc]">{session.name || "User"}</span>
             </>
           ) : (
             <div className="hidden sm:flex items-center gap-3">
-              <Link href="/login" className="text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
+              <Link href="/login" className="text-[14px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:text-[#7C3AED] transition-colors">
                 Log in
               </Link>
               <Link href="/register">
@@ -103,22 +108,22 @@ export function Navbar() {
             </div>
           )}
 
-          {mounted && isLoggedIn && (<NotificationBell />)}
+          {mounted && session && (<NotificationBell />)}
           {mounted && (
           <button
             onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-            className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] hover:bg-[#F8FAFC] dark:bg-[#0f0f1a] transition-colors dark:border-[#2a2a3e] dark:bg-[#1c1a3a] dark:hover:bg-[#2a2a3e]"
+                  className="hidden sm:inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] hover:bg-[#F8FAFC] dark:hover:bg-[#2a2a3e] transition-colors"
             aria-label="Toggle theme"
           >
-            <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc] hidden dark:block" />
-            <MoonIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:hidden" />
+            <SunIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] hidden dark:block" />
+            <MoonIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:hidden" />
           </button>
           )}
 
           {/* Mobile menu toggle */}
           <Sheet open={open} onOpenChange={setOpen}>
-            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#0f0f1a] hover:bg-[#F8FAFC] dark:bg-[#0f0f1a] transition-colors">
-              <MenuIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]" />
+            <SheetTrigger className="sm:hidden inline-flex size-9 items-center justify-center rounded-[6px] border border-[#E2E8F0] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] hover:bg-[#F8FAFC] dark:hover:bg-[#2a2a3e] transition-colors">
+              <MenuIcon className="size-4 text-[#0F172A] dark:text-[#f8fafc]" />
             </SheetTrigger>
             <SheetContent side="right" className="w-72 pt-14">
               <div className="flex flex-col gap-1">
@@ -133,7 +138,7 @@ export function Navbar() {
                         "rounded-lg px-3 py-2.5 text-[15px] font-medium transition-colors",
                         isActive
                           ? "bg-[#F5F3FF] text-[#7C3AED]"
-                          : "text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:bg-[#F1F5F9] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
+                          : "text-[#64748B] dark:text-[#94a3b8] hover:bg-[#F1F5F9] hover:text-[#0F172A]"
                       )}
                     >
                       {link.label}
@@ -141,11 +146,11 @@ export function Navbar() {
                   )
                 })}
                 <hr className="my-3 border-[#E2E8F0] dark:border-[#2a2a3e]" />
-                {isLoggedIn ? (
+                {session ? (
                   <Link
-                    href="/dashboard"
+                    href={dashboardHref}
                     onClick={() => setOpen(false)}
-                    className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] hover:bg-[#F1F5F9] hover:text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]"
+                    className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#64748B] dark:text-[#94a3b8] hover:bg-[#F1F5F9] dark:hover:bg-[#2a274a] hover:text-[#0F172A] dark:hover:text-[#f8fafc]"
                   >
                     Dashboard
                   </Link>
@@ -154,7 +159,7 @@ export function Navbar() {
                     <Link
                       href="/login"
                       onClick={() => setOpen(false)}
-                      className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] hover:bg-[#F1F5F9]"
+                      className="rounded-lg px-3 py-2.5 text-[15px] font-medium text-[#0F172A] dark:text-[#f8fafc] hover:bg-[#F1F5F9] dark:hover:bg-[#2a274a]"
                     >
                       Log in
                     </Link>

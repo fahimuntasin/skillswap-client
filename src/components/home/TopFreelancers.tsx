@@ -16,7 +16,7 @@ export async function TopFreelancers() {
   if (!freelancers.length) return null
 
   return (
-    <section className="mx-auto max-w-[1280px] px-6 py-[96px] bg-accent/30 dark:bg-[#0e0e18] rounded-3xl my-8 border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
+    <section className="mx-auto max-w-[1280px] px-4 sm:px-6 py-16 sm:py-[96px] bg-accent/30 dark:bg-[#0e0e18] rounded-3xl my-8 border-b border-[#F1F5F9] dark:border-[#2a2a3e]">
       <div className="mb-12 text-center">
         <h2>Top Freelancers</h2>
         <p className="mt-3 text-[#64748B] dark:text-[#94a3b8] text-base">Meet our highest-rated talent ready to work on your tasks</p>
