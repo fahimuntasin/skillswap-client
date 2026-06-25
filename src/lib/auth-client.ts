@@ -21,7 +21,7 @@ export async function signInWithGoogle(role?: string) {
     const res = await fetch("/api/auth/sign-in/social", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ provider: "google", callbackURL: `/api/auth/oauth-callback?role=${role || ""}` }),
+      body: JSON.stringify({ provider: "google", callbackURL: `/auth/oauth-redirect?role=${role || ""}` }),
     })
     const data = await res.json()
     if (data.url) window.location.href = data.url
