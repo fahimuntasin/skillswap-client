@@ -1,6 +1,7 @@
 import { NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/db"
 import { Proposal } from "@/models/proposal"
+import { auth } from "@/lib/auth"
 
 export async function GET(req: NextRequest) {
   try {
@@ -22,16 +23,23 @@ export async function GET(req: NextRequest) {
 
 export async function POST(req: NextRequest) {
   try {
+    const session = await auth.api.getSession({ headers: req.headers })
+    if (!session?.user) {
+      return NextResponse.json({ error: "Authentication required" }, { status: 401 })
+    }
+
     await connectDB()
     const data = await req.json()
+    const freelancerEmail = session.user.email
+
     const existing = await Proposal.findOne({
       task_id: data.task_id,
-      freelancer_email: data.freelancer_email,
+      freelancer_email: freelancerEmail,
     })
     if (existing) {
       return NextResponse.json({ error: "You already submitted a proposal for this task" }, { status: 400 })
     }
-    const proposal = await Proposal.create(data)
+    const proposal = await Proposal.create({ ...data, freelancer_email: freelancerEmail })
     return NextResponse.json(proposal, { status: 201 })
   } catch {
     return NextResponse.json({ error: "Failed to submit proposal" }, { status: 500 })
