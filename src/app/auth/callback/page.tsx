@@ -9,7 +9,7 @@ export default function AuthCallbackPage() {
 
   useEffect(() => {
     const updateRole = async (userId: string, role: string) => {
-      try { await fetch("/api/auth/update-user", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: userId, role }) }) } catch {}
+      try { await fetch("/api/auth/update-user", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: userId, role }) }) } catch {}
     }
 
     fetch("/api/auth/session", { credentials: "include" }).then(r => r.json()).then(async (s: any) => {

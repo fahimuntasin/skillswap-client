@@ -135,7 +135,7 @@ export default function RegisterPage() {
                 await api.updateUser(res.user.id, { role }).catch(() => {})
               }
               toast.success("Account created! Let's set up your profile.")
-              router.push(`/onboarding?role=${role}`)
+              window.location.href = `/onboarding?role=${role}`
             } catch (err: any) {
               const msg = err?.message || ""
               if (msg.toLowerCase().includes("already exists") || msg.toLowerCase().includes("already registered")) {
