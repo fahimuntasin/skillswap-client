@@ -64,9 +64,9 @@ export function DashboardShell({ children, role, userName = "User" }: DashboardS
   return (
     <div className="flex min-h-[calc(100vh-4rem)]">
       {/* Sidebar */}
-      <aside className="hidden w-64 shrink-0 border-r bg-white/50 backdrop-blur-sm lg:block dark:bg-[#0f0f1a]/80 dark:border-[#2a2a3e]">
+      <aside className="hidden w-64 shrink-0 border-r bg-white lg:block dark:bg-[#0f0f1a] dark:border-[#2a2a3e]">
         <div className="flex h-full flex-col">
-          <div className="flex items-center gap-3 border-b px-6 py-5">
+          <div className="flex items-center gap-3 border-b dark:border-[#2a2a3e] px-6 py-5">
             <Avatar className="size-9 ring-2 ring-primary/20">
               <AvatarFallback className="bg-primary text-white font-semibold text-sm">
                 {userName.split(" ").map(n => n[0]).join("").toUpperCase().slice(0, 2)}
@@ -99,7 +99,7 @@ export function DashboardShell({ children, role, userName = "User" }: DashboardS
             })}
           </nav>
 
-          <div className="border-t p-3">
+          <div className="border-t dark:border-[#2a2a3e] p-3">
             <Link href="/login">
               <Button variant="ghost" className="w-full justify-start gap-3 text-muted-foreground">
                 <LogOutIcon className="size-4" />

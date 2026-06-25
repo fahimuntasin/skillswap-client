@@ -23,23 +23,23 @@ export default function ProposalsPage() {
     <DashboardShell role="client" userName="John">
       <div className="mb-6">
         <p className="text-sm font-semibold text-[#7C3AED] mb-1">Proposals</p>
-        <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">Manage Proposals</h1>
+        <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">Manage Proposals</h1>
       </div>
       <div className="space-y-3">
         {proposals.map((p) => (
-          <div key={p.id} className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-5">
+          <div key={p.id} className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] dark:bg-[#1c1a3a] p-5">
             <div className="flex items-start justify-between mb-3">
               <div>
-                <p className="text-sm text-[#94A3B8] dark:text-[#64748b] mb-0.5">Task: <span className="text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] font-medium">{p.task}</span></p>
-                <p className="text-[15px] font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{p.freelancer}</p>
+                <p className="text-sm text-[#94A3B8] dark:text-[#64748b] dark:text-[#64748b] mb-0.5">Task: <span className="text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc] font-medium">{p.task}</span></p>
+                <p className="text-[15px] font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">{p.freelancer}</p>
               </div>
               <Badge className={`text-xs font-medium ${sc[p.status]}`}>{p.status}</Badge>
             </div>
-            <p className="text-sm text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] mb-3">&ldquo;{p.note}&rdquo;</p>
+            <p className="text-sm text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] dark:text-[#94a3b8] mb-3">&ldquo;{p.note}&rdquo;</p>
             <div className="flex items-center justify-between">
               <div className="flex gap-4 text-sm">
-                <span className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">${p.budget}</span>
-                <span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">{p.days} days</span>
+                <span className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">${p.budget}</span>
+                <span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] dark:text-[#94a3b8]">{p.days} days</span>
               </div>
               {p.status === "Pending" && (
                 <div className="flex gap-2">

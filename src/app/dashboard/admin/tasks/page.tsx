@@ -16,14 +16,14 @@ const sc: Record<string, string> = { Open: "bg-amber-50 text-amber-700", "In Pro
 export default function AdminTasksPage() {
   return (
     <DashboardShell role="admin" userName="Admin">
-      <div className="mb-6"><p className="text-sm font-semibold text-[#7C3AED] mb-1">Admin</p><h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">Manage Tasks</h1></div>
-      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white">
-        <div className="grid grid-cols-[1fr_140px_80px_80px_60px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b]">
+      <div className="mb-6"><p className="text-sm font-semibold text-[#7C3AED] mb-1">Admin</p><h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">Manage Tasks</h1></div>
+      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white">
+        <div className="grid grid-cols-[1fr_140px_80px_80px_60px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b] dark:text-[#64748b]">
           <span>Title</span><span>Client</span><span>Budget</span><span>Status</span><span></span>
         </div>
         {tasks.map((t) => (
-          <div key={t.id} className="grid grid-cols-[1fr_140px_80px_80px_60px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] last:border-0 text-sm">
-            <span className="font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{t.title}</span><span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">{t.client}</span><span className="font-semibold">${t.budget}</span>
+          <div key={t.id} className="grid grid-cols-[1fr_140px_80px_80px_60px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] last:border-0 text-sm">
+            <span className="font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">{t.title}</span><span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] dark:text-[#94a3b8]">{t.client}</span><span className="font-semibold">${t.budget}</span>
             <Badge className={`text-xs font-medium ${sc[t.status]}`}>{t.status}</Badge>
             <Button size="icon" variant="ghost" className="size-8 text-red-500"><TrashIcon className="size-4" /></Button>
           </div>

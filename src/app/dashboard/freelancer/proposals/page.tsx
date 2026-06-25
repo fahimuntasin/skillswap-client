@@ -21,17 +21,17 @@ export default function FreelancerProposalsPage() {
     <DashboardShell role="freelancer" userName="Sarah">
       <div className="mb-6">
         <p className="text-sm font-semibold text-[#7C3AED] mb-1">Proposals</p>
-        <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">My Proposals</h1>
+        <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">My Proposals</h1>
       </div>
-      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white">
-        <div className="grid grid-cols-[1fr_100px_120px_100px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b]">
+      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white">
+        <div className="grid grid-cols-[1fr_100px_120px_100px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b] dark:text-[#64748b]">
           <span>Task</span><span>Bid</span><span>Date</span><span>Status</span>
         </div>
         {proposals.map((p) => (
-          <div key={p.id} className="grid grid-cols-[1fr_100px_120px_100px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] last:border-0 text-sm">
-            <span className="font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{p.task}</span>
+          <div key={p.id} className="grid grid-cols-[1fr_100px_120px_100px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] last:border-0 text-sm">
+            <span className="font-medium text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">{p.task}</span>
             <span className="font-semibold">${p.budget}</span>
-            <span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8]">{new Date(p.date).toLocaleDateString()}</span>
+            <span className="text-[#64748B] dark:text-[#94a3b8] dark:text-[#94a3b8] dark:text-[#94a3b8]">{new Date(p.date).toLocaleDateString()}</span>
             <Badge className={`text-xs font-medium ${sc[p.status]}`}>{p.status}</Badge>
           </div>
         ))}

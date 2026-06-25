@@ -25,18 +25,18 @@ export default function MyTasksPage() {
       <div className="mb-6">
         <p className="text-sm font-semibold text-[#7C3AED] mb-1">Tasks</p>
         <div className="flex items-center justify-between">
-          <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">My Tasks</h1>
+          <h1 className="text-[28px] font-bold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">My Tasks</h1>
           <Link href="/dashboard/client/post-task"><Button variant="plastic" className="rounded-lg">Post New Task</Button></Link>
         </div>
       </div>
-      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white">
-        <div className="grid grid-cols-[1fr_120px_100px_100px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b]">
+      <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] bg-white">
+        <div className="grid grid-cols-[1fr_120px_100px_100px] gap-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] px-6 py-3 text-xs font-semibold uppercase text-[#94A3B8] dark:text-[#64748b] dark:text-[#64748b]">
           <span>Task</span><span>Budget</span><span>Status</span><span>Actions</span>
         </div>
         {tasks.map((t) => (
-          <div key={t.id} className="grid grid-cols-[1fr_120px_100px_100px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] last:border-0 text-sm">
-            <div><p className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">{t.title}</p><p className="text-xs text-[#94A3B8] dark:text-[#64748b]">Due {new Date(t.deadline).toLocaleDateString()}</p></div>
-            <span className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc]">${t.budget}</span>
+          <div key={t.id} className="grid grid-cols-[1fr_120px_100px_100px] gap-4 items-center px-6 py-4 border-b border-[#F1F5F9] dark:border-[#2a2a3e] dark:border-[#2a2a3e] last:border-0 text-sm">
+            <div><p className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">{t.title}</p><p className="text-xs text-[#94A3B8] dark:text-[#64748b] dark:text-[#64748b]">Due {new Date(t.deadline).toLocaleDateString()}</p></div>
+            <span className="font-semibold text-[#0F172A] dark:text-[#f8fafc] dark:text-[#f8fafc] dark:text-[#f8fafc]">${t.budget}</span>
             <Badge variant="outline" className={`text-xs font-medium ${sc[t.status]}`}>{t.status}</Badge>
             <div className="flex gap-2">
               {t.status === "Open" && <Button size="icon" variant="ghost" className="size-8"><PencilIcon className="size-4" /></Button>}
