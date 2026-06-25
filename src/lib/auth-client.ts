@@ -16,7 +16,8 @@ export const loginWithEmail = (email: string, password: string) =>
 export const registerWithEmail = (data: { name: string; email: string; password: string; image?: string; role?: string }) =>
   post("/api/auth/sign-up/email", data)
 
-export async function signInWithGoogle() {
+export async function signInWithGoogle(role?: string) {
+  if (role) sessionStorage.setItem("pending_role", role)
   try {
     const res = await fetch("/api/auth/sign-in/social", {
       method: "POST",
