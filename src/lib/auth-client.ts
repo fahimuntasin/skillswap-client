@@ -17,12 +17,11 @@ export const registerWithEmail = (data: { name: string; email: string; password:
   post("/api/auth/sign-up/email", data)
 
 export async function signInWithGoogle(role?: string) {
-  if (role) sessionStorage.setItem("pending_role", role)
   try {
     const res = await fetch("/api/auth/sign-in/social", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ provider: "google", callbackURL: "/auth/callback" }),
+      body: JSON.stringify({ provider: "google", callbackURL: `/api/auth/oauth-callback?role=${role || ""}` }),
     })
     const data = await res.json()
     if (data.url) window.location.href = data.url
