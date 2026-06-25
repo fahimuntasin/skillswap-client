@@ -1,32 +1,44 @@
-import { headers } from "next/headers"
+import { cookies } from "next/headers"
 import { redirect } from "next/navigation"
-import { auth } from "@/lib/auth"
-import { MongoClient } from "mongodb"
+import { MongoClient, ObjectId } from "mongodb"
 
 export default async function OAuthRedirectPage({
   searchParams,
 }: {
   searchParams: Promise<{ role?: string }>
 }) {
-  const h = await headers()
-  const session = await auth.api.getSession({ headers: h })
   const { role } = await searchParams
+  const cookieStore = await cookies()
+  const sessionToken = cookieStore.get("better-auth.session_token")?.value
 
-  if (!session?.user) {
+  if (!sessionToken) {
     redirect("/login")
   }
 
-  if (role && role !== session.user.role) {
-    const client = new MongoClient(process.env.MONGODB_URI || "")
-    await client.connect()
-    await client.db().collection("user").updateOne(
-      { id: session.user.id },
-      { $set: { role } }
-    )
+  const client = new MongoClient(process.env.MONGODB_URI || "")
+  await client.connect()
+  const db = client.db()
+
+  const session = await db.collection("session").findOne({ token: sessionToken })
+  if (!session?.userId) {
     await client.close()
+    redirect("/login")
   }
 
-  const finalRole = role || session.user.role || "client"
+  if (role) {
+    await db.collection("user").updateOne(
+      { _id: new ObjectId(session.userId as string) },
+      { $set: { role } }
+    )
+  }
+
+  const user = await db.collection("user").findOne(
+    { _id: new ObjectId(session.userId as string) },
+    { projection: { role: 1 } }
+  )
+  await client.close()
+
+  const finalRole = role || user?.role || "client"
   redirect(
     finalRole === "admin" ? "/dashboard/admin" :
     finalRole === "freelancer" ? "/dashboard/freelancer" :
