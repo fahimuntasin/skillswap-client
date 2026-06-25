@@ -8,6 +8,7 @@ import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { LayersIcon, StarIcon, TrendingUpIcon, CreditCardIcon, UserIcon, BriefcaseIcon, UploadIcon, EyeIcon, EyeOffIcon, CheckIcon } from "lucide-react"
 import { registerWithEmail, signInWithGoogle } from "@/lib/auth-client"
+import { api } from "@/lib/api"
 import { toast } from "sonner"
 import gsap from "gsap"
 
@@ -129,7 +130,10 @@ export default function RegisterPage() {
             if (!/[A-Z]/.test(pass)) { toast.error("Password must contain 1 uppercase letter"); setLoading(false); return }
             if (!/[a-z]/.test(pass)) { toast.error("Password must contain 1 lowercase letter"); setLoading(false); return }
             try {
-              await registerWithEmail({ name: form.get("name") as string, email: form.get("email") as string, password: pass, image: avatarDataUrl || undefined, role })
+              const res = await registerWithEmail({ name: form.get("name") as string, email: form.get("email") as string, password: pass, image: avatarDataUrl || undefined, role })
+              if (res?.user?.id) {
+                await api.updateUser(res.user.id, { role }).catch(() => {})
+              }
               toast.success("Account created! Let's set up your profile.")
               router.push(`/onboarding?role=${role}`)
             } catch (err: any) {

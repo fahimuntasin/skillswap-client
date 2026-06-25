@@ -106,7 +106,7 @@ export default function LoginPage() {
               const role = res.user?.role
               if (role === "admin") router.push("/dashboard/admin")
               else if (role === "freelancer") router.push("/dashboard/freelancer")
-              else router.push("/")
+              else router.push("/dashboard/client")
             } catch { toast.error("Invalid email or password") }
             finally { setLoading(false) }
           }}>
