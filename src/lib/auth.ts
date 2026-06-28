@@ -1,5 +1,6 @@
 import { betterAuth } from "better-auth"
 import { mongodbAdapter } from "@better-auth/mongo-adapter"
+import { nextCookies } from "better-auth/next-js"
 import { MongoClient } from "mongodb"
 
 const client = new MongoClient(process.env.MONGODB_URI || "mongodb://localhost:27017/skillswap")
@@ -13,6 +14,7 @@ export const auth = betterAuth({
     process.env.NEXT_PUBLIC_CLIENT_URL || "",
     "https://skillswap-two-psi.vercel.app",
   ].filter(Boolean),
+  plugins: [nextCookies()],
   emailAndPassword: {
     enabled: true,
     minPasswordLength: 6,

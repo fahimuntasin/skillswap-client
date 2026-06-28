@@ -9,7 +9,9 @@ export default async function OAuthRedirectPage({
 }) {
   const { role } = await searchParams
   const cookieStore = await cookies()
-  const sessionToken = cookieStore.get("better-auth.session_token")?.value
+  const sessionToken =
+    cookieStore.get("__Secure-better-auth.session_token")?.value ||
+    cookieStore.get("better-auth.session_token")?.value
 
   if (!sessionToken) {
     redirect("/login")
