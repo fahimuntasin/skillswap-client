@@ -1,9 +1,11 @@
 "use client"
 
 import { useEffect, useState } from "react"
-import { useParams, useRouter } from "next/navigation"
+import { useParams } from "next/navigation"
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
+import { PrimaryActionButton } from "@/components/ui/PrimaryActionButton"
+import { SuccessPanel } from "@/components/ui/SuccessPanel"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
@@ -12,15 +14,15 @@ import { Loader } from "@/components/ui/Loader"
 import { DollarSignIcon, ClockIcon, UserIcon } from "lucide-react"
 import { api } from "@/lib/api"
 import { getSession } from "@/lib/auth-client"
-import { toast } from "sonner"
+import { notifySuccess, notifyError } from "@/lib/notify"
 
 export default function TaskDetailPage() {
   const { id } = useParams<{ id: string }>()
-  const router = useRouter()
   const [task, setTask] = useState<any>(null)
   const [loading, setLoading] = useState(true)
   const [session, setSession] = useState<any>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [submitted, setSubmitted] = useState(false)
 
   useEffect(() => {
     getSession().then(setSession)
@@ -28,7 +30,8 @@ export default function TaskDetailPage() {
   }, [id])
 
   async function handleProposal(e: React.FormEvent<HTMLFormElement>) {
-    e.preventDefault(); setSubmitting(true)
+    e.preventDefault()
+    setSubmitting(true)
     const form = new FormData(e.currentTarget)
     try {
       await api.createProposal({
@@ -38,9 +41,13 @@ export default function TaskDetailPage() {
         estimated_days: Number(form.get("days")),
         cover_note: form.get("note"),
       })
-      toast.success("Proposal submitted!")
-    } catch { toast.error("Failed to submit proposal") }
-    finally { setSubmitting(false) }
+      setSubmitted(true)
+      notifySuccess("Proposal sent!", "The client will review your offer.")
+    } catch {
+      notifyError("Submission failed", "Could not send your proposal. Try again.")
+    } finally {
+      setSubmitting(false)
+    }
   }
 
   if (loading) return <div className="flex min-h-[60vh] items-center justify-center"><Loader /></div>
@@ -63,19 +70,35 @@ export default function TaskDetailPage() {
           </div>
 
           <div className="rounded-xl border border-[#F1F5F9] dark:border-[#2a2a3e] bg-white dark:bg-[#1c1a3a] p-6 h-fit sticky top-24">
-            <h2 className="text-lg font-semibold text-[#0F172A] dark:text-[#f8fafc] mb-4">Submit a Proposal</h2>
             {!session?.user ? (
-              <div className="text-center py-6 space-y-3">
-                <p className="text-sm text-[#64748B] dark:text-[#94a3b8]">You must be logged in to submit a proposal.</p>
-                <Link href="/login"><Button variant="plastic" className="w-full">Log in to Submit</Button></Link>
-              </div>
+              <>
+                <h2 className="text-lg font-semibold text-[#0F172A] dark:text-[#f8fafc] mb-4">Submit a Proposal</h2>
+                <div className="text-center py-6 space-y-3">
+                  <p className="text-sm text-[#64748B] dark:text-[#94a3b8]">You must be logged in to submit a proposal.</p>
+                  <Link href="/login"><Button variant="plastic" className="w-full">Log in to Submit</Button></Link>
+                </div>
+              </>
+            ) : submitted ? (
+              <SuccessPanel
+                title="Proposal submitted!"
+                description="Your offer is on its way. We'll notify you when the client responds."
+                actionLabel="Browse more tasks"
+                actionHref="/tasks"
+                secondaryLabel="View dashboard"
+                secondaryHref="/dashboard/freelancer"
+              />
             ) : (
-            <form onSubmit={handleProposal} className="space-y-4">
-              <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Your Budget (USD)</Label><Input name="budget" type="number" min={1} required className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
-              <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Estimated Days</Label><Input name="days" type="number" min={1} required className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
-              <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Cover Note</Label><Textarea name="note" placeholder="Why you're the best fit..." rows={4} required className="rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
-              <Button type="submit" variant="plastic" className="w-full" disabled={submitting}>{submitting ? "Submitting..." : "Submit Proposal"}</Button>
-            </form>
+              <>
+                <h2 className="text-lg font-semibold text-[#0F172A] dark:text-[#f8fafc] mb-4">Submit a Proposal</h2>
+                <form onSubmit={handleProposal} className="space-y-4">
+                  <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Your Budget (USD)</Label><Input name="budget" type="number" min={1} required className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
+                  <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Estimated Days</Label><Input name="days" type="number" min={1} required className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
+                  <div className="grid gap-2"><Label className="dark:text-[#e2e8f0]">Cover Note</Label><Textarea name="note" placeholder="Why you're the best fit..." rows={4} required className="rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc]" /></div>
+                  <PrimaryActionButton loading={submitting} disabled={submitting}>
+                    {submitting ? "Sending proposal..." : "Submit proposal"}
+                  </PrimaryActionButton>
+                </form>
+              </>
             )}
           </div>
         </div>

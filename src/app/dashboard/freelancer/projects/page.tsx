@@ -3,13 +3,14 @@
 import { useState, useEffect } from "react"
 import { DashboardShell } from "@/components/dashboard/DashboardShell"
 import { Badge } from "@/components/ui/badge"
+import { PrimaryActionButton } from "@/components/ui/PrimaryActionButton"
+import { notifySuccess, notifyError } from "@/lib/notify"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { UploadIcon, ExternalLinkIcon, LoaderIcon } from "lucide-react"
 import { api } from "@/lib/api"
-import { toast } from "sonner"
 
 export default function ActiveProjectsPage() {
   const [projects, setProjects] = useState<any[]>([])
@@ -17,6 +18,7 @@ export default function ActiveProjectsPage() {
   const [deliverableUrl, setDeliverableUrl] = useState("")
   const [selectedTask, setSelectedTask] = useState<string | null>(null)
   const [submitting, setSubmitting] = useState(false)
+  const [submitSuccess, setSubmitSuccess] = useState(false)
 
   useEffect(() => {
     api.getProposals("status=accepted").then((data) => {
@@ -38,12 +40,16 @@ export default function ActiveProjectsPage() {
     setSubmitting(true)
     try {
       await api.updateTask(selectedTask, { status: "completed", deliverable_url: deliverableUrl })
-      toast.success("Deliverable submitted!")
-      setDeliverableUrl("")
-      setSelectedTask(null)
+      setSubmitSuccess(true)
+      notifySuccess("Deliverable submitted!", "The client can now review your work.")
       setProjects(prev => prev.map(p => p.taskId === selectedTask ? { ...p, status: "Completed", deliverable: deliverableUrl } : p))
+      setTimeout(() => {
+        setDeliverableUrl("")
+        setSelectedTask(null)
+        setSubmitSuccess(false)
+      }, 1500)
     } catch {
-      toast.error("Failed to submit deliverable")
+      notifyError("Submission failed", "Could not submit deliverable. Try again.")
     } finally { setSubmitting(false) }
   }
 
@@ -82,9 +88,16 @@ export default function ActiveProjectsPage() {
                         <Label>Deliverable URL</Label>
                         <Input value={deliverableUrl} onChange={e => setDeliverableUrl(e.target.value)} placeholder="https://github.com/..." className="h-11 rounded-lg" />
                       </div>
-                      <Button variant="plastic" className="w-full h-11 rounded-lg" disabled={!deliverableUrl || submitting} onClick={handleSubmitDeliverable}>
-                        {submitting ? "Submitting..." : "Submit"}
-                      </Button>
+                      <PrimaryActionButton
+                        type="button"
+                        loading={submitting}
+                        success={submitSuccess}
+                        disabled={!deliverableUrl || submitting || submitSuccess}
+                        successLabel="Submitted!"
+                        onClick={handleSubmitDeliverable}
+                      >
+                        {submitting ? "Submitting..." : "Submit deliverable"}
+                      </PrimaryActionButton>
                     </div>
                   </DialogContent>
                 </Dialog>

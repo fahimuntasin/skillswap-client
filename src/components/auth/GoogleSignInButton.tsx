@@ -3,7 +3,7 @@
 import { forwardRef, useState } from "react"
 import { Loader2 } from "lucide-react"
 import { signInWithGoogle } from "@/lib/auth-client"
-import { toast } from "sonner"
+import { notifyError } from "@/lib/notify"
 
 type GoogleSignInButtonProps = {
   className?: string
@@ -19,11 +19,11 @@ export const GoogleSignInButton = forwardRef<HTMLButtonElement, GoogleSignInButt
         const ok = await signInWithGoogle()
         if (!ok) {
           setLoading(false)
-          toast.error("Could not connect to Google. Please try again.")
+          notifyError("Google sign-in failed", "Could not connect to Google. Please try again.")
         }
       } catch {
         setLoading(false)
-        toast.error("Could not connect to Google. Please try again.")
+        notifyError("Google sign-in failed", "Could not connect to Google. Please try again.")
       }
     }
 

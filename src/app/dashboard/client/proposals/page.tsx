@@ -28,13 +28,20 @@ export default function ProposalsPage() {
   }, [])
 
   const handleAccept = async (proposal: any) => {
+    if (!session?.user?.email) {
+      alert("You must be signed in as a client to accept proposals")
+      return
+    }
     try {
       const checkout = await api.createCheckout({
         taskId: proposal.task_id,
+        proposalId: proposal._id,
         freelancerEmail: proposal.freelancer_email,
         amount: proposal.proposed_budget,
+        clientEmail: session.user.email,
       })
       if (checkout?.url) window.location.href = checkout.url
+      else alert("Failed to initiate payment")
     } catch {
       alert("Failed to initiate payment")
     }
@@ -76,7 +83,7 @@ export default function ProposalsPage() {
                   <span className="font-semibold text-[#0F172A] dark:text-[#f8fafc]">${p.proposed_budget}</span>
                   <span className="text-[#64748B] dark:text-[#94a3b8]">{p.estimated_days} days</span>
                 </div>
-                {p.status === "Pending" && (
+                {p.status === "pending" && (
                   <div className="flex gap-2">
                     <Button variant="plastic" size="sm" className="gap-1 rounded-lg text-xs sm:text-sm" onClick={() => handleAccept(p)}>
                       <CheckIcon className="size-3.5 shrink-0" /> <span className="hidden sm:inline">Accept</span><span className="sm:hidden">Pay</span>

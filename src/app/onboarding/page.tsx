@@ -2,13 +2,14 @@
 
 import { useEffect, useState } from "react"
 import { useRouter, useSearchParams } from "next/navigation"
+import { PrimaryActionButton } from "@/components/ui/PrimaryActionButton"
+import { notifySuccess, notifyError } from "@/lib/notify"
 import { Button } from "@/components/ui/button"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { LayersIcon, SparklesIcon, ArrowRightIcon } from "lucide-react"
 import { getSession } from "@/lib/auth-client"
-import { toast } from "sonner"
 import Link from "next/link"
 
 export default function OnboardingPage() {
@@ -19,6 +20,7 @@ export default function OnboardingPage() {
   const [step, setStep] = useState(0)
   const [user, setUser] = useState<any>(null)
   const [saving, setSaving] = useState(false)
+  const [done, setDone] = useState(false)
 
   // Freelancer fields
   const [skills, setSkills] = useState("")
@@ -56,10 +58,13 @@ export default function OnboardingPage() {
         body: JSON.stringify(body),
       })
       if (!res.ok) throw new Error("Update failed")
-      toast.success("Profile setup complete!")
-      window.location.href = role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client"
+      setDone(true)
+      notifySuccess("Profile ready!", "Taking you to your dashboard...")
+      setTimeout(() => {
+        window.location.href = role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client"
+      }, 900)
     } catch {
-      toast.error("Something went wrong")
+      notifyError("Setup failed", "Something went wrong. Please try again.")
     } finally { setSaving(false) }
   }
 
@@ -149,9 +154,17 @@ export default function OnboardingPage() {
               Next <ArrowRightIcon className="size-4" />
             </Button>
           ) : (
-            <Button onClick={handleFinish} variant="plastic" className="h-11 px-6 rounded-lg gap-2" disabled={saving}>
-              {saving ? "Saving..." : "Complete setup"}
-            </Button>
+            <PrimaryActionButton
+              type="button"
+              onClick={handleFinish}
+              loading={saving}
+              success={done}
+              disabled={done}
+              successLabel="All set!"
+              className="!w-auto shrink-0 px-6"
+            >
+              {saving ? "Saving profile..." : "Complete setup"}
+            </PrimaryActionButton>
           )}
         </div>
 

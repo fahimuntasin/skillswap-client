@@ -38,7 +38,11 @@ export const api = {
 
   // Payments
   createCheckout: (data: unknown) => request("/api/payments", { method: "POST", body: JSON.stringify(data) }),
-  confirmPayment: (sessionId: string) => request(`/api/payments?session_id=${sessionId}`, { method: "PUT" }),
+  confirmPayment: (sessionId: string) =>
+    request("/api/payments/confirm-session", {
+      method: "POST",
+      body: JSON.stringify({ session_id: sessionId }),
+    }),
   getPayments: () => request("/api/payments"),
 
   // Reviews

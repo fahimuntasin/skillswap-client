@@ -3,7 +3,8 @@
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { PrimaryActionButton } from "@/components/ui/PrimaryActionButton"
+import { notifySuccess, notifyError } from "@/lib/notify"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { LayersIcon, StarIcon, TrendingUpIcon, CreditCardIcon, UserIcon, BriefcaseIcon, UploadIcon, EyeIcon, EyeOffIcon, CheckIcon } from "lucide-react"
@@ -12,7 +13,6 @@ import { homePathForRole } from "@/lib/auth-routes"
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton"
 import { AuthPlatformStats } from "@/components/auth/AuthPlatformStats"
 import { api } from "@/lib/api"
-import { toast } from "sonner"
 import gsap from "gsap"
 
 const features = [
@@ -36,6 +36,7 @@ function passwordStrength(p: string): { label: string; color: string; score: num
 export default function RegisterPage() {
   const router = useRouter()
   const [loading, setLoading] = useState(false)
+  const [success, setSuccess] = useState(false)
   const [showPass, setShowPass] = useState(false)
   const [password, setPassword] = useState("")
   const [ps, setPs] = useState({ label: "", color: "bg-red-500", score: 0 } as ReturnType<typeof passwordStrength>)
@@ -53,7 +54,7 @@ export default function RegisterPage() {
   const handleImageSelect = (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0]
     if (!file) return
-    if (file.size > 2 * 1024 * 1024) { toast.error("Image must be under 2MB"); return }
+    if (file.size > 2 * 1024 * 1024) { notifyError("Image too large", "Please use a file under 2MB."); return }
     setAvatarFile(file)
     const reader = new FileReader()
     reader.onload = () => setAvatarDataUrl(reader.result as string)
@@ -118,9 +119,9 @@ export default function RegisterPage() {
             e.preventDefault(); setLoading(true)
             const form = new FormData(e.currentTarget)
             const pass = form.get("password") as string
-            if (pass.length < 6) { toast.error("Password must be at least 6 characters"); setLoading(false); return }
-            if (!/[A-Z]/.test(pass)) { toast.error("Password must contain 1 uppercase letter"); setLoading(false); return }
-            if (!/[a-z]/.test(pass)) { toast.error("Password must contain 1 lowercase letter"); setLoading(false); return }
+            if (pass.length < 6) { notifyError("Password too short", "Use at least 6 characters."); setLoading(false); return }
+            if (!/[A-Z]/.test(pass)) { notifyError("Password needs uppercase", "Include at least one capital letter."); setLoading(false); return }
+            if (!/[a-z]/.test(pass)) { notifyError("Password needs lowercase", "Include at least one lowercase letter."); setLoading(false); return }
             try {
               const email = form.get("email") as string
               const res = await registerWithEmail({ name: form.get("name") as string, email, password: pass, image: avatarDataUrl || undefined, role })
@@ -128,13 +129,14 @@ export default function RegisterPage() {
                 await api.updateUser(res.user.id, { role }).catch(() => {})
               }
               await loginWithEmail(email, pass).catch(() => {})
-              toast.success("Account created successfully!")
-              window.location.href = homePathForRole(role)
+              setSuccess(true)
+              notifySuccess("Welcome to SkillSwap!", role === "freelancer" ? "Your freelancer account is ready." : "Your client account is ready.")
+              setTimeout(() => { window.location.href = homePathForRole(role) }, 900)
             } catch (err: any) {
               const msg = err?.message || ""
               if (msg.toLowerCase().includes("already exists") || msg.toLowerCase().includes("already registered")) {
-                toast.error("This email is already registered. Please sign in instead.", { action: { label: "Sign in", onClick: () => router.push("/login") } })
-              } else { toast.error("Registration failed. Please try again.") }
+                notifyError("Email already registered", "Try signing in instead.")
+              } else { notifyError("Registration failed", "Please check your details and try again.") }
             }
             finally { setLoading(false) }
           }}>
@@ -211,7 +213,15 @@ export default function RegisterPage() {
               <input ref={fileInputRef} type="file" accept="image/png,image/jpeg,image/jpg,image/webp" onChange={handleImageSelect} className="hidden" />
             </div>
 
-            <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>{loading ? "Creating..." : "Create account"}</Button>
+            <PrimaryActionButton
+              size="lg"
+              loading={loading}
+              success={success}
+              disabled={success}
+              successLabel="Account created"
+            >
+              {loading ? "Creating your account..." : "Create account"}
+            </PrimaryActionButton>
           </form>
 
           <div className="my-5 sm:my-6 flex items-center gap-3"><div className="h-px flex-1 bg-[#F1F5F9] dark:bg-[#2a2a3e]" /><span className="text-xs text-[#94A3B8] uppercase tracking-wider">or continue with</span><div className="h-px flex-1 bg-[#F1F5F9] dark:bg-[#2a2a3e]" /></div>

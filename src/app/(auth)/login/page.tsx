@@ -3,7 +3,8 @@
 import Link from "next/link"
 import { useState, useRef, useEffect } from "react"
 import { useRouter } from "next/navigation"
-import { Button } from "@/components/ui/button"
+import { PrimaryActionButton } from "@/components/ui/PrimaryActionButton"
+import { notifySuccess, notifyError } from "@/lib/notify"
 import { Input } from "@/components/ui/input"
 import { Label } from "@/components/ui/label"
 import { FileTextIcon, UsersIcon, ShieldCheckIcon, LayersIcon } from "lucide-react"
@@ -11,7 +12,6 @@ import { loginWithEmail } from "@/lib/auth-client"
 import { homePathForRole } from "@/lib/auth-routes"
 import { GoogleSignInButton } from "@/components/auth/GoogleSignInButton"
 import { AuthPlatformStats } from "@/components/auth/AuthPlatformStats"
-import { toast } from "sonner"
 import gsap from "gsap"
 
 const features = [
@@ -86,10 +86,10 @@ export default function LoginPage() {
             const form = new FormData(e.currentTarget)
             try {
               const res = await loginWithEmail(form.get("email") as string, form.get("password") as string)
-              toast.success("Logged in successfully")
+              notifySuccess("Welcome back!", "Redirecting you now...")
               const role = res.user?.role
-              router.push(homePathForRole(role))
-            } catch { toast.error("Invalid email or password") }
+              setTimeout(() => router.push(homePathForRole(role)), 600)
+            } catch { notifyError("Sign in failed", "Check your email and password.") }
             finally { setLoading(false) }
           }}>
             <div className="space-y-2"><Label htmlFor="email" className="text-[13px] font-medium text-[#0F172A] dark:text-[#e2e8f0]">Email</Label><Input id="email" name="email" type="email" placeholder="you@email.com" autoCapitalize="none" autoComplete="email" className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" /></div>
@@ -97,7 +97,9 @@ export default function LoginPage() {
               <div className="flex items-center justify-between"><Label htmlFor="password" className="text-[13px] font-medium text-[#0F172A] dark:text-[#e2e8f0]">Password</Label><Link href="/forgot-password" className="text-[13px] text-[#64748B] dark:text-[#94a3b8] hover:text-[#7C3AED]">Forgot?</Link></div>
               <Input id="password" name="password" type="password" placeholder="••••••••" autoComplete="current-password" className="h-11 rounded-lg border-[#E2E8F0] dark:border-[#2a2a3e] dark:bg-[#1a1a2e] dark:text-[#f8fafc] text-[15px] placeholder:text-[#94A3B8] focus-visible:border-[#7C3AED] focus-visible:ring-0" />
             </div>
-            <Button type="submit" variant="plastic" className="w-full h-11 rounded-lg text-[15px] font-medium" disabled={loading}>{loading ? "Signing in..." : "Sign in"}</Button>
+            <PrimaryActionButton loading={loading}>
+              {loading ? "Signing you in..." : "Sign in"}
+            </PrimaryActionButton>
           </form>
           <div className="my-6 flex items-center gap-3"><div className="h-px flex-1 bg-[#F1F5F9] dark:bg-[#2a2a3e]" /><span className="text-xs text-[#94A3B8] uppercase tracking-wider">or continue with</span><div className="h-px flex-1 bg-[#F1F5F9] dark:bg-[#2a2a3e]" /></div>
           <GoogleSignInButton ref={googleBtnRef} />
