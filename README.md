@@ -37,15 +37,9 @@
   <circle cx="400" cy="30" r="25" fill="#7C3AED" opacity="0.2">
     <animate attributeName="r" values="25;30;25" dur="3s" repeatCount="indefinite"/>
   </circle>
-  <!-- Logo icon -->
-  <g transform="translate(340, 55)" filter="url(#glow)">
-    <rect x="0" y="0" width="50" height="50" rx="12" fill="#7C3AED" opacity="0.9">
-      <animate attributeName="opacity" values="0.9;1;0.9" dur="2s" repeatCount="indefinite"/>
-    </rect>
-    <text x="25" y="34" text-anchor="middle" fill="white" font-size="24" font-weight="bold" font-family="sans-serif">S</text>
-  </g>
-  <text x="400" y="145" text-anchor="middle" fill="url(#textGrad)" font-size="42" font-weight="bold" font-family="sans-serif" filter="url(#glow)">SkillSwap</text>
-  <text x="400" y="175" text-anchor="middle" fill="#94a3b8" font-size="14" font-family="sans-serif" letter-spacing="4">FREELANCE MICRO-TASK PLATFORM</text>
+  <text x="400" y="115" text-anchor="middle" fill="url(#textGrad)" font-size="48" font-weight="bold" font-family="sans-serif" filter="url(#glow)">SkillSwap</text>
+  <text x="400" y="150" text-anchor="middle" fill="#c4b5fd" font-size="16" font-family="sans-serif">Post tasks · Hire talent · Get paid</text>
+  <text x="400" y="178" text-anchor="middle" fill="#94a3b8" font-size="13" font-family="sans-serif" letter-spacing="3">FREELANCE MICRO-TASK PLATFORM</text>
 </svg>
 
 <br/>
@@ -62,11 +56,6 @@
 [![MongoDB](https://img.shields.io/badge/MongoDB-7-47A248?style=flat-square&logo=mongodb&logoColor=white)](https://www.mongodb.com)
 [![Stripe](https://img.shields.io/badge/Stripe-Payments-635BFF?style=flat-square&logo=stripe&logoColor=white)](https://stripe.com)
 [![Better Auth](https://img.shields.io/badge/Better_Auth-OAuth_+_Credentials-7C3AED?style=flat-square)](https://www.better-auth.com)
-
-<br/>
-
-<!-- Typing SVG -->
-[![Typing SVG](https://readme-typing-svg.herokuapp.com?font=Fira+Code&weight=600&size=22&duration=3000&pause=1000&color=7C3AED&center=true&vCenter=true&width=600&lines=Post+tasks.+Hire+talent.+Get+paid.;Clients+%E2%80%A2+Freelancers+%E2%80%A2+Admins;Stripe+Checkout+%E2%80%A2+Better+Auth+%E2%80%A2+MongoDB)](https://git.io/typing-svg)
 
 </div>
 
@@ -131,30 +120,22 @@
 
 ## 🏗️ Architecture
 
-```mermaid
-graph TB
-    subgraph Client["🖥️ SkillSwap Client (Next.js 16)"]
-        UI[React 19 UI]
-        MW[Middleware Guards]
-        API_Routes[API Routes]
-    end
-
-    subgraph Services["☁️ External Services"]
-        BA[Better Auth]
-        ST[Stripe Checkout]
-        MG[(MongoDB)]
-    end
-
-    UI --> MW
-    MW --> API_Routes
-    API_Routes --> BA
-    API_Routes --> ST
-    API_Routes --> MG
-    BA --> MG
-    ST --> API_Routes
-
-    style Client fill:#1e1b4b,stroke:#7C3AED,color:#e2e8f0
-    style Services fill:#0f0f1a,stroke:#a78bfa,color:#e2e8f0
+```
+┌─────────────────────────────────────────────────────────┐
+│              SkillSwap Client (Next.js 16)              │
+│  ┌─────────────┐   ┌──────────────────┐   ┌────────┐ │
+│  │ React 19 UI │──▶│ Middleware Guards │──▶│  API   │ │
+│  └─────────────┘   └──────────────────┘   │ Routes │ │
+│                                            └───┬────┘ │
+└────────────────────────────────────────────────┼───────┘
+                                                 │
+              ┌──────────────────────────────────┼──────────────┐
+              ▼                  ▼               ▼              │
+       ┌────────────┐    ┌──────────────┐   ┌──────────┐       │
+       │ Better Auth│    │    Stripe    │   │ MongoDB  │       │
+       └─────┬──────┘    │   Checkout   │   └────▲─────┘       │
+             └───────────┴──────┬───────┴────────┘             │
+                                └──────────────────────────────┘
 ```
 
 ---
