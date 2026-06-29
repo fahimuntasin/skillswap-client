@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/db"
 import { Payment } from "@/models/payment"
+import { requireRole } from "@/lib/require-auth"
 
-export async function GET() {
+export async function GET(req: NextRequest) {
+  const authResult = await requireRole(req, "admin")
+  if ("error" in authResult) return authResult.error
+
   try {
     await connectDB()
     const revenue = await Payment.aggregate([

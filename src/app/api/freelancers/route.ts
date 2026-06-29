@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/db"
 import { User } from "@/models/user"
 import { Review } from "@/models/review"
+import { Proposal } from "@/models/proposal"
+import { Task } from "@/models/task"
 
 export async function GET(req: NextRequest) {
   try {
@@ -21,9 +23,21 @@ export async function GET(req: NextRequest) {
         const avgRating = reviews.length > 0
           ? reviews.reduce((sum, r) => sum + r.rating, 0) / reviews.length
           : 0
-        return { ...f, rating: Math.round(avgRating * 10) / 10, totalReviews: reviews.length }
+        const accepted = await Proposal.find({ freelancer_email: f.email, status: "accepted" }).select("task_id")
+        const taskIds = accepted.map((p) => p.task_id)
+        const completedJobs = taskIds.length
+          ? await Task.countDocuments({ _id: { $in: taskIds }, status: "completed" })
+          : 0
+        return {
+          ...f,
+          rating: Math.round(avgRating * 10) / 10,
+          totalReviews: reviews.length,
+          completedJobs,
+        }
       })
     )
+
+    withRatings.sort((a, b) => (b.rating || 0) - (a.rating || 0) || (b.completedJobs || 0) - (a.completedJobs || 0))
 
     return NextResponse.json(withRatings)
   } catch {

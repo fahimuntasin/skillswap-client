@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server"
 import type { NextRequest } from "next/server"
+import { homePathForRole, dashboardPathForRole } from "@/lib/auth-routes"
 
 export async function middleware(request: NextRequest) {
   const { pathname } = request.nextUrl
@@ -20,16 +21,19 @@ export async function middleware(request: NextRequest) {
 
     const role = data.user.role
 
+    const ownDashboard = dashboardPathForRole(role)
+    const clientHome = homePathForRole("client")
+
     if (pathname.startsWith("/dashboard/admin") && role !== "admin") {
-      return NextResponse.redirect(new URL("/login", request.url))
+      return NextResponse.redirect(new URL(role === "client" ? clientHome : ownDashboard, request.url))
     }
 
     if (pathname.startsWith("/dashboard/client") && role !== "client" && role !== "admin") {
-      return NextResponse.redirect(new URL("/login", request.url))
+      return NextResponse.redirect(new URL(ownDashboard, request.url))
     }
 
     if (pathname.startsWith("/dashboard/freelancer") && role !== "freelancer" && role !== "admin") {
-      return NextResponse.redirect(new URL("/login", request.url))
+      return NextResponse.redirect(new URL(role === "client" ? clientHome : ownDashboard, request.url))
     }
   } catch {
     return NextResponse.redirect(new URL("/login", request.url))

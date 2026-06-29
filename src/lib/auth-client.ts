@@ -16,17 +16,24 @@ export const loginWithEmail = (email: string, password: string) =>
 export const registerWithEmail = (data: { name: string; email: string; password: string; image?: string; role?: string }) =>
   post("/api/auth/sign-up/email", data)
 
-export async function signInWithGoogle(role?: string) {
+export async function signInWithGoogle(): Promise<boolean> {
   try {
     const res = await fetch("/api/auth/sign-in/social", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ provider: "google", callbackURL: `/auth/oauth-redirect?role=${role || ""}` }),
+      body: JSON.stringify({
+        provider: "google",
+        callbackURL: "/auth/oauth-redirect",
+      }),
     })
     const data = await res.json()
-    if (data.url) window.location.href = data.url
+    if (data.url) {
+      window.location.href = data.url
+      return true
+    }
+    return false
   } catch {
-    window.location.href = "/api/auth/sign-in/social?provider=google"
+    return false
   }
 }
 

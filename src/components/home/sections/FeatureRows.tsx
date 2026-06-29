@@ -1,8 +1,10 @@
 "use client"
 
+import { useEffect, useState } from "react"
 import Link from "next/link"
 import { useReveal } from "@/lib/use-reveal"
 import { AnimatedLines } from "@/components/home/decor/Decorations"
+import { ShieldCheckIcon } from "lucide-react"
 
 const features = [
   {
@@ -13,6 +15,7 @@ const features = [
     href: "/register",
     bg: "bg-[#F8FAFC] dark:bg-[#0e0e16]",
     reverse: false,
+    preview: "task" as const,
   },
   {
     tag: "Find top talent",
@@ -22,6 +25,7 @@ const features = [
     href: "/freelancers",
     bg: "bg-white dark:bg-[#111118]",
     reverse: true,
+    preview: "freelancers" as const,
   },
   {
     tag: "Pay securely",
@@ -31,10 +35,16 @@ const features = [
     href: "/register",
     bg: "bg-[#F8FAFC] dark:bg-[#0e0e16]",
     reverse: false,
+    preview: "payment" as const,
   },
 ]
 
-function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
+function FeatureRow({ f, i, task, freelancers }: {
+  f: typeof features[0]
+  i: number
+  task: any
+  freelancers: any[]
+}) {
   const { ref, visible } = useReveal()
   const cardBg = "bg-white dark:bg-[#1c1a3a]"
   const cardBorder = "border-[#d1d9e0] dark:border-[#2a2a3e]"
@@ -49,31 +59,43 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
           <p className="mt-4 text-base leading-relaxed text-[#64748B] dark:text-[#94a3b8] max-w-[480px]">{f.desc}</p>
           <Link href={f.href} className="btn-action mt-6">{f.link}<span className="btn-arrow">→</span></Link>
         </div>
-          <div className={`rounded-xl border ${cardBorder} ${cardBg} p-4 sm:p-6 ${f.reverse ? "lg:order-1" : ""} overflow-hidden max-w-full sm:max-w-[90%]`}>
+        <div className={`rounded-xl border ${cardBorder} ${cardBg} p-4 sm:p-6 ${f.reverse ? "lg:order-1" : ""} overflow-hidden max-w-full sm:max-w-[90%]`}>
           <div className="space-y-3">
-            {f.tag.includes("Post") && (
-              <div className={`rounded-lg border ${cardBorder} p-4 dark:bg-[#16163a]`}>
-                <p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">Design a modern landing page</p>
-                <p className="text-xs text-[#64748B] dark:text-[#94a3b8] mt-1">Design · $150 budget · Due Jul 15</p>
-              </div>
-            )}
-            {f.tag.includes("top talent") && (
-              <>
-                <div className={`flex items-center gap-3 rounded-lg border ${cardBorder} p-3 dark:bg-[#16163a]`}>
-                  <div className="size-8 rounded-full bg-[#EDE9FE] dark:bg-[#7C3AED]/30 flex items-center justify-center text-xs font-semibold text-[#7C3AED] dark:text-[#c4b5fd]">SC</div>
-                  <div><p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">Sarah Chen</p><p className="text-xs text-[#64748B] dark:text-[#94a3b8]">UI Designer · $45/hr · 4.9 ★</p></div>
+            {f.preview === "task" && (
+              task ? (
+                <div className={`rounded-lg border ${cardBorder} p-4 dark:bg-[#16163a]`}>
+                  <p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">{task.title}</p>
+                  <p className="text-xs text-[#64748B] dark:text-[#94a3b8] mt-1">{task.category} · ${task.budget} budget · Due {new Date(task.deadline).toLocaleDateString()}</p>
                 </div>
-                <div className={`flex items-center gap-3 rounded-lg border ${cardBorder} p-3 dark:bg-[#16163a]`}>
-                  <div className="size-8 rounded-full bg-[#EDE9FE] dark:bg-[#7C3AED]/30 flex items-center justify-center text-xs font-semibold text-[#7C3AED] dark:text-[#c4b5fd]">AR</div>
-                  <div><p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">Alex Rivera</p><p className="text-xs text-[#64748B] dark:text-[#94a3b8]">Full-Stack Dev · $55/hr · 4.8 ★</p></div>
-                </div>
-              </>
+              ) : (
+                <p className="text-sm text-[#64748B] dark:text-[#94a3b8] p-4">No open tasks yet — be the first to post one.</p>
+              )
             )}
-            {f.tag.includes("securely") && (
+            {f.preview === "freelancers" && (
+              freelancers.length ? freelancers.slice(0, 2).map((fl) => (
+                <div key={fl._id} className={`flex items-center gap-3 rounded-lg border ${cardBorder} p-3 dark:bg-[#16163a]`}>
+                  <div className="size-8 rounded-full bg-[#EDE9FE] dark:bg-[#7C3AED]/30 flex items-center justify-center text-xs font-semibold text-[#7C3AED] dark:text-[#c4b5fd]">
+                    {fl.name?.split(" ").map((n: string) => n[0]).join("").slice(0, 2).toUpperCase()}
+                  </div>
+                  <div className="min-w-0">
+                    <p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc] flex items-center gap-1">
+                      {fl.name}
+                      {fl.verified && <ShieldCheckIcon className="size-3.5 text-[#7C3AED]" />}
+                    </p>
+                    <p className="text-xs text-[#64748B] dark:text-[#94a3b8] truncate">
+                      {fl.skills?.[0] || "Freelancer"} · ${fl.hourlyRate || 0}/hr · {fl.rating || 0} ★
+                    </p>
+                  </div>
+                </div>
+              )) : (
+                <p className="text-sm text-[#64748B] dark:text-[#94a3b8] p-4">Freelancers will appear here as they join.</p>
+              )
+            )}
+            {f.preview === "payment" && (
               <div className={`rounded-lg border ${cardBorder} p-4 text-center dark:bg-[#16163a]`}>
                 <p className="text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc]">Secure Payment</p>
                 <p className="text-xs text-[#64748B] dark:text-[#94a3b8] mt-1">Pay via Stripe · Funds held until approval</p>
-                <p className="text-lg font-bold text-[#0F172A] dark:text-[#f8fafc] mt-2">$150.00</p>
+                <p className="text-lg font-bold text-[#0F172A] dark:text-[#f8fafc] mt-2">{task ? `$${task.budget}.00` : "—"}</p>
               </div>
             )}
           </div>
@@ -84,11 +106,21 @@ function FeatureRow({ f, i }: { f: typeof features[0]; i: number }) {
 }
 
 export function FeatureRows() {
+  const [task, setTask] = useState<any>(null)
+  const [freelancers, setFreelancers] = useState<any[]>([])
+
+  useEffect(() => {
+    fetch("/api/tasks?limit=1").then((r) => r.json()).then((d) => setTask(d.tasks?.[0] || null)).catch(() => {})
+    fetch("/api/freelancers?limit=4").then((r) => r.json()).then(setFreelancers).catch(() => {})
+  }, [])
+
   return (
     <section className="relative border-b border-[#d1d9e0] dark:border-[#2a2a3e] overflow-hidden">
       <AnimatedLines />
       <div className="mx-auto max-w-[1280px] relative">
-        {features.map((f, i) => <FeatureRow key={i} f={f} i={i} />)}
+        {features.map((f, i) => (
+          <FeatureRow key={i} f={f} i={i} task={task} freelancers={freelancers} />
+        ))}
       </div>
     </section>
   )

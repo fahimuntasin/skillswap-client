@@ -3,18 +3,16 @@ import { connectDB } from "@/lib/db"
 import { Task } from "@/models/task"
 import { User } from "@/models/user"
 import { Payment } from "@/models/payment"
-import { Proposal } from "@/models/proposal"
 
 export async function GET(req: NextRequest) {
   try {
     await connectDB()
-    const { searchParams } = new URL(req.url)
-    const email = searchParams.get("email")
 
-    const [totalUsers, totalTasks, activeTasks, totalPayments] = await Promise.all([
+    const [totalUsers, totalTasks, activeTasks, freelancerCount, totalPayments] = await Promise.all([
       User.countDocuments(),
       Task.countDocuments(),
       Task.countDocuments({ status: { $in: ["open", "in_progress"] } }),
+      User.countDocuments({ role: "freelancer" }),
       Payment.aggregate([{ $match: { payment_status: "completed" } }, { $group: { _id: null, total: { $sum: "$amount" } } }]),
     ])
 
@@ -22,6 +20,7 @@ export async function GET(req: NextRequest) {
       totalUsers,
       totalTasks,
       activeTasks,
+      freelancerCount,
       totalRevenue: totalPayments[0]?.total || 0,
     })
   } catch {

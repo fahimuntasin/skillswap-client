@@ -8,7 +8,6 @@ import { Label } from "@/components/ui/label"
 import { Textarea } from "@/components/ui/textarea"
 import { LayersIcon, SparklesIcon, ArrowRightIcon } from "lucide-react"
 import { getSession } from "@/lib/auth-client"
-import { api } from "@/lib/api"
 import { toast } from "sonner"
 import Link from "next/link"
 
@@ -41,16 +40,22 @@ export default function OnboardingPage() {
     if (!user?.id) return
     setSaving(true)
     try {
-      const data: Record<string, unknown> = { onboardingCompleted: true }
+      const body: Record<string, unknown> = { onboardingCompleted: true, role }
       if (role === "freelancer") {
-        data.skills = skills.split(",").map((s) => s.trim()).filter(Boolean)
-        data.hourlyRate = Number(hourlyRate) || 0
-        data.bio = bio
+        body.skills = skills.split(",").map((s) => s.trim()).filter(Boolean)
+        body.hourlyRate = Number(hourlyRate) || 0
+        body.bio = bio
       } else {
-        data.company = company
-        data.website = website
+        body.company = company
+        body.website = website
       }
-      await api.updateUser(user.id, data)
+      const res = await fetch("/api/auth/update-user", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        credentials: "include",
+        body: JSON.stringify(body),
+      })
+      if (!res.ok) throw new Error("Update failed")
       toast.success("Profile setup complete!")
       window.location.href = role === "freelancer" ? "/dashboard/freelancer" : "/dashboard/client"
     } catch {

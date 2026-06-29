@@ -28,10 +28,10 @@ export function HeroSection() {
           Get your tasks done by <span className="text-[#7C3AED]">skilled freelancers</span>
         </h1>
         <p className="hero-sub mx-auto mt-6 max-w-[500px] text-lg text-[#64748B] dark:text-[#94a3b8]">
-          Post any job and get it done by vetted professionals.
+          Clients post tasks. Freelancers apply. Hire and pay securely — all in one marketplace.
         </p>
-        <div className="hero-buttons mt-10 flex items-center justify-center gap-4">
-          <Link href="/register" className="btn-glossy gsap-hover">Get Started →</Link>
+        <div className="hero-buttons mt-10 flex flex-wrap items-center justify-center gap-4">
+          <Link href="/register" className="btn-glossy gsap-hover">Post a Task</Link>
           <Link href="/tasks" className="group inline-flex items-center gap-1.5 rounded-lg border border-[#E2E8F0] dark:border-[#2a2a3e] px-6 py-3 text-sm font-semibold text-[#0F172A] dark:text-[#f8fafc] transition-all duration-200 hover:border-[#CBD5E1] dark:hover:border-[#4a4a6e] hover:bg-[#F8FAFC] dark:hover:bg-[#1e1b4b] gsap-hover">
             Browse Tasks <span className="transition-transform group-hover:translate-x-0.5">→</span>
           </Link>

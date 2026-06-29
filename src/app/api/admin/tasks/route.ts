@@ -3,8 +3,12 @@ import { connectDB } from "@/lib/db"
 import { Task } from "@/models/task"
 import { Proposal } from "@/models/proposal"
 import { Payment } from "@/models/payment"
+import { requireRole } from "@/lib/require-auth"
 
 export async function DELETE(req: NextRequest) {
+  const authResult = await requireRole(req, "admin")
+  if ("error" in authResult) return authResult.error
+
   try {
     await connectDB()
     const { searchParams } = new URL(req.url)

@@ -2,12 +2,21 @@ import { Card, CardContent } from "@/components/ui/card"
 import { Badge } from "@/components/ui/badge"
 import { ClockIcon, DollarSignIcon } from "lucide-react"
 import Link from "next/link"
-import { api } from "@/lib/api"
+import { connectDB } from "@/lib/db"
+import { Task } from "@/models/task"
+import { User } from "@/models/user"
 
 async function getTasks() {
   try {
-    const data = await api.getTasks("limit=6")
-    return data.tasks || []
+    await connectDB()
+    const tasks = await Task.find({ status: "open" }).sort({ createdAt: -1 }).limit(6).lean()
+    const emails = [...new Set(tasks.map((t) => t.client_email))]
+    const clients = await User.find({ email: { $in: emails } }).select("email name").lean()
+    const nameByEmail = Object.fromEntries(clients.map((c) => [c.email, c.name]))
+    return tasks.map((t) => ({
+      ...t,
+      clientName: nameByEmail[t.client_email] || t.client_email,
+    }))
   } catch { return [] }
 }
 
@@ -23,7 +32,7 @@ export async function FeaturedTasks() {
       </div>
       <div className="gsap-cards grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
         {tasks.map((task: any) => (
-          <Link key={task._id} href={`/tasks/${task._id}`}>
+          <Link key={String(task._id)} href={`/tasks/${task._id}`}>
             <Card className="gsap-card card-global group border-0 rounded-2xl">
               <CardContent className="p-5">
                 <Badge variant="secondary" className="mb-3 bg-accent text-accent-foreground dark:bg-[#2d1f5e] dark:text-[#c4b5fd] border-0 font-medium">
@@ -32,7 +41,7 @@ export async function FeaturedTasks() {
                 <h3 className="mb-2 font-semibold text-foreground dark:text-[#f8fafc] group-hover:text-primary transition-colors line-clamp-2">
                   {task.title}
                 </h3>
-                <p className="mb-4 text-sm text-muted-foreground dark:text-[#94a3b8]">by {task.client_email}</p>
+                <p className="mb-4 text-sm text-muted-foreground dark:text-[#94a3b8]">by {task.clientName}</p>
                 <div className="flex items-center justify-between text-sm">
                   <span className="flex items-center gap-1.5 text-primary font-semibold">
                     <DollarSignIcon className="size-4" />${task.budget}

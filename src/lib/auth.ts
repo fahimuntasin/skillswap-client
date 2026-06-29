@@ -7,12 +7,13 @@ const client = new MongoClient(process.env.MONGODB_URI || "mongodb://localhost:2
 
 export const auth = betterAuth({
   database: mongodbAdapter(client.db()),
-  baseURL: process.env.BETTER_AUTH_URL || "https://skillswap-two-psi.vercel.app",
+  baseURL: process.env.BETTER_AUTH_URL || process.env.NEXT_PUBLIC_CLIENT_URL || "http://localhost:3000",
   trustedOrigins: [
     "http://localhost:3000",
     "http://localhost:3003",
     process.env.NEXT_PUBLIC_CLIENT_URL || "",
     "https://skillswap-two-psi.vercel.app",
+    "https://taskhive-eight-phi.vercel.app",
   ].filter(Boolean),
   plugins: [nextCookies()],
   emailAndPassword: {
@@ -34,6 +35,8 @@ export const auth = betterAuth({
       image: { type: "string" },
       hourlyRate: { type: "number", defaultValue: 0 },
       isBlocked: { type: "boolean", defaultValue: false },
+      onboardingCompleted: { type: "boolean", defaultValue: false },
+      verified: { type: "boolean", defaultValue: false },
     },
   },
 })

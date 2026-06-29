@@ -1,34 +1,22 @@
 "use client"
 
 import { useEffect } from "react"
-import { useRouter } from "next/navigation"
 import { LayersIcon } from "lucide-react"
+import { homePathForRole } from "@/lib/auth-routes"
 
 export default function AuthCallbackPage() {
-  const router = useRouter()
-
   useEffect(() => {
-    const updateRole = async (userId: string, role: string) => {
-      try { await fetch("/api/auth/update-user", { method: "PATCH", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ id: userId, role }) }) } catch {}
-    }
-
-    fetch("/api/auth/session", { credentials: "include" }).then(r => r.json()).then(async (s: any) => {
-      if (!s?.user) {
-        setTimeout(() => { window.location.href = "/login" }, 500)
-        return
-      }
-      const pendingRole = typeof window !== "undefined" ? sessionStorage.getItem("pending_role") : null
-      if (pendingRole && pendingRole !== s.user.role) {
-        await updateRole(s.user.id, pendingRole)
-        s.user.role = pendingRole
-        sessionStorage.removeItem("pending_role")
-      }
-      const role = s.user.role
-      if (role === "admin") window.location.href = "/dashboard/admin"
-      else if (role === "freelancer") window.location.href = "/dashboard/freelancer"
-      else window.location.href = "/dashboard/client"
-    }).catch(() => { setTimeout(() => { window.location.href = "/login" }, 500) })
-  }, [router])
+    fetch("/api/auth/session", { credentials: "include" })
+      .then((r) => r.json())
+      .then((s: any) => {
+        if (!s?.user) {
+          setTimeout(() => { window.location.href = "/login" }, 500)
+          return
+        }
+        window.location.href = homePathForRole(s.user.role)
+      })
+      .catch(() => { setTimeout(() => { window.location.href = "/login" }, 500) })
+  }, [])
 
   return (
     <div className="flex min-h-[calc(100vh-4rem)] items-center justify-center">

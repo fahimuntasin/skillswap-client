@@ -27,6 +27,11 @@ export default function PostTaskPage() {
     e.preventDefault()
     setLoading(true)
     const form = new FormData(e.currentTarget)
+    if (!session?.user?.email) {
+      toast.error("You must be signed in to post a task")
+      setLoading(false)
+      return
+    }
     try {
       await api.createTask({
         title: form.get("title"),
@@ -34,7 +39,7 @@ export default function PostTaskPage() {
         description: form.get("description"),
         budget: Number(form.get("budget")),
         deadline: form.get("deadline"),
-        client_email: session?.user?.email || "client@example.com",
+        client_email: session.user.email,
       })
       toast.success("Task posted successfully!")
       router.push("/dashboard/client")

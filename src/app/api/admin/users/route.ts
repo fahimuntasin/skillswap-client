@@ -1,8 +1,12 @@
 import { NextRequest, NextResponse } from "next/server"
 import { connectDB } from "@/lib/db"
 import { User } from "@/models/user"
+import { requireRole } from "@/lib/require-auth"
 
 export async function PATCH(req: NextRequest) {
+  const authResult = await requireRole(req, "admin")
+  if ("error" in authResult) return authResult.error
+
   try {
     await connectDB()
     const { searchParams } = new URL(req.url)

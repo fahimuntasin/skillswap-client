@@ -9,6 +9,7 @@ export interface IUser extends Document {
   bio?: string
   hourlyRate?: number
   isBlocked: boolean
+  verified?: boolean
   createdAt: Date
 }
 

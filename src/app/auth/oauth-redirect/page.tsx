@@ -1,51 +1,25 @@
-import { cookies } from "next/headers"
+import { headers } from "next/headers"
 import { redirect } from "next/navigation"
-import { MongoClient, ObjectId } from "mongodb"
+import { auth } from "@/lib/auth"
+import { GOOGLE_OAUTH_ROLE, homePathForRole } from "@/lib/auth-routes"
 
-export default async function OAuthRedirectPage({
-  searchParams,
-}: {
-  searchParams: Promise<{ role?: string }>
-}) {
-  const { role } = await searchParams
-  const cookieStore = await cookies()
-  const sessionToken =
-    cookieStore.get("__Secure-better-auth.session_token")?.value ||
-    cookieStore.get("better-auth.session_token")?.value
+/** Google OAuth sign-up/login always creates a Client account (A10_CAT-011 §06). */
+export default async function OAuthRedirectPage() {
+  const reqHeaders = await headers()
 
-  if (!sessionToken) {
+  let session = await auth.api.getSession({ headers: reqHeaders })
+  if (!session?.user) {
     redirect("/login")
   }
 
-  const client = new MongoClient(process.env.MONGODB_URI || "")
-  await client.connect()
-  const db = client.db()
-
-  const session = await db.collection("session").findOne({ token: sessionToken })
-  if (!session?.userId) {
-    await client.close()
-    redirect("/login")
+  if (session.user.role !== GOOGLE_OAUTH_ROLE && session.user.role !== "admin") {
+    await auth.api.updateUser({
+      headers: reqHeaders,
+      body: { role: GOOGLE_OAUTH_ROLE },
+    })
+    session = await auth.api.getSession({ headers: reqHeaders })
+    if (!session?.user) redirect("/login")
   }
 
-  if (role) {
-    await db.collection("user").updateOne(
-      { _id: new ObjectId(session.userId as string) },
-      { $set: { role } }
-    )
-  }
-
-  const user = await db.collection("user").findOne(
-    { _id: new ObjectId(session.userId as string) },
-    { projection: { role: 1 } }
-  )
-  await client.close()
-
-  const finalRole = role || user?.role || "client"
-  redirect(
-    finalRole === "admin" ? "/dashboard/admin" :
-    finalRole === "freelancer" ? "/dashboard/freelancer" :
-    "/dashboard/client"
-  )
-
-  return null
+  redirect(homePathForRole(session!.user.role))
 }

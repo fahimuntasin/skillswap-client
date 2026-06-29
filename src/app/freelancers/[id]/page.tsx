@@ -5,7 +5,7 @@ import { useParams } from "next/navigation"
 import { Avatar, AvatarFallback } from "@/components/ui/avatar"
 import { Badge } from "@/components/ui/badge"
 import { Loader } from "@/components/ui/Loader"
-import { StarIcon, DollarSignIcon } from "lucide-react"
+import { StarIcon, DollarSignIcon, ShieldCheckIcon } from "lucide-react"
 import { api } from "@/lib/api"
 
 export default function FreelancerProfilePage() {
@@ -46,7 +46,10 @@ export default function FreelancerProfilePage() {
             <AvatarFallback className="bg-[#7C3AED] text-white text-xl sm:text-2xl font-semibold">{user.name?.split(" ").map((n: string) => n[0]).join("").toUpperCase()}</AvatarFallback>
           </Avatar>
           <div>
-            <h1 className="text-[24px] sm:text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc]">{user.name}</h1>
+            <h1 className="text-[24px] sm:text-[36px] font-bold text-[#0F172A] dark:text-[#f8fafc] flex items-center justify-center sm:justify-start gap-2">
+              {user.name}
+              {user.verified && <ShieldCheckIcon className="size-6 sm:size-7 text-[#7C3AED]" aria-label="Verified" />}
+            </h1>
             <div className="flex flex-wrap items-center gap-3 mt-2 justify-center sm:justify-start">
               <div className="flex items-center gap-1"><StarIcon className="size-5 fill-amber-400 text-amber-400" /><span className="font-semibold text-[#0F172A] dark:text-[#f8fafc]">{avgRating}</span><span className="text-[#64748B] dark:text-[#94a3b8]">({reviews.length})</span></div>
               {user.hourlyRate > 0 && <span className="flex items-center gap-1 text-[#7C3AED] font-semibold"><DollarSignIcon className="size-4" />{user.hourlyRate}/hr</span>}
