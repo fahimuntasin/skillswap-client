@@ -13,7 +13,7 @@ export default function FreelancersPage() {
   const [loading, setLoading] = useState(true)
 
   useEffect(() => {
-    api.getUsers("role=freelancer").then((users) => {
+    api.getFreelancers(50).then((users) => {
       setFreelancers(Array.isArray(users) ? users : [])
     }).catch(() => {}).finally(() => setLoading(false))
   }, [])
@@ -30,7 +30,13 @@ export default function FreelancersPage() {
         </div>
 
         {freelancers.length === 0 ? (
-          <p className="text-center text-[#64748B] dark:text-[#94a3b8] py-20">No freelancers found</p>
+          <div className="py-20 text-center">
+            <p className="text-[#64748B] dark:text-[#94a3b8]">No freelancers on the platform yet.</p>
+            <p className="mt-2 text-sm text-[#94A3B8]">Freelancers appear here once they sign up with an email account.</p>
+            <Link href="/register" className="mt-6 inline-flex h-10 items-center rounded-lg bg-[#7C3AED] px-5 text-sm font-medium text-white hover:brightness-110">
+              Join as a freelancer
+            </Link>
+          </div>
         ) : (
           <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {freelancers.map((f: any) => (
