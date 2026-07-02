@@ -42,6 +42,14 @@ async function seedAdminCredential() {
         name: ADMIN_NAME,
         email: ADMIN_EMAIL,
         password: ADMIN_PASSWORD,
+        // Better Auth additionalFields expected by the email/password sign-up type.
+        image: "",
+        skills: [],
+        bio: "",
+        hourlyRate: 0,
+        isBlocked: false,
+        onboardingCompleted: true,
+        verified: false,
       },
       headers: authHeaders(),
     })
